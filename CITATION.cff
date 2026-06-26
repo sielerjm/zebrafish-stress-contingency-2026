@@ -47,3 +47,13 @@ preferred-citation:
   doi: 10.1101/XXXXXX
   license: CC-BY-NC-4.0
   notes: "Replace doi with bioRxiv DOI after Jul 5 upload."
+references:
+  - type: dataset
+    title: "Sieler2026 DESeq2 checkpoint RDS — zebrafish stress contingency gut RNA-seq"
+    authors:
+      - family-names: Sieler
+        given-names: Michael J.
+        name-particle: Jr.
+    doi: 10.5281/zenodo.20941630
+    url: https://zenodo.org/records/20941630
+    license: CC-BY-4.0

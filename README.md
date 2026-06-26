@@ -22,7 +22,7 @@ Adult zebrafish (*Danio rerio*) experienced sequential antibiotics, heat, and pa
 # cd zebrafish-stress-contingency-2026
 source("install_dependencies.R")   # once — see Software_SessionInfo CSV for versions
 source("run_all.R")                # full pipeline (hours); or run modules individually
-# Large DESeq2 checkpoints: download from Zenodo (see DATA.md)
+# Large DESeq2 checkpoints: https://doi.org/10.5281/zenodo.20941630 (see DATA.md)
 ```
 
 See [QUICKSTART.md](QUICKSTART.md) for step-by-step instructions and [REPRODUCE.md](REPRODUCE.md) for module order and runtime notes.
@@ -63,7 +63,7 @@ Rscript Code/01__Analysis/01__Diversity.R
 |----------|----------|
 | Raw 16S + RNA-seq reads | [NCBI BioProject PRJNA1482558](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1482558) |
 | Processed phyloseq / Salmon (this repo) | `Data/` — see [DATA.md](DATA.md) |
-| DESeq2 checkpoint RDS (~215 MB) | [Zenodo](https://zenodo.org/) — see `DATA.md` and `ZENODO.md` |
+| DESeq2 checkpoint RDS (~215 MB) | [Zenodo 10.5281/zenodo.20941630](https://doi.org/10.5281/zenodo.20941630) — see [DATA.md](DATA.md) |
 | Supplementary tables & figures | `Manuscript/Supplementary/` |
 
 ## License and citation

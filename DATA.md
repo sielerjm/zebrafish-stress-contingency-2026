@@ -1,7 +1,7 @@
 # Data dictionary
 
 **Created by:** Michael Sieler  
-**Last updated:** 2026-06-26
+**Last updated:** 2026-06-27
 
 ## Overview
 
@@ -64,12 +64,13 @@ These files are **not** in GitHub (~215 MB total):
 | `Results/04__DiffGeneExp/Stats/dds_parasite_history.rds` | ~54 MB |
 | `Results/04__DiffGeneExp/Stats/dds_history_num.rds` | ~54 MB |
 
-### Download instructions
+### Download
 
-1. Open the Zenodo record (DOI to be added after upload — see [ZENODO.md](ZENODO.md)).
-2. Download `Sieler2026_dds_checkpoints.zip`.
-3. Unzip into `Results/04__DiffGeneExp/Stats/`.
-4. Verify checksums against `ZENODO_MANIFEST.txt` in the zip.
+**Zenodo record (v1):** [https://doi.org/10.5281/zenodo.20941630](https://doi.org/10.5281/zenodo.20941630) · [landing page](https://zenodo.org/records/20941630)
+
+1. Download `Sieler2026_dds_checkpoints.zip` from the record above.
+2. Unzip into `Results/04__DiffGeneExp/Stats/`.
+3. Verify checksums against `ZENODO_MANIFEST.txt` in the zip (md5 `f558136b89cfcd90575c9d08a0437643` for the zip on Zenodo).
 
 Alternatively, re-run `Code/01__Analysis/04__DiffGeneExp.R` to rebuild checkpoints (requires Salmon TSV in `Data/DEG/`).
 

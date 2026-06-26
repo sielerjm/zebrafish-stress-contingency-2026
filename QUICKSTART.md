@@ -43,7 +43,7 @@ Rscript Code/01__Analysis/01__Diversity.R
 
 ## 4. Large DESeq2 files (module 04)
 
-`dds_*.rds` files are not in GitHub (~215 MB total). Download from Zenodo (see [DATA.md](DATA.md)) and place in:
+`dds_*.rds` files are not in GitHub (~215 MB total). Download from [Zenodo (10.5281/zenodo.20941630)](https://doi.org/10.5281/zenodo.20941630) and place in:
 
 ```text
 Results/04__DiffGeneExp/Stats/
