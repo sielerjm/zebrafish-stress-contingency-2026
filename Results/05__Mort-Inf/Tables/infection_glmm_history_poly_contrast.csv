@@ -1,0 +1,3 @@
+contrast,odds.ratio,SE,df,null,z.ratio,p.value
+linear,0.3123631727206374,0.24445195424745275,Inf,1,-1.4868454447118877,0.13705563579599683
+quadratic,1,0,Inf,1,NA,NA

@@ -1,0 +1,4 @@
+direction,n_union_genes,n_genes_in_all_four_taxa,n_genes_in_exactly_one_taxon,n_genes_in_exactly_two_taxa,n_genes_in_exactly_three_taxa,n_genes_in_at_least_two_taxa,n_genes_input_Culicoidibacter,n_genes_input_Shewanella,n_genes_input_Flavobacterium,n_genes_input_Cetobacterium,n_intersect_Culicoidibacter__Shewanella,n_intersect_Culicoidibacter__Flavobacterium,n_intersect_Shewanella__Flavobacterium,n_intersect_Culicoidibacter__Cetobacterium,n_intersect_Shewanella__Cetobacterium,n_intersect_Flavobacterium__Cetobacterium
+all_significant_edges,119,0,119,0,0,0,26,6,83,4,0,0,0,0,0,0
+any_positive_partial_cor,30,0,30,0,0,0,25,4,1,0,0,0,0,0,0,0
+any_negative_partial_cor,89,0,89,0,0,0,1,2,82,4,0,0,0,0,0,0

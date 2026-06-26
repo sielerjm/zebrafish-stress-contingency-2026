@@ -1,0 +1,9 @@
+Distance,Term,Df,R2,F,p_value
+Bray-Curtis,HistoryLevelNum,1,0.0168,4.1,0.006
+Bray-Curtis,Parasite,1,0.0339,8.288,0.001
+Bray-Curtis,HistoryLevelNum:Parasite,1,0.0053,1.302,0.241
+Bray-Curtis,Residual,231,0.944,NA,NA
+Canberra,HistoryLevelNum,1,0.0111,2.687,0.001
+Canberra,Parasite,1,0.0292,7.081,0.001
+Canberra,HistoryLevelNum:Parasite,1,0.0078,1.893,0.005
+Canberra,Residual,231,0.9519,NA,NA

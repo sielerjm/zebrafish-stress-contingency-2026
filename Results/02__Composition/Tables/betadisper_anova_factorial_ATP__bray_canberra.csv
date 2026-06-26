@@ -1,0 +1,5 @@
+Distance,Term,Df,Sum Sq,Mean Sq,F value,p_value
+Bray-Curtis,Groups,7,0.751978,0.107425,3.869144,5.33e-4
+Bray-Curtis,Residuals,227,6.302577,0.027765,NA,NA
+Canberra,Groups,7,0.142708,0.020387,5.462321,8e-6
+Canberra,Residuals,227,0.847227,0.003732,NA,NA

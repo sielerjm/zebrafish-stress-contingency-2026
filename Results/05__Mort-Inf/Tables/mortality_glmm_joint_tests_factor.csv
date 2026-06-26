@@ -1,0 +1,4 @@
+model term,df1,df2,F.ratio,Chisq,p.value
+HistoryLevel,2,Inf,4.222,8.444,0.014662919117176883
+Parasite,1,Inf,0.847,0.847,0.3574456357045167
+HistoryLevel:Parasite,2,Inf,0.484,0.968,0.6163969012688182

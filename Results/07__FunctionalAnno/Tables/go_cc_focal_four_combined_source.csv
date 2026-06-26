@@ -1,0 +1,17 @@
+ID,Description,p.adjust,Count,geneID,log_padj,Taxon,Description_plot,Description_wrapped
+GO:0005884,actin filament,3.104270052579074e-4,2,tpm3/actb1,3.5080405047967926,Shewanella,actin filament,actin filament
+GO:0015629,actin cytoskeleton,0.007636349678220723,2,tpm3/actb1,2.117114192923127,Shewanella,actin cytoskeleton,actin cytoskeleton
+GO:0099513,polymeric cytoskeletal fiber,0.008510933447332388,2,tpm3/actb1,2.0700228055095478,Shewanella,polymeric cytoskeletal fiber,polymeric cytoskeletal fiber
+GO:0000502,proteasome complex,1.5376146071775605e-13,11,psma5/psmc6/psmd11b/psmd14/psmc4/pomp/psmb3/adrm1/psmc5/psma6a/psmd13,12.813152503903888,Flavobacterium,proteasome complex,proteasome complex
+GO:1905369,endopeptidase complex,7.103616389407359e-13,11,psma5/psmc6/psmd11b/psmd14/psmc4/pomp/psmb3/adrm1/psmc5/psma6a/psmd13,12.148520499434111,Flavobacterium,endopeptidase complex,endopeptidase complex
+GO:1905368,peptidase complex,6.2767337431438115e-12,11,psma5/psmc6/psmd11b/psmd14/psmc4/pomp/psmb3/adrm1/psmc5/psma6a/psmd13,11.20226629357901,Flavobacterium,peptidase complex,peptidase complex
+GO:0005838,proteasome regulatory particle,8.091342981502748e-11,7,psmc6/psmd11b/psmd14/psmc4/adrm1/psmc5/psmd13,10.091979389259162,Flavobacterium,proteasome regulatory particle,proteasome regulatory particle
+GO:0022624,proteasome accessory complex,1.8066640857969384e-10,7,psmc6/psmd11b/psmd14/psmc4/adrm1/psmc5/psmd13,9.743122588582539,Flavobacterium,proteasome accessory complex,proteasome accessory complex
+GO:0008540,"proteasome regulatory particle, base subcomplex",2.369632169747629e-4,3,psmc6/psmc4/psmc5,3.625319062870367,Flavobacterium,"proteasome regulatory particle, base subcomplex","proteasome regulatory particle, base subcomplex"
+GO:0005839,proteasome core complex,0.0021037880339158633,3,psma5/psmb3/psma6a,2.6769980194318195,Flavobacterium,proteasome core complex,proteasome core complex
+GO:0030131,clathrin adaptor complex,0.0030044727123214134,3,ap2a1/ap1g2/ap1b1,2.5222317360481634,Flavobacterium,clathrin adaptor complex,clathrin adaptor complex
+GO:0030119,AP-type membrane coat adaptor complex,0.005351536266254561,3,ap2a1/ap1g2/ap1b1,2.271521527103541,Flavobacterium,AP-type membrane coat adaptor complex,AP-type membrane coat adaptor complex
+GO:0030118,clathrin coat,0.008404149039368933,3,ap2a1/ap1g2/ap1b1,2.0755062544096385,Flavobacterium,clathrin coat,clathrin coat
+GO:0019773,"proteasome core complex, alpha-subunit complex",0.008802072497773542,2,psma5/psma6a,2.055415058716344,Flavobacterium,"proteasome core complex, alpha-subunit complex","proteasome core complex, alpha-subunit complex"
+GO:0005682,U5 snRNP,0.011770800987707468,2,prpf8/snrpd3,1.9291939829759968,Flavobacterium,U5 snRNP,U5 snRNP
+GO:0099513,polymeric cytoskeletal fiber,0.07748484707713943,1,selenos,1.1107832197416143,Cetobacterium,polymeric cytoskeletal fiber,polymeric cytoskeletal fiber

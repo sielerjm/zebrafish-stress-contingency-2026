@@ -1,0 +1,9 @@
+value,n_significant,n_positive,n_negative
+A- T- P+,10,8,2
+A- T+ P-,6,4,2
+A- T+ P+,12,10,2
+A+ T- P-,6,6,0
+A+ T- P+,10,9,1
+A+ T+ P-,3,3,0
+A+ T+ P+,6,6,0
+Total,53,46,7

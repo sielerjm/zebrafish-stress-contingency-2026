@@ -1,0 +1,272 @@
+---
+title: "Gut microbial alpha diversity (display)"
+subtitle: "01__Diversity — mirrors `Code/01__Analysis/01__Diversity.R`"
+author: "Michael Sieler"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    fig_width: 10
+    fig_height: 6
+params:
+  rerun_analysis: false
+---
+
+```{r setup, include=FALSE}
+# Knit from any working directory: locate Sieler2026 repo root, then source_project_init.
+knitr::opts_chunk$set(
+  echo = isTRUE(params$rerun_analysis),
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  dpi = 300
+)
+
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+
+# Knit with repo root as working directory so relative paths resolve consistently.
+knitr::opts_knit$set(root.dir = root)
+
+bundle_path <- here::here("Results", "01__Diversity", "Stats", "diversity__gut__bundle.rds")
+
+if (isTRUE(params$rerun_analysis)) {
+  source(here::here("Code", "01__Analysis", "01__Diversity.R"))
+}
+
+if (!file.exists(bundle_path)) {
+  stop(
+    "Bundle not found: ", bundle_path, "\n",
+    "Run `Code/01__Analysis/01__Diversity.R` from the project root, or knit this document with ",
+    "`params$rerun_analysis: true` (requires `ps.list` and full analysis environment)."
+  )
+}
+
+div <- readRDS(bundle_path)
+
+# Resolve paths saved in bundles:
+# - Prefer the stored path when it exists on this machine
+# - Otherwise, treat it as relative to the repo root (here::here)
+resolve_bundle_path <- function(p) {
+  if (is.null(p) || !nzchar(p)) {
+    return(NA_character_)
+  }
+  if (file.exists(p)) {
+    return(p)
+  }
+  p2 <- tryCatch(here::here(p), error = function(e) NA_character_)
+  if (!is.na(p2) && file.exists(p2)) {
+    return(p2)
+  }
+  p3 <- file.path(root, p)
+  if (file.exists(p3)) {
+    return(p3)
+  }
+  p
+}
+
+# Include a PNG from the bundle, robust to absolute/relative paths.
+# We rely on Pandoc `--embed-resources` (RStudio knit) to create a standalone HTML.
+include_png <- function(p) {
+  p_res <- resolve_bundle_path(p)
+  if (is.null(p_res) || !nzchar(p_res)) {
+    return(invisible(NULL))
+  }
+  p_abs <- normalizePath(p_res, winslash = "/", mustWork = TRUE)
+  knitr::include_graphics(p_abs, rel_path = FALSE)
+}
+```
+
+This report loads the serialized results from `Results/01__Diversity/Stats/diversity__gut__bundle.rds` and prints **all** tables and figures produced by [`Code/01__Analysis/01__Diversity.R`](../01__Analysis/01__Diversity.R). By default the analysis script is **not** re-run. To refresh models, figures, and tables from R Markdown, knit with `params$rerun_analysis` set to `true` (e.g. in the RStudio **Knit** dropdown → *Knit with Parameters*, or `rmarkdown::render(..., params = list(rerun_analysis = TRUE))`).
+
+---
+
+## Statistical models
+
+**Outcomes:** Genus-level normalized Shannon, inverse Simpson, and richness (`Shannon__Genus_norm`, `Simpson__Genus_norm`, `Richness__Genus_norm`), each bounded on (0, 1) for beta regression.
+
+```{r model-text, echo=FALSE, results='asis'}
+if (!is.null(div$meta$model_linear_trend)) {
+  cat("**Linear trend table:**\n\n")
+  cat(div$meta$model_linear_trend, "\n\n")
+}
+if (!is.null(div$meta$model_table2)) {
+  cat("**P-value summary (Table C):**\n\n")
+  cat(div$meta$model_table2, "\n\n")
+}
+if (!is.null(div$meta$model_interaction)) {
+  cat("**History × parasite (Table B):**\n\n")
+  cat(div$meta$model_interaction, "\n\n")
+}
+if (!is.null(div$meta$model_parasite_simple_effects)) {
+  cat("**Parasite simple effects within each stressor history (Table D):**\n\n")
+  cat(div$meta$model_parasite_simple_effects, "\n\n")
+}
+if (!is.null(div$meta$model_formulas)) {
+  gt::gt(tibble::enframe(div$meta$model_formulas, name = "Model", value = "Formula")) %>%
+    gt::tab_header(
+      title = "Model formulas (reference)",
+      subtitle = "y = normalized diversity metric"
+    )
+}
+```
+
+---
+
+## Combined tables
+
+## Exposure regimes (factorial A × T × P)
+
+### Type-III Wald tests (terms) from GLMMs
+
+```{r table-factorial-atp-terms, echo=FALSE}
+if (!is.null(div$table_factorial_atp_terms)) {
+  div$table_factorial_atp_terms
+}
+```
+
+### Figures — estimated marginal means by A × T, split by parasite exposure
+
+#### Shannon
+
+```{r fig-atp-shannon, echo=FALSE, fig.cap="Factorial exposure regime effects (A×T×P): Shannon diversity estimated marginal means (response scale) ± 95% CI."}
+if (!is.null(div$modules$exposure_regime_factorial$Shannon$paths[["figure_png"]])) {
+  include_png(div$modules$exposure_regime_factorial$Shannon$paths[["figure_png"]])
+}
+```
+
+#### Simpson
+
+```{r fig-atp-simpson, echo=FALSE, fig.cap="Factorial exposure regime effects (A×T×P): Simpson diversity estimated marginal means (response scale) ± 95% CI."}
+if (!is.null(div$modules$exposure_regime_factorial$Simpson$paths[["figure_png"]])) {
+  include_png(div$modules$exposure_regime_factorial$Simpson$paths[["figure_png"]])
+}
+```
+
+#### Richness
+
+```{r fig-atp-richness, echo=FALSE, fig.cap="Factorial exposure regime effects (A×T×P): Observed richness estimated marginal means (response scale) ± 95% CI."}
+if (!is.null(div$modules$exposure_regime_factorial$Richness$paths[["figure_png"]])) {
+  include_png(div$modules$exposure_regime_factorial$Richness$paths[["figure_png"]])
+}
+```
+
+### Table A: linear stress-history trends (all metrics)
+
+```{r table-trends, echo=FALSE}
+div$table_combined_trends
+```
+
+### Table B: history × parasite interaction (coefficients, link scale)
+
+```{r table-interaction, echo=FALSE}
+div$table_combined_interaction
+```
+
+### Table C: p-value summary (stress-history trend vs. history × parasite)
+
+```{r table-combined-table2, echo=FALSE}
+div$table_combined_table2
+```
+
+### Table D: parasite exposure vs. unexposed within each prior stressor history (simple effects)
+
+```{r table-parasite-within-history, echo=FALSE}
+if (!is.null(div$table_parasite_within_history)) {
+  div$table_parasite_within_history
+}
+```
+
+---
+
+## Figures (stress history: predicted vs observed)
+
+Files live under `Results/01__Diversity/Figures/` (PDF and PNG). Below uses **PNG** via `knitr::include_graphics()` for reliable HTML embedding. The same panels are stored as **ggplot** objects in the bundle (`div$modules$stress_history$Shannon$figure`, etc.) if you want to edit layers in a chunk without re-running the driver.
+
+### Shannon
+
+```{r fig-shannon, echo=FALSE, fig.width=8, fig.height=8, fig.cap="Shannon diversity (normalized): tank-level observed means and model predictions."}
+include_png(div$modules$stress_history$Shannon$paths[["figure_png"]])
+```
+
+### Simpson (inverse Simpson index, normalized)
+
+```{r fig-simpson, echo=FALSE, fig.cap="Simpson diversity (normalized): tank-level observed means and model predictions."}
+include_png(div$modules$stress_history$Simpson$paths[["figure_png"]])
+```
+
+### Observed richness (Genus, normalized)
+
+```{r fig-richness, echo=FALSE, fig.cap="Observed richness (normalized): tank-level observed means and model predictions."}
+include_png(div$modules$stress_history$Richness$paths[["figure_png"]])
+```
+
+---
+
+## Figures (parasite exposure within each stressor history)
+
+Normalized diversity by parasite exposure, faceted by 0 / 1 / 2 prior stressors (violin + jitter). **Table D** lists emmeans contrasts (Parasite 1 − 0) from the interaction beta-GLMM.
+
+### Shannon
+
+```{r fig-parasite-shannon, echo=FALSE, fig.width=12, fig.height=5, fig.cap="Shannon diversity (normalized): distribution by parasite exposure within each prior stressor history."}
+if (!is.null(div$modules$parasite_within_history) && !is.null(div$modules$parasite_within_history$Shannon$paths[["figure_png"]])) {
+  include_png(div$modules$parasite_within_history$Shannon$paths[["figure_png"]])
+}
+```
+
+### Simpson
+
+```{r fig-parasite-simpson, echo=FALSE, fig.width=12, fig.height=5, fig.cap="Simpson diversity (normalized): distribution by parasite exposure within each prior stressor history."}
+if (!is.null(div$modules$parasite_within_history) && !is.null(div$modules$parasite_within_history$Simpson$paths[["figure_png"]])) {
+  include_png(div$modules$parasite_within_history$Simpson$paths[["figure_png"]])
+}
+```
+
+### Observed richness
+
+```{r fig-parasite-richness, echo=FALSE, fig.width=12, fig.height=5, fig.cap="Observed richness (normalized): distribution by parasite exposure within each prior stressor history."}
+if (!is.null(div$modules$parasite_within_history) && !is.null(div$modules$parasite_within_history$Richness$paths[["figure_png"]])) {
+  include_png(div$modules$parasite_within_history$Richness$paths[["figure_png"]])
+}
+```
+
+---
+
+## Bundle metadata
+
+```{r meta, echo=FALSE}
+meta_simple <- div$meta[
+  intersect(
+    names(div$meta),
+    c(
+      "run_date", "ps_list_element", "bundle_version", "script",
+      "model_linear_trend", "model_table2", "model_interaction", "model_parasite_simple_effects"
+    )
+  )
+]
+gt::gt(tibble::enframe(meta_simple, name = "Field", value = "Value")) %>%
+  gt::tab_header(title = "Bundle provenance and model text")
+if (!is.null(div$meta$model_formulas)) {
+  gt::gt(tibble::enframe(div$meta$model_formulas, name = "Model", value = "Formula")) %>%
+    gt::tab_header(title = "Model formulas (reference)")
+}
+```
+
+Interaction model **p** values (history × parasite) are stored in `div$modules$parasite_interaction` if you need them in-line in prose. Simple-effect contrasts and faceted violin plots are in `div$table_parasite_within_history` and `div$modules$parasite_within_history` (bundles v1.4+).

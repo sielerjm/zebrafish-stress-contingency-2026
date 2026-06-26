@@ -1,0 +1,206 @@
+---
+title: "Gene-taxa partial correlation network (display)"
+subtitle: "06__Taxon-DEG-Mort — mirrors `Code/01__Analysis/06__Taxon-DEG-Mort.R`"
+author: "Michael Sieler"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    fig_width: 7
+    fig_height: 6
+params:
+  rerun_analysis: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = isTRUE(params$rerun_analysis),
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 7,
+  fig.height = 6,
+  dpi = 300
+)
+
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+
+bundle_path <- here::here("Results", "06__Taxon-DEG-Mort", "Stats", "taxon_deg_mort__bundle.rds")
+
+if (isTRUE(params$rerun_analysis)) {
+  source(here::here("Code", "01__Analysis", "06__Taxon-DEG-Mort.R"))
+}
+
+if (!file.exists(bundle_path)) {
+  stop(
+    "Bundle not found: ", bundle_path, "\n",
+    "Run `Code/01__Analysis/06__Taxon-DEG-Mort.R` from the project root, or knit with ",
+    "`params$rerun_analysis: true`."
+  )
+}
+
+taxon_deg <- readRDS(bundle_path)
+per_taxon <- taxon_deg$tables$per_taxon_summary
+
+# Resolve paths saved in bundles:
+# - Prefer the stored path when it exists on this machine
+# - Otherwise, treat it as relative to the repo root (here::here)
+resolve_bundle_path <- function(p) {
+  if (is.null(p) || !nzchar(p)) {
+    return(NA_character_)
+  }
+  if (file.exists(p)) {
+    return(p)
+  }
+  p2 <- tryCatch(here::here(p), error = function(e) NA_character_)
+  if (!is.na(p2) && file.exists(p2)) {
+    return(p2)
+  }
+  p3 <- file.path(root, p)
+  if (file.exists(p3)) {
+    return(p3)
+  }
+  p
+}
+
+include_png <- function(p) {
+  p_res <- resolve_bundle_path(p)
+  if (is.null(p_res) || !nzchar(p_res)) {
+    return(invisible(NULL))
+  }
+  p_abs <- normalizePath(p_res, winslash = "/", mustWork = TRUE)
+  knitr::include_graphics(p_abs, rel_path = FALSE)
+}
+```
+
+This report loads `Results/06__Taxon-DEG-Mort/Stats/taxon_deg_mort__bundle.rds` produced by [`Code/01__Analysis/06__Taxon-DEG-Mort.R`](../01__Analysis/06__Taxon-DEG-Mort.R). **Spearman** correlations screen gene–genus pairs (both z-scored) within each exposure contrast vs **A- T- P-**; **nonparametric partial correlations** (`nptest::np.cor.test`) control for **Total.Worm.Count**. **FDR** (Benjamini–Hochberg) is applied to partial-correlation *p*-values (threshold **0.1**, matching the archived helper).
+
+---
+
+## Figure: bipartite partial-correlation network
+
+```{r fig-bipartite, echo=FALSE, fig.cap="Significant partial correlations (FDR < 0.1), colored by partial r (red positive, blue negative). Genes (left) and genera (right); subset of top gene–taxon pairs for readability."}
+include_png(taxon_deg$paths$figures$bipartite_png)
+```
+
+---
+
+## Figure: partial correlation histogram (by contrast)
+
+```{r fig-hist, echo=FALSE, fig.cap="Distribution of significant partial correlation estimates, faceted by base vs comparison regime; top genera by association count."}
+include_png(taxon_deg$paths$figures$histogram_png)
+```
+
+---
+
+## Figure: top 10 taxa (mean absolute partial correlation vs number of associations)
+
+```{r fig-scatter, echo=FALSE, fig.cap="Top 10 genera ranked by count of FDR-significant partial-correlation edges (Benjamini-Hochberg FDR below 0.1 on nonparametric partial correlation p-values; infection burden adjusted via Total.Worm.Count). Spearman FDR below 0.05 screened gene-genus pairs before partial testing. x-axis: mean absolute partial correlation across significant edges. Point fill: mean signed partial correlation per genus (color bar -1 to 1). Blue = negative, red = positive. Focal genera (when present in the top 10): bold labels and ring; label colour matches sign of mean partial r."}
+include_png(taxon_deg$paths$figures$top10_png)
+```
+
+---
+
+## Figure: all significant taxa (full per-genus summary)
+
+```{r fig-scatter-all, echo=FALSE, fig.cap="Every genus with at least one FDR-significant partial-correlation edge (same FDR 0.1 criterion as elsewhere in this module). Axes as in the top-10 figure. Smaller semi-transparent points for non-focal genera (no text labels). Focal genera (Shewanella, Culicoidibacter, Flavobacterium, Cetobacterium): larger points, hollow ring, bold ggrepel labels; label colour blue (negative mean partial r) or red (positive)."}
+p_all <- taxon_deg$paths$figures$all_sig_png
+if (!is.null(p_all) && !is.na(p_all) && nzchar(p_all)) {
+  include_png(p_all)
+} else {
+  knitr::asis_output("_Figure path `all_sig_png` not in bundle (re-run `06__Taxon-DEG-Mort.R`)._")
+}
+```
+
+---
+
+## Figures: focal four genera (gene-set overlap for enrichment inputs)
+
+Each panel summarizes **unique host gene symbols** with **BH FDR &lt; 0.1** on **nonparametric partial correlations** to genus abundance (infection burden adjusted via **Total.Worm.Count**), restricted to the four focal genera. **All**: every significant edge for that genus; **Positive** / **Negative**: genes with at least one significant edge of that sign. These are the same gene lists exported as `partial_correlation_edges__*.csv` and used as inputs to GO/KEGG enrichment in `Code/01__Analysis/07__FunctionalAnno.R`. Figures are written by `Code/01__Analysis/06__Taxon-DEG-Mort.R` (focal-four Venn helpers are inlined in that driver).
+
+```{r fig-venn-focal-four-all, echo=FALSE, fig.cap="Gene overlap across focal four taxa (all FDR-significant partial-correlation edges per taxon)."}
+p_va <- taxon_deg[["paths"]][["figures"]][["focal_four_venn_all"]]
+if (is.null(p_va) || !nzchar(as.character(p_va))) {
+  knitr::asis_output("_Venn path not in bundle (re-run `06__Taxon-DEG-Mort.R`)._")
+} else {
+  include_png(p_va)
+}
+```
+
+```{r fig-venn-focal-four-positive, echo=FALSE, fig.cap="Gene overlap: genes with at least one positive partial correlation (FDR < 0.1) per taxon."}
+p_vp <- taxon_deg[["paths"]][["figures"]][["focal_four_venn_positive"]]
+if (is.null(p_vp) || !nzchar(as.character(p_vp))) {
+  knitr::asis_output("_Venn path not in bundle._")
+} else {
+  include_png(p_vp)
+}
+```
+
+```{r fig-venn-focal-four-negative, echo=FALSE, fig.cap="Gene overlap: genes with at least one negative partial correlation (FDR < 0.1) per taxon."}
+p_vn <- taxon_deg[["paths"]][["figures"]][["focal_four_venn_negative"]]
+if (is.null(p_vn) || !nzchar(as.character(p_vn))) {
+  knitr::asis_output("_Venn path not in bundle._")
+} else {
+  include_png(p_vn)
+}
+```
+
+### Table: overlap summary (Venn input gene sets)
+
+```{r tbl-focal-four-venn-overlap-06, echo=FALSE}
+tog <- taxon_deg[["table_focal_four_venn_gene_overlap"]]
+if (is.null(tog)) {
+  cat("Overlap summary not in bundle (zero significant edges, or re-run `06__Taxon-DEG-Mort.R`).\n")
+} else {
+  tog
+}
+```
+
+---
+
+## Table: per-genus summary (significant partial correlations)
+
+```{r tbl-per-taxon, echo=FALSE}
+if (nrow(per_taxon) > 0L) {
+  if (!is.null(taxon_deg$table_per_taxon_summary)) {
+    taxon_deg$table_per_taxon_summary
+  } else {
+    gt::gt(per_taxon)
+  }
+} else {
+  cat("No significant partial correlations in bundle.")
+}
+```
+
+---
+
+## Table: bundle metadata
+
+```{r tbl-meta, echo=FALSE}
+tbl_meta <- tibble::tibble(
+  Field = c("run_date", "script", "n_sig_partial_edges", "n_comparisons"),
+  Value = c(
+    taxon_deg$meta$run_date,
+    taxon_deg$meta$script,
+    as.character(taxon_deg$meta$n_sig_partial_edges),
+    as.character(taxon_deg$meta$n_comparisons)
+  )
+)
+gt::gt(tbl_meta) %>%
+  gt::tab_header(title = "06__Taxon-DEG-Mort run summary")
+```

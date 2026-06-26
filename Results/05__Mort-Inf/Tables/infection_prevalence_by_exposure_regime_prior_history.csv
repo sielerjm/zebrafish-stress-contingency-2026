@@ -1,0 +1,5 @@
+Treatment,n_survivors_sampled,n_infected,mean_worm_burden,percent_infected,Prior_Stressor_History
+A- T- P+,37,31,4.513513513513514,83.8,Zero
+A+ T- P+,35,19,1.2857142857142858,54.3,One
+A- T+ P+,32,21,3.78125,65.6,One
+A+ T+ P+,25,15,3.08,60,Two

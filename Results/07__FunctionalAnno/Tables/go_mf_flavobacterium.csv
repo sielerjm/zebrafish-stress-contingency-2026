@@ -1,0 +1,7 @@
+ID,Description,p.adjust,Count,geneID,log_padj
+GO:0070628,proteasome binding,1.6225955919196445e-5,4,psmg1/psmd14/adrm1/uchl5,4.7897897081976675
+GO:0003729,mRNA binding,0.004804858082703936,7,ilf3b/hnrnpa1a/hnrnpl2/ddx39ab/srsf7a/hnrnpl/ppp1r8b,2.318319435218906
+GO:0016887,ATP hydrolysis activity,0.04953231330235268,6,vcp/psmc6/snrnp200/psmc4/psmc5/smc1al,1.3051113887349628
+GO:0005200,structural constituent of cytoskeleton,0.04953231330235268,3,lmnb1/tuba8l4/lmnb2,1.3051113887349628
+GO:0035615,clathrin adaptor activity,0.07380501091744113,2,ap2a1/ap1g2,1.1319141511862219
+GO:0140312,cargo adaptor activity,0.08244363462765618,2,ap2a1/ap1g2,1.0838428700716296

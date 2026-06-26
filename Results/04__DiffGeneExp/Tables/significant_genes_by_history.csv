@@ -1,0 +1,4 @@
+comparison,n_significant,n_up,n_down
+1_vs_0,3,1,2
+2_vs_0,11,1,10
+2_vs_1,32,2,30

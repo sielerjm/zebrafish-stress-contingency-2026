@@ -1,0 +1,2 @@
+comparison_name,n_genes,n_positive,n_negative,mean_correlation
+A- T- P- vs A- T- P+,83,1,82,-0.25766924067506347

@@ -1,0 +1,8 @@
+Treatment,n_significant,n_up,n_down,total,prior_stressor_history
+A- T- P+,3822,2012,1810,3822,Zero
+A+ T- P-,43,13,30,43,One
+A+ T- P+,6414,3428,2986,6414,One
+A- T+ P-,67,15,52,67,One
+A- T+ P+,6152,3222,2930,6152,One
+A+ T+ P-,124,23,101,124,Two
+A+ T+ P+,4964,2591,2373,4964,Two

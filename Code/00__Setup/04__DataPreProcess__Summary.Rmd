@@ -1,0 +1,318 @@
+---
+title: "Preprocessing audit summary"
+subtitle: "04__DataPreProcess__Summary — how uncleaned becomes cleaned"
+author: "Michael Sieler"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+    fig_width: 10
+    fig_height: 6
+---
+
+```{r setup, include=FALSE}
+# Filename: 04__DataPreProcess__Summary.Rmd
+# Created by: Michael Sieler
+# Date last updated: 2026-04-22
+#
+# Description:
+#   Audit report for Sieler2026 preprocessing. Compares the latest uncleaned phyloseq
+#   (from Data/DADA2) to the latest cleaned phyloseq produced by 04__DataPreProcess.R.
+#   Replays the major filter steps (including optional decontam) to show which samples
+#   and taxa are removed at each stage.
+#
+# Expected input:
+#   - Sieler2026 repo with Data/DADA2/pseq_uncleaned_*.rds and pseq_cleaned_filtered_*.rds
+#   - Optional: Data/r_objects/decontam__*.rds (written by 04__DataPreProcess.R when run_decontam=TRUE)
+#
+# Expected output:
+#   - HTML audit report (this document)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  dpi = 300
+)
+
+# Knit from any working directory: locate repo root, then source_project_init.
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+knitr::opts_knit$set(root.dir = root)
+```
+
+## Load the latest phyloseq objects (repo-local)
+
+```{r}
+ps_uncleaned <- readRDS(path.pseq.uncleaned)
+ps_cleaned <- readRDS(path.pseq.cleaned)
+
+tibble::tibble(
+  object = c("uncleaned (latest)", "cleaned (latest)"),
+  path = c(path.pseq.uncleaned, path.pseq.cleaned),
+  n_samples = c(phyloseq::nsamples(ps_uncleaned), phyloseq::nsamples(ps_cleaned)),
+  n_taxa = c(phyloseq::ntaxa(ps_uncleaned), phyloseq::ntaxa(ps_cleaned))
+) |>
+  gt::gt() |>
+  gt::tab_header(title = "Current preprocessing inputs/outputs (latest RDS)")
+```
+
+## Read-depth + taxa filter settings used by preprocessing
+
+These defaults are defined in `Code/00__Setup/04__DataPreProcess.R`.
+
+```{r}
+min_prevalence_taxa <- 3L
+min_sample_reads <- 5000L
+```
+
+## Optional decontam audit (if present)
+
+If you ran `04__DataPreProcess.R` with decontam enabled, it writes a dated audit RDS under `Data/r_objects/`.
+
+```{r}
+decontam_audit_path <- resolve_latest_rds(
+  dir = path.objects,
+  pattern = "^decontam__.*\\.rds$",
+  error_if_empty = FALSE
+)
+
+if (!is.na(decontam_audit_path)) {
+  decontam_audit <- readRDS(decontam_audit_path)
+  gt::gt(tibble::tibble(
+    key = names(decontam_audit)[names(decontam_audit) != "contam_tbl"],
+    value = purrr::map_chr(decontam_audit[names(decontam_audit) != "contam_tbl"], \(x) paste0(x, collapse = ", "))
+  )) |>
+    gt::tab_header(
+      title = "Decontam audit file detected",
+      subtitle = basename(decontam_audit_path)
+    )
+
+  if (!is.null(decontam_audit$contam_tbl) && nrow(decontam_audit$contam_tbl) > 0) {
+    decontam_audit$contam_tbl |>
+      dplyr::filter(.data$contaminant) |>
+      dplyr::mutate(p = round(.data$p, 4)) |>
+      dplyr::select(.data$taxon, .data$contaminant, .data$p) |>
+      gt::gt() |>
+      gt::tab_header(
+        title = "Taxa flagged as contaminants by decontam",
+        subtitle = "decontam::isContaminant(method = 'prevalence')"
+      )
+  }
+} else {
+  gt::gt(tibble::tibble(note = "No decontam audit file found in Data/r_objects/. Decontam may not have been run yet.")) |>
+    gt::tab_header(title = "Decontam audit")
+}
+```
+
+## Recreate the filtering steps (to audit what was removed)
+
+This section replays the same logic as `apply_pre_analysis_filters()` to show **which** taxa/samples are removed by each stage.
+
+```{r}
+recreate_pre_analysis_filters <- function(ps_input, min_prevalence, min_reads) {
+  # Step 0: start
+  ps0 <- ps_input
+
+  # Step 1: prevalence (taxa)
+  otu <- as(phyloseq::otu_table(ps0), "matrix")
+  if (!phyloseq::taxa_are_rows(ps0)) {
+    otu <- t(otu)
+  }
+  taxa_prev <- rowSums(otu > 0)
+  ps1 <- phyloseq::prune_taxa(taxa_prev >= min_prevalence, ps0)
+
+  # Step 2: taxonomy-based taxa removal (if available)
+  ps2 <- ps1
+  if (!is.null(phyloseq::tax_table(ps2, errorIfNULL = FALSE))) {
+    tax_df <- as.data.frame(as(phyloseq::tax_table(ps2), "matrix"), stringsAsFactors = FALSE)
+    rm_target <- apply(
+      tax_df,
+      1,
+      function(x) any(grepl("Mitochondria|Chloroplast|Eukaryota", x, ignore.case = TRUE))
+    )
+    phylum_col <- if ("Phylum" %in% colnames(tax_df)) {
+      "Phylum"
+    } else if (ncol(tax_df) >= 2) {
+      colnames(tax_df)[2]
+    } else {
+      NA_character_
+    }
+    unresolved <- rep(FALSE, nrow(tax_df))
+    if (!is.na(phylum_col)) {
+      phylum_vals <- tax_df[[phylum_col]]
+      unresolved <- is.na(phylum_vals) |
+        phylum_vals == "" |
+        grepl("^Kingdom_Bacteria$", phylum_vals, ignore.case = TRUE) |
+        grepl("^Bacteria Phylum$", phylum_vals, ignore.case = TRUE)
+    }
+    keep <- !(rm_target | unresolved)
+    ps2 <- phyloseq::prune_taxa(rownames(tax_df)[keep], ps2)
+  }
+
+  # Step 3: low-read samples (after taxa filters)
+  keep_samples <- phyloseq::sample_sums(ps2) >= min_reads
+  ps3 <- phyloseq::prune_samples(keep_samples, ps2)
+  ps3 <- phyloseq::prune_taxa(phyloseq::taxa_sums(ps3) > 0, ps3)
+
+  list(
+    ps0 = ps0,
+    ps1 = ps1,
+    ps2 = ps2,
+    ps3 = ps3,
+    keep_samples_step3 = keep_samples
+  )
+}
+
+steps <- recreate_pre_analysis_filters(
+  ps_input = ps_uncleaned,
+  min_prevalence = min_prevalence_taxa,
+  min_reads = min_sample_reads
+)
+
+tibble::tibble(
+  step = c("0 raw (uncleaned)", "1 prevalence taxa", "2 taxonomy taxa", "3 low-read samples"),
+  n_samples = c(phyloseq::nsamples(steps$ps0), phyloseq::nsamples(steps$ps1), phyloseq::nsamples(steps$ps2), phyloseq::nsamples(steps$ps3)),
+  n_taxa = c(phyloseq::ntaxa(steps$ps0), phyloseq::ntaxa(steps$ps1), phyloseq::ntaxa(steps$ps2), phyloseq::ntaxa(steps$ps3))
+) |>
+  gt::gt() |>
+  gt::tab_header(title = "Dimensions after each preprocessing filter stage")
+```
+
+### Samples removed for low read depth
+
+```{r}
+reads_after_tax_filters <- phyloseq::sample_sums(steps$ps2)
+low_read_removed <- names(reads_after_tax_filters)[reads_after_tax_filters < min_sample_reads]
+
+sd <- phyloseq::sample_data(ps_uncleaned) |>
+  as.data.frame() |>
+  tibble::rownames_to_column("sample_name") |>
+  tibble::as_tibble()
+
+# Robust metadata lookup: some datasets store the fecal ID in a column rather than the rowname,
+# or mix "153" vs "f153" conventions. Build a mapping table from any available identifier column.
+id_cols <- intersect(
+  c("sample_name", "fecal.sample.number", "Sample"),
+  colnames(sd)
+)
+
+sd_id_map <- sd |>
+  dplyr::mutate(dplyr::across(dplyr::any_of(c("sample_name", "fecal.sample.number", "Sample")), as.character)) |>
+  tidyr::pivot_longer(
+    cols = dplyr::all_of(id_cols),
+    names_to = "id_type",
+    values_to = "join_id"
+  ) |>
+  dplyr::filter(!is.na(.data$join_id), .data$join_id != "") |>
+  dplyr::distinct(.data$join_id, .keep_all = TRUE) |>
+  dplyr::select(-.data$id_type)
+
+removed_tbl <- tibble::tibble(
+  sample_name = low_read_removed,
+  reads_after_tax_filters = unname(reads_after_tax_filters[low_read_removed])
+) |>
+  # Try matching on multiple identifiers (rowname sample_name, fecal.sample.number, Sample),
+  # and also allow "f###" ↔ "###" matching.
+  dplyr::mutate(sample_id_stripped_f = sub("^f", "", .data$sample_name)) |>
+  dplyr::left_join(sd_id_map, by = c("sample_name" = "join_id")) |>
+  dplyr::left_join(
+    sd_id_map,
+    by = c("sample_id_stripped_f" = "join_id"),
+    suffix = c("", "__stripped")
+  ) |>
+  dplyr::mutate(
+    # If direct join failed, fill from stripped join columns when present.
+    # Exclude columns that already end with __stripped: across would otherwise look for
+    # e.g. Tank.ID__stripped__stripped when coalescing the suffixed duplicate.
+    dplyr::across(
+      .cols = -dplyr::any_of(c("sample_name", "sample_id_stripped_f", "reads_after_tax_filters")) &
+        -dplyr::ends_with("__stripped"),
+      .fns = \(x) dplyr::coalesce(x, get(paste0(dplyr::cur_column(), "__stripped")))
+    )
+  ) |>
+  dplyr::select(-dplyr::ends_with("__stripped")) |>
+  dplyr::arrange(.data$reads_after_tax_filters, .data$sample_name)
+
+gt::gt(removed_tbl) |>
+  gt::tab_header(
+    title = "Samples removed for low read depth",
+    subtitle = paste0("Computed on the taxa-filtered intermediate; threshold = ", min_sample_reads, " reads")
+  ) |>
+  gt::fmt_number(columns = "reads_after_tax_filters", decimals = 0) |>
+  gt::cols_label(
+    sample_name = "Sample",
+    reads_after_tax_filters = "Reads (after taxa filters)"
+  )
+```
+
+### Taxa removed by each taxa filter step (IDs only)
+
+```{r}
+taxa0 <- phyloseq::taxa_names(steps$ps0)
+taxa1 <- phyloseq::taxa_names(steps$ps1)
+taxa2 <- phyloseq::taxa_names(steps$ps2)
+taxa3 <- phyloseq::taxa_names(steps$ps3)
+
+tbl_taxa_removed <- dplyr::bind_rows(
+  tibble::tibble(step = "step1_prevalence_taxa", taxon = setdiff(taxa0, taxa1)),
+  tibble::tibble(step = "step2_taxonomy_taxa", taxon = setdiff(taxa1, taxa2)),
+  tibble::tibble(step = "step3_post_sample_prune_zero_taxa", taxon = setdiff(taxa2, taxa3))
+) |>
+  dplyr::arrange(.data$step, .data$taxon)
+
+tbl_taxa_removed |>
+  dplyr::count(.data$step, name = "n_taxa_removed") |>
+  gt::gt() |>
+  gt::tab_header(
+    title = "Taxa removed by preprocessing (counts)",
+    subtitle = "Detailed ASV IDs are shown in a scrollable table below."
+  ) |>
+  gt::cols_label(step = "Filter step", n_taxa_removed = "Taxa removed"
+  )
+
+gt::gt(tbl_taxa_removed) |>
+  gt::tab_header(
+    title = "Taxa removed by preprocessing (ASV IDs)",
+    subtitle = "Scrollable audit table (HTML)."
+  ) |>
+  gt::cols_label(step = "Filter step", taxon = "Taxon") |>
+  gt::tab_options(container.height = gt::px(300), table.font.size = gt::px(12))
+```
+
+## Consistency check: does the replayed pipeline match the saved cleaned object?
+
+The replayed pipeline *should* match the saved `path.pseq.cleaned` with respect to sample/taxa sets
+after the same filters are applied (aside from optional decontam behavior and any subsequent metadata-based
+filtering applied later in the pipeline).
+
+```{r}
+same_samples <- setequal(phyloseq::sample_names(ps_cleaned), phyloseq::sample_names(steps$ps3))
+same_taxa <- setequal(phyloseq::taxa_names(ps_cleaned), phyloseq::taxa_names(steps$ps3))
+
+tibble::tibble(
+  check = c("Same sample set?", "Same taxa set?"),
+  value = c(same_samples, same_taxa)
+) |>
+  gt::gt() |>
+  gt::tab_header(title = "Replay vs saved cleaned object")
+```
+

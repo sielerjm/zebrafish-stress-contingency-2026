@@ -1,0 +1,22 @@
+Metric,Term,Chisq,Df,p_value,p_signif
+Shannon diversity,Antibiotics_f,0.3500369534815594,1,0.5541,ns
+Shannon diversity,Temperature_f,4.053384343195367,1,0.0441,*
+Shannon diversity,Parasite_f,0.20099001324824592,1,0.6539,ns
+Shannon diversity,Antibiotics_f:Temperature_f,0.2681508120926392,1,0.6046,ns
+Shannon diversity,Antibiotics_f:Parasite_f,0.11414007296988712,1,0.7355,ns
+Shannon diversity,Temperature_f:Parasite_f,0.23598779928745847,1,0.6271,ns
+Shannon diversity,Antibiotics_f:Temperature_f:Parasite_f,0.8983367817010959,1,0.3432,ns
+Simpson diversity,Antibiotics_f,1.0857913956699163,1,0.2974,ns
+Simpson diversity,Temperature_f,5.266175355925464,1,0.0217,*
+Simpson diversity,Parasite_f,0.5627412675316719,1,0.4532,ns
+Simpson diversity,Antibiotics_f:Temperature_f,0.1222840655821292,1,0.7266,ns
+Simpson diversity,Antibiotics_f:Parasite_f,0.0686126390783143,1,0.7934,ns
+Simpson diversity,Temperature_f:Parasite_f,0.7473080953633349,1,0.3873,ns
+Simpson diversity,Antibiotics_f:Temperature_f:Parasite_f,0.4516157791946666,1,0.5016,ns
+Observed richness,Antibiotics_f,8.488414100687318e-4,1,0.9768,ns
+Observed richness,Temperature_f,0.7817179109467272,1,0.3766,ns
+Observed richness,Parasite_f,0.24390513441685055,1,0.6214,ns
+Observed richness,Antibiotics_f:Temperature_f,4.17421109154036,1,0.041,*
+Observed richness,Antibiotics_f:Parasite_f,3.804075170002495,1,0.0511,.
+Observed richness,Temperature_f:Parasite_f,1.8077826908267396,1,0.1788,ns
+Observed richness,Antibiotics_f:Temperature_f:Parasite_f,0.14409883906115795,1,0.7042,ns

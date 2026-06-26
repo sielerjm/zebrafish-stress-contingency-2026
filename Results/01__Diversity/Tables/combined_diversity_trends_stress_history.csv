@@ -1,0 +1,4 @@
+Metric,Contrast,Estimate,SE,df,z_ratio,p_value,p_signif
+Shannon diversity,Linear trend (0 → 2),-0.449,0.261,Inf,-1.72,0.086,.
+Simpson diversity,Linear trend (0 → 2),-0.612,0.28,Inf,-2.19,0.029,*
+Observed richness,Linear trend (0 → 2),0.072,0.28,Inf,0.26,0.798,ns

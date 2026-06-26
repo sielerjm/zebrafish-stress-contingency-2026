@@ -1,0 +1,74 @@
+ID,Description,p.adjust,Count,geneID,log_padj
+GO:0043632,modification-dependent macromolecule catabolic process,2.2699277610987813e-15,50,anapc2/psmd2/psmd6/fbxo44.1/psmd13/psmd4a/psmc1b/psmc2/cul2/ppp1r11/ube4b/dis3l2/anapc10/uchl3/nedd8/fbxo44.3/psmb5/psma5/vcp/psmc6/psmd4b/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1/uchl5/ccdc22/ube2d2l/ube2d2/ube2l3b/usp14/uba1/nsfl1c/psmb12/psmc3/psma2a/uba7/si:ch211-284e13.9/psmd1/si:ch211-212k18.15/psmd3/psmc1a/psmb2/psma1/psma4/psma6b/usp38,14.643987963712332
+GO:0019941,modification-dependent protein catabolic process,4.8252306250072406e-15,49,anapc2/psmd2/psmd6/fbxo44.1/psmd13/psmd4a/psmc1b/psmc2/cul2/ppp1r11/ube4b/anapc10/uchl3/nedd8/fbxo44.3/psmb5/psma5/vcp/psmc6/psmd4b/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1/uchl5/ccdc22/ube2d2l/ube2d2/ube2l3b/usp14/uba1/nsfl1c/psmb12/psmc3/psma2a/uba7/si:ch211-284e13.9/psmd1/si:ch211-212k18.15/psmd3/psmc1a/psmb2/psma1/psma4/psma6b/usp38,14.316481924439483
+GO:0006511,ubiquitin-dependent protein catabolic process,6.41474834498886e-15,48,anapc2/psmd2/psmd6/fbxo44.1/psmd13/psmd4a/psmc1b/psmc2/cul2/ppp1r11/ube4b/anapc10/uchl3/fbxo44.3/psmb5/psma5/vcp/psmc6/psmd4b/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1/uchl5/ccdc22/ube2d2l/ube2d2/ube2l3b/usp14/uba1/nsfl1c/psmb12/psmc3/psma2a/uba7/si:ch211-284e13.9/psmd1/si:ch211-212k18.15/psmd3/psmc1a/psmb2/psma1/psma4/psma6b/usp38,14.19282037662755
+GO:0051603,proteolysis involved in protein catabolic process,3.726537223050557e-13,51,anapc2/psmd2/psmd6/fbxo44.1/psmd13/psmd4a/psmc1b/psmc2/cul2/ppp1r11/ube4b/anapc10/uchl3/nedd8/fbxo44.3/psmb5/psma5/vcp/psmc6/psmd4b/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1/uchl5/ccdc22/rspry1/ube2d2l/ube2d2/ube2l3b/usp14/uba1/nsfl1c/psmb12/psmc3/psma2a/uba7/si:ch211-284e13.9/psmd1/si:ch211-212k18.15/psmd3/psmc1a/psmb2/psma1/psma4/psmb1/psma6b/usp38,12.428694536399457
+GO:0016071,mRNA metabolic process,4.834032837670694e-12,47,gemin4/ddx23/ppwd1/hnrnpul1l/sf3a3/prpf3/smu1a/dis3l2/bud13/nudt21/plrg1/skic8/sf3b5/prpf8/snrpd3/ilf3b/snrnp200/fastkd1/hnrnpl2/ddx39ab/srsf7a/cpsf3/hnrnpl/rbm17/trub1/xab2/sf3b4/dcp1b/upf1/hnrnpa0b/sf1/srsf9/sympk/sf3b2/igf2bp2b/cstf2/eif4a3/wbp11/yju2/lsm3/dis3/dhx16/usp39/thoc5/prpf4/tut1/mettl14,11.31569040374824
+GO:0006397,mRNA processing,2.504839220766653e-11,38,gemin4/ddx23/ppwd1/hnrnpul1l/sf3a3/prpf3/smu1a/bud13/nudt21/plrg1/sf3b5/prpf8/snrpd3/ilf3b/snrnp200/hnrnpl2/ddx39ab/srsf7a/cpsf3/hnrnpl/rbm17/xab2/sf3b4/sf1/srsf9/sympk/sf3b2/cstf2/eif4a3/wbp11/yju2/lsm3/dhx16/usp39/thoc5/prpf4/tut1/mettl14,10.60122014515592
+GO:0006260,DNA replication,7.822473468297388e-11,24,pold1/orc1/rpa1/mcmbp/rmi1/rpa3/mcm10/cdt1/orc6/gins1/rfc3/rfc2/recql4/wdr18/timeless/polb/mcm3/mcm6/e2f7/dbf4/lrwd1/prim1/mms22l/pole2,10.106655901188043
+GO:0043161,proteasome-mediated ubiquitin-dependent protein catabolic process,1.5801754850365331e-9,31,psmd2/psmd6/fbxo44.1/psmd4a/psmc1b/psmc2/cul2/anapc10/fbxo44.3/psmb5/psma5/vcp/psmc6/psmd4b/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1/usp14/nsfl1c/psmb12/psmc3/psma2a/psmd1/psmc1a/psmb2/psma1/psma4/psma6b,8.801294680165181
+GO:0006259,DNA metabolic process,1.6659719756971646e-9,45,pold1/orc1/rif1/ap5s1/rpa1/mcmbp/msh2/rmi1/gtf2h4/ftr06/rpa3/mnat1/mcm10/dmap1/cdt1/tdg.1/orc6/gins1/xrcc4/vcp/rfc3/rfc2/ube2na/recql4/wdr18/timeless/h2ax/zgc:110425/hdac10/pargl/parga/polb/mcm3/mcm6/rad9a/e2f7/zgc:113265/dbf4/lrwd1/tdp1/lig4/prim1/mms22l/pole2/rad18,8.778332308392885
+GO:0008380,RNA splicing,1.6659719756971646e-9,34,gemin4/ddx23/ppwd1/hnrnpul1l/sf3a3/rbm12bb/prpf3/smu1a/bud13/plrg1/sf3b5/prpf8/snrpd3/ilf3b/snrnp200/hnrnpl2/ddx39ab/srsf7a/hnrnpl/rbm17/xab2/sf3b4/sf1/srsf9/sf3b2/eif4a3/wbp11/yju2/lsm3/dhx16/usp39/thoc5/prpf4/mettl14,8.778332308392885
+GO:0006261,DNA-templated DNA replication,1.2104229572905098e-8,17,pold1/orc1/mcmbp/mcm10/cdt1/orc6/gins1/rfc3/wdr18/timeless/mcm3/mcm6/e2f7/dbf4/prim1/mms22l/pole2,7.917062847930972
+GO:0000375,"RNA splicing, via transesterification reactions",3.449689830178701e-8,27,gemin4/ddx23/hnrnpul1l/sf3a3/prpf3/smu1a/bud13/plrg1/sf3b5/prpf8/snrpd3/ilf3b/snrnp200/ddx39ab/srsf7a/rbm17/xab2/sf3b4/sf1/srsf9/sf3b2/eif4a3/yju2/lsm3/usp39/prpf4/mettl14,7.46221995162165
+GO:0000377,"RNA splicing, via transesterification reactions with bulged adenosine as nucleophile",3.449689830178701e-8,27,gemin4/ddx23/hnrnpul1l/sf3a3/prpf3/smu1a/bud13/plrg1/sf3b5/prpf8/snrpd3/ilf3b/snrnp200/ddx39ab/srsf7a/rbm17/xab2/sf3b4/sf1/srsf9/sf3b2/eif4a3/yju2/lsm3/usp39/prpf4/mettl14,7.46221995162165
+GO:0000398,"mRNA splicing, via spliceosome",3.449689830178701e-8,27,gemin4/ddx23/hnrnpul1l/sf3a3/prpf3/smu1a/bud13/plrg1/sf3b5/prpf8/snrpd3/ilf3b/snrnp200/ddx39ab/srsf7a/rbm17/xab2/sf3b4/sf1/srsf9/sf3b2/eif4a3/yju2/lsm3/usp39/prpf4/mettl14,7.46221995162165
+GO:0010498,proteasomal protein catabolic process,5.6838441972491994e-8,32,psmd2/psmd6/fbxo44.1/psmd4a/psmc1b/psmc2/cul2/ube4b/anapc10/fbxo44.3/psmb5/psma5/vcp/psmc6/psmd4b/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1/usp14/nsfl1c/psmb12/psmc3/psma2a/psmd1/psmc1a/psmb2/psma1/psma4/psma6b,7.245357835248846
+GO:0006974,DNA damage response,8.698141925479566e-8,39,bbc3/pold1/ap5s1/rpa1/msh2/rmi1/gtf2h4/rpa3/vrk2/plrg1/mnat1/mcm10/dmap1/tdg.1/hdac1/xrcc4/csnk2a1/vcp/rfc3/ube2na/recql4/timeless/h2ax/pargl/parga/uba1/uba7/cd74b/polb/mcm3/baxb/mcm6/rad9a/yju2/tdp1/lig4/mms22l/pole2/rad18,7.0605735103347715
+GO:0006281,DNA repair,6.68662040757069e-5,28,pold1/ap5s1/rpa1/msh2/rmi1/gtf2h4/rpa3/mnat1/dmap1/tdg.1/xrcc4/vcp/rfc3/ube2na/recql4/timeless/h2ax/pargl/parga/polb/mcm3/mcm6/rad9a/tdp1/lig4/mms22l/pole2/rad18,4.174793330542683
+GO:0051169,nuclear transport,3.3795513269901917e-4,14,tpra/nup85/tprb/nup35/anp32a/nup62l/ddx39ab/nutf2/snupn/xpo7/nup160/ran/thoc5/aaas,3.4711409533159636
+GO:0050657,nucleic acid transport,7.830040844005676e-4,11,nup85/tprb/seh1l/nup35/nup62l/ddx39ab/nutf2/snupn/eif4a3/ran/thoc5,3.106235972516767
+GO:0050658,RNA transport,7.830040844005676e-4,11,nup85/tprb/seh1l/nup35/nup62l/ddx39ab/nutf2/snupn/eif4a3/ran/thoc5,3.106235972516767
+GO:0051236,establishment of RNA localization,7.830040844005676e-4,11,nup85/tprb/seh1l/nup35/nup62l/ddx39ab/nutf2/snupn/eif4a3/ran/thoc5,3.106235972516767
+GO:0044786,cell cycle DNA replication,9.429162496853209e-4,6,cdt1/gins1/mcm3/mcm6/e2f7/dbf4,3.0255268798128077
+GO:0006913,nucleocytoplasmic transport,0.0012055921015682643,13,tpra/nup85/tprb/nup35/anp32a/nup62l/ddx39ab/nutf2/snupn/nup160/ran/thoc5/aaas,2.9187996059626307
+GO:0006403,RNA localization,0.0012989161799964995,11,nup85/tprb/seh1l/nup35/nup62l/ddx39ab/nutf2/snupn/eif4a3/ran/thoc5,2.886418873360775
+GO:0034504,protein localization to nucleus,0.0014088874872598307,10,tpra/nup85/tprb/nup35/lmnb1/nup62l/lmnb2/nutf2/snupn/ran,2.851123687950442
+GO:0043248,proteasome assembly,0.001490375517712335,5,psmg1/psmd11b/pomp/adrm1/psmd5,2.8267042921763377
+GO:0000278,mitotic cell cycle,0.0030353861190775986,27,orc1/anapc2/tubgcp5/rbl1/rb1/iqgap1/tprb/chmp4bb/kdm8/seh1l/tubb4b/cdt1/tubb5/gins1/vcp/myb/banf1/tuba8l4/ywhae1/mcm3/mcm6/rad9a/e2f7/pim2/ran/cks2/si:ch211-161h7.4,2.5177860562464613
+GO:0032446,protein modification by small protein conjugation,0.004385774599924128,29,anapc2/sumo3a/uba3/cul2/ppp1r11/ube4b/trim35-4/anapc10/nedd8/vcp/ufc1/ube2na/ubxn1/sae1/ube2d2l/ube2d2/ube2l3b/uba1/marchf5l/uba7/rnf115a/dtx2/btr31/ftr79/si:busm1-163l24.3/pef1/trim35-28/socs1b/rad18,2.357953691975546
+GO:0006606,protein import into nucleus,0.004762450949499875,8,tpra/nup85/tprb/nup35/nup62l/nutf2/snupn/ran,2.3221694842761647
+GO:0006270,DNA replication initiation,0.004908418866493177,6,orc1/mcm10/cdt1/orc6/mcm3/mcm6,2.309058383262761
+GO:0006325,chromatin organization,0.004908418866493177,24,rbl1/cbx5/kdm8/smarcb1a/eed/dnmt1/dmap1/chd4a/suz12a/hdac1/anp32e/banf1/lmnb1/ddx39ab/hmgn2/lmnb2/dot1l/h2ax/zgc:110425/ezh2/hdac10/lrwd1/hdac3/mms22l,2.309058383262761
+GO:0051170,import into nucleus,0.005008391207398686,8,tpra/nup85/tprb/nup35/nup62l/nutf2/snupn/ran,2.300301755560624
+GO:0033260,nuclear DNA replication,0.005124170037502808,5,cdt1/gins1/mcm3/mcm6/dbf4,2.2903764673106584
+GO:0051276,chromosome organization,0.008265839354763278,17,anapc2/rif1/rpa1/mcmbp/msh2/tprb/smc1al/seh1l/stag1b/cenpt/cenpo/banf1/recql4/uchl5/zgc:110425/ran/si:ch211-161h7.4,2.0827130394145583
+GO:0090329,regulation of DNA-templated DNA replication,0.01010630988852542,4,cdt1/timeless/e2f7/dbf4,1.9954073891758384
+GO:0006289,nucleotide-excision repair,0.011609837058214889,6,pold1/rpa1/gtf2h4/rpa3/mnat1/lig4,1.935173875456493
+GO:0000076,DNA replication checkpoint signaling,0.014009871436924705,4,orc1/cdt1/timeless/rad9a,1.853565850045443
+GO:0006310,DNA recombination,0.01427971294566262,14,ap5s1/rpa1/msh2/rmi1/rpa3/xrcc4/recql4/h2ax/zgc:110425/hdac10/mcm3/mcm6/lig4/mms22l,1.8452805227676705
+GO:0040029,epigenetic regulation of gene expression,0.01427971294566262,11,cbx5/eed/dnmt1/hdac1/lmnb1/ddx39ab/lmnb2/h2ax/ezh2/hdac10/hdac3,1.8452805227676705
+GO:0006753,nucleoside phosphate metabolic process,0.018742998045916844,24,pank1a/atp6v1ba/elovl1b/nudt14/prps1b/entpd1/rrm1/slc25a12/acot19/cnp/atp6v1ab/gfpt1/adpgk/prkag1/pargl/parga/dnph1/acot8/gmpr2/adssl/nampt2/ran/dctd/itpa,1.7271609400939822
+GO:0051028,mRNA transport,0.019873618664291513,8,nup85/tprb/seh1l/nup35/ddx39ab/nutf2/eif4a3/thoc5,1.7017230476940792
+GO:0071897,DNA biosynthetic process,0.019873618664291513,6,pold1/rpa1/vcp/polb/lig4/pole2,1.7017230476940792
+GO:0031507,heterochromatin formation,0.029363330067206556,8,cbx5/eed/dnmt1/hdac1/lmnb1/lmnb2/h2ax/ezh2,1.5321946930406638
+GO:0070646,protein modification by small protein removal,0.030274897921289484,9,usp45/usp5/ubxn1/uchl5/cops8/usp14/usp11/usp39/usp38,1.5189173125051558
+GO:0010629,negative regulation of gene expression,0.03762670506689166,24,drosha/cbx5/ppp1r11/dis3l2/eed/dnmt1/hdac1/skic8/banf1/lmnb1/fastkd1/focad/lmnb2/eif4ebp3l/h2ax/ezh2/dcp1b/upf1/hnrnpa0b/parp14rs1/igf2bp2b/eif4a3/dis3/mettl14,1.424503810750551
+GO:0031124,mRNA 3'-end processing,0.03775560920397192,4,nudt21/cpsf3/cstf2/tut1,1.4230185177999068
+GO:0016567,protein ubiquitination,0.041160201939786534,24,anapc2/cul2/ppp1r11/ube4b/trim35-4/anapc10/vcp/ube2na/ubxn1/ube2d2l/ube2d2/ube2l3b/uba1/marchf5l/uba7/rnf115a/dtx2/btr31/ftr79/si:busm1-163l24.3/pef1/trim35-28/socs1b/rad18,1.3855225031729714
+GO:0006886,intracellular protein transport,0.041477439665252774,22,tpra/rilpl2/nup85/tprb/ap2a1/ap1b1/snapin/sec24b/nup35/vcp/ap1g2/nup62l/timm10/rab1ab/stx2a/nutf2/cd74b/snupn/stx17/xpo7/ap4e1/ran,1.382188059746134
+GO:0016579,protein deubiquitination,0.044657479172542175,8,usp45/usp5/ubxn1/uchl5/usp14/usp11/usp39/usp38,1.350105795647772
+GO:0006997,nucleus organization,0.044657479172542175,6,seh1l/nup35/banf1/lmnb1/lmnb2/nsfl1c,1.350105795647772
+GO:0055086,nucleobase-containing small molecule metabolic process,0.044657479172542175,24,pank1a/atp6v1ba/elovl1b/nudt14/prps1b/entpd1/rrm1/slc25a12/acot19/cnp/atp6v1ab/gfpt1/adpgk/prkag1/pargl/parga/dnph1/acot8/gmpr2/adssl/nampt2/ran/dctd/itpa,1.350105795647772
+GO:0015931,nucleobase-containing compound transport,0.04487559165425538,11,nup85/tprb/seh1l/nup35/nup62l/ddx39ab/nutf2/snupn/eif4a3/ran/thoc5,1.347989812497537
+GO:0051726,regulation of cell cycle,0.04668228285055985,21,orc1/anapc2/rbl1/rb1/tprb/chmp4bb/ikbkb/mnat1/cdt1/csnk2a1/timeless/dot1l/cdk18/ywhae1/rad9a/e2f7/pim2/dbf4/june/cks2/cdk7,1.3308479142984886
+GO:0006302,double-strand break repair,0.04668228285055985,12,ap5s1/rpa1/rmi1/rpa3/xrcc4/vcp/recql4/polb/mcm3/mcm6/lig4/mms22l,1.3308479142984886
+GO:0006301,postreplication repair,0.05068820421053887,4,vcp/ube2na/pole2/rad18,1.295093094755464
+GO:0009894,regulation of catabolic process,0.05853986426414124,18,ulk2/psmd2/rraga/dis3l2/cpt1ab/vcp/fastkd1/ubxn1/ccdc22/prkag1/usp14/dcp1b/upf1/hnrnpa0b/psmd1/psmd3/igf2bp2b/mettl14,1.2325482888957833
+GO:0045814,"negative regulation of gene expression, epigenetic",0.06025795906745905,8,cbx5/eed/dnmt1/hdac1/lmnb1/lmnb2/h2ax/ezh2,1.219985581934996
+GO:0034655,nucleobase-containing compound catabolic process,0.07140485301253922,17,dis3l2/entpd1/skic8/fastkd1/cnp/adpgk/prkag1/dcp1b/upf1/hnrnpa0b/dnph1/igf2bp2b/eif4a3/dis3/dctd/itpa/mettl14,1.1462722705075472
+GO:1903047,mitotic cell cycle process,0.07233680944811002,18,orc1/anapc2/rbl1/rb1/iqgap1/tprb/chmp4bb/kdm8/seh1l/gins1/vcp/banf1/mcm3/mcm6/rad9a/e2f7/ran/si:ch211-161h7.4,1.1406406505320672
+GO:0044770,cell cycle phase transition,0.08213603135105692,12,orc1/anapc2/rbl1/rb1/chmp4bb/kdm8/cdt1/timeless/cdk18/rad9a/e2f7/dbf4,1.0854662852171542
+GO:0006284,base-excision repair,0.08213603135105692,4,pold1/rpa3/tdg.1/polb,1.0854662852171542
+GO:1901988,negative regulation of cell cycle phase transition,0.08213603135105692,8,orc1/rbl1/rb1/chmp4bb/cdt1/timeless/rad9a/e2f7,1.0854662852171542
+GO:0031017,exocrine pancreas development,0.08832201653386604,6,ppdpfa/eed/dnmt1/hdac1/nup62l/nol9,1.0539310238592954
+GO:0035272,exocrine system development,0.08832201653386604,6,ppdpfa/eed/dnmt1/hdac1/nup62l/nol9,1.0539310238592954
+GO:0043516,"regulation of DNA damage response, signal transduction by p53 class mediator",0.08935925124981443,3,plrg1/cd74b/yju2,1.0488604788745004
+GO:1902807,negative regulation of cell cycle G1/S phase transition,0.08935925124981443,3,rbl1/rb1/e2f7,1.0488604788745004
+GO:2000134,negative regulation of G1/S transition of mitotic cell cycle,0.08935925124981443,3,rbl1/rb1/e2f7,1.0488604788745004
+GO:0006275,regulation of DNA replication,0.08935925124981443,4,cdt1/timeless/e2f7/dbf4,1.0488604788745004
+GO:0009117,nucleotide metabolic process,0.0971758935208085,17,atp6v1ba/prps1b/rrm1/slc25a12/cnp/atp6v1ab/adpgk/prkag1/pargl/parga/dnph1/gmpr2/adssl/nampt2/ran/dctd/itpa,1.012441457392116
+GO:1901987,regulation of cell cycle phase transition,0.0971758935208085,10,orc1/rbl1/rb1/chmp4bb/cdt1/timeless/cdk18/rad9a/e2f7/dbf4,1.012441457392116
+GO:0002440,production of molecular mediator of immune response,0.09846859780555171,4,msh2/xrcc4/cd74b/lig4,1.0067022463970408
+GO:0006998,nuclear envelope organization,0.09846859780555171,4,banf1/lmnb1/lmnb2/nsfl1c,1.0067022463970408
+GO:1901796,regulation of signal transduction by p53 class mediator,0.09846859780555171,4,plrg1/nup62l/cd74b/yju2,1.0067022463970408

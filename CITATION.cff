@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+title: "Historical contingency shapes zebrafish host-microbiome responses to a subsequent biotic challenge"
+message: "If you use this code or data, please cite the preprint and this repository."
+type: software
+authors:
+  - family-names: Sieler
+    given-names: Michael J.
+    name-particle: Jr.
+    affiliation: Oregon State University
+    orcid: https://orcid.org/0000-0002-XXXX-XXXX
+  - family-names: Leong
+    given-names: Connor
+  - family-names: Kasschau
+    given-names: Kristin D.
+  - family-names: Kent
+    given-names: Mike L.
+  - family-names: Sharpton
+    given-names: Thomas J.
+repository-code: https://github.com/sielerjm/zebrafish-stress-contingency-2026
+url: https://github.com/sielerjm/zebrafish-stress-contingency-2026
+license: Other
+license-url: https://github.com/sielerjm/zebrafish-stress-contingency-2026/blob/main/LICENSE
+version: 1.0.0
+date-released: 2026-06-26
+keywords:
+  - microbiome
+  - zebrafish
+  - historical contingency
+  - stress history
+  - 16S rRNA
+  - RNA-seq
+preferred-citation:
+  type: article
+  title: "Historical contingency shapes zebrafish host-microbiome responses to a subsequent biotic challenge"
+  authors:
+    - family-names: Sieler
+      given-names: Michael J.
+      name-particle: Jr.
+    - family-names: Leong
+      given-names: Connor
+    - family-names: Kasschau
+      given-names: Kristin D.
+    - family-names: Kent
+      given-names: Mike L.
+    - family-names: Sharpton
+      given-names: Thomas J.
+  doi: 10.1101/XXXXXX
+  license: CC-BY-NC-4.0
+  notes: "Replace doi with bioRxiv DOI after Jul 5 upload."

@@ -1,0 +1,7 @@
+ID,Description,p.adjust,Count,geneID,log_padj
+GO:0005881,cytoplasmic microtubule,0.03874306214079459,1,selenos,1.4118060568669357
+GO:0140534,endoplasmic reticulum protein-containing complex,0.03874306214079459,1,selenos,1.4118060568669357
+GO:0005874,microtubule,0.07397818281161594,1,selenos,1.1308963408305805
+GO:0030312,external encapsulating structure,0.07397818281161594,1,fbn1,1.1308963408305805
+GO:0031012,extracellular matrix,0.07397818281161594,1,fbn1,1.1308963408305805
+GO:0099513,polymeric cytoskeletal fiber,0.07748484707713943,1,selenos,1.1107832197416143

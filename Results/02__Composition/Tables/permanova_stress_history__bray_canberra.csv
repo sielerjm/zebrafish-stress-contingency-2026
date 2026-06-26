@@ -1,0 +1,5 @@
+Distance,Term,Df,R2,F,p_value
+Bray-Curtis,HistoryLevelNum,1,0.0168,3.971,0.008
+Bray-Curtis,Residual,233,0.9832,NA,NA
+Canberra,HistoryLevelNum,1,0.0111,2.609,0.001
+Canberra,Residual,233,0.9889,NA,NA

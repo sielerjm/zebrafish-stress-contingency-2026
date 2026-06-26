@@ -1,0 +1,16 @@
+ID,Description,Count_Culicoidibacter,Count_Shewanella,Count_Flavobacterium,Count_Cetobacterium,log_padj_Culicoidibacter,log_padj_Shewanella,log_padj_Flavobacterium,log_padj_Cetobacterium
+GO:0000375,"RNA splicing, via transesterification reactions",NA,NA,7,NA,NA,NA,2.7870661164440156,NA
+GO:0000377,"RNA splicing, via transesterification reactions with bulged adenosine as nucleophile",NA,NA,7,NA,NA,NA,2.7870661164440156,NA
+GO:0000398,"mRNA splicing, via spliceosome",NA,NA,7,NA,NA,NA,2.7870661164440156,NA
+GO:0006397,mRNA processing,NA,NA,10,NA,NA,NA,4.312198402798561,NA
+GO:0006511,ubiquitin-dependent protein catabolic process,NA,NA,14,NA,NA,NA,6.8292031630290415,NA
+GO:0006998,nuclear envelope organization,NA,NA,3,NA,NA,NA,2.303023468099916,NA
+GO:0008380,RNA splicing,NA,NA,9,NA,NA,NA,3.643429458499035,NA
+GO:0010498,proteasomal protein catabolic process,NA,NA,10,1,NA,NA,4.318227747100981,1.0747589165859002
+GO:0016071,mRNA metabolic process,NA,NA,11,NA,NA,NA,3.881217688346364,NA
+GO:0019941,modification-dependent protein catabolic process,NA,NA,14,NA,NA,NA,6.8292031630290415,NA
+GO:0043161,proteasome-mediated ubiquitin-dependent protein catabolic process,NA,NA,10,NA,NA,NA,5.062723874179669,NA
+GO:0043248,proteasome assembly,NA,NA,4,NA,NA,NA,4.712961546553821,NA
+GO:0043632,modification-dependent macromolecule catabolic process,NA,NA,14,NA,NA,NA,6.8292031630290415,NA
+GO:0051603,proteolysis involved in protein catabolic process,NA,NA,14,NA,NA,NA,5.887076206935647,NA
+GO:2000058,regulation of ubiquitin-dependent protein catabolic process,NA,NA,3,NA,NA,NA,1.7089846835658016,NA

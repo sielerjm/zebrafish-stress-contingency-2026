@@ -1,0 +1,509 @@
+---
+title: "Mortality and infection vs prior stressor history (display)"
+author: "Michael Sieler"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    fig_width: 6
+    fig_height: 6
+params:
+  rerun_analysis: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = isTRUE(params$rerun_analysis),
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 6,
+  fig.height = 6,
+  dpi = 300
+)
+
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+
+bundle_path <- here::here("Results", "05__Mort-Inf", "Stats", "mortinf__host__bundle.rds")
+
+if (isTRUE(params$rerun_analysis)) {
+  source(here::here("Code", "01__Analysis", "05__Mort-Inf.R"))
+}
+
+if (!file.exists(bundle_path)) {
+  stop(
+    "Bundle not found: ", bundle_path, "\n",
+    "Run `Code/01__Analysis/05__Mort-Inf.R` from the project root, or knit with ",
+    "`params$rerun_analysis: true`."
+  )
+}
+
+mortinf <- readRDS(bundle_path)
+
+# Resolve paths saved in bundles:
+# - Prefer the stored path when it exists on this machine
+# - Otherwise, treat it as relative to the repo root (here::here)
+resolve_bundle_path <- function(p) {
+  if (is.null(p) || !nzchar(p)) {
+    return(NA_character_)
+  }
+  if (file.exists(p)) {
+    return(p)
+  }
+  p2 <- tryCatch(here::here(p), error = function(e) NA_character_)
+  if (!is.na(p2) && file.exists(p2)) {
+    return(p2)
+  }
+  p3 <- file.path(root, p)
+  if (file.exists(p3)) {
+    return(p3)
+  }
+  p
+}
+
+# Include a PNG from the bundle, robust to absolute/relative paths.
+include_png <- function(p) {
+  p_res <- resolve_bundle_path(p)
+  if (is.null(p_res) || !nzchar(p_res)) {
+    return(invisible(NULL))
+  }
+  p_abs <- normalizePath(p_res, winslash = "/", mustWork = TRUE)
+  knitr::include_graphics(p_abs, rel_path = FALSE)
+}
+```
+
+This report loads `Results/05__Mort-Inf/Stats/mortinf__host__bundle.rds` produced by [`Code/01__Analysis/05__Mort-Inf.R`](../01__Analysis/05__Mort-Inf.R). **Mortality** uses binomial **glmmTMB** models: **HistoryLevelNum + (1 | Tank.ID)** for the main cumulative-stress trend figure, and **HistoryLevelNum × Parasite + (1 | Tank.ID)** for the supplementary parasite comparison. **Infection** is **Day-60 surviving P+ fish** (one row per `Sample`); tank-level models include **HistoryLevelNum** and **Treatment** with **emmeans** contrasts. The **four** manuscript figures below follow a 2×2 layout (bars on top, trends on bottom), **square 6 × 6 in** PNGs.
+
+## Metadata
+
+```{r meta, echo=FALSE}
+mortinf$meta
+```
+
+***
+
+## Main figures (manuscript, square)
+
+### 1. Final mortality by exposure regime
+
+```{r fig-mortality-bars-sq, echo=FALSE, fig.cap="Day-60 percent mortality by exposure regime (45 fish at risk per regime); facets = prior stressor history. Labels: percent and deaths/at-risk."}
+include_png(mortinf$paths$figures$mortality_percent_by_exposure_regime_prior_history_square_png)
+```
+
+### 1b. Final mortality by exposure regime (A×T only; parasite pooled within stratum)
+
+```{r fig-mortality-at-bars-pooled, echo=FALSE, fig.cap="Day-60 percent mortality by A×T exposure regime (parasite pooled); facets = prior stressor history. Labels: percent and deaths/at-risk pooled across P- and P+ tanks within each stratum."}
+include_png(mortinf$paths$figures$mortality_percent_by_AT_regime_prior_history_pooled_parasite_png)
+```
+
+### 1c. Final mortality by exposure regime (A×T), faceted by stress history with P− vs P+ side-by-side
+
+```{r fig-mortality-at-bars-by-parasite, echo=FALSE, fig.cap="Day-60 percent mortality by A×T exposure regime with P− vs P+ side-by-side; facets = prior stressor history. Outline color = stress history palette (green/orange/purple); fill = parasite exposure (grey/red)."}
+include_png(mortinf$paths$figures$mortality_percent_by_AT_regime_prior_history_by_parasite_png)
+```
+
+### 2. Infection prevalence by exposure regime (P+ survivors)
+
+```{r fig-infection-bars-sq, echo=FALSE, fig.cap="Infection prevalence in P+ regimes among Day-60 surviving sampled fish; facets = prior stressor history. Prevalence = worms present (Total.Worm.Count > 0) / survivors sampled; labels show percent and infected/total."}
+include_png(mortinf$paths$figures$infection_prevalence_by_exposure_regime_prior_history_square_png)
+```
+
+### 3. Mortality trend: prior stressor history (main model)
+
+```{r fig-mortality-trend-sq, echo=FALSE, fig.cap="Day-60 tank-level mortality: observed (gray) and GLMM predicted probabilities with 95% CI (black line, blue ribbon). Model: HistoryLevelNum + (1 | Tank.ID)."}
+include_png(mortinf$paths$figures$mortality_prior_stressor_trend_square_png)
+```
+
+### 4. Infection prevalence trend (P+ survivors, Day 60)
+
+```{r fig-infection-trend-sq, echo=FALSE, fig.cap="Tank-level infection prevalence among Day-60 surviving P+ fish; observed (gray) and GLMM predicted probabilities with 95% CI. Primary model: HistoryLevelNum + (1 | Tank.ID)."}
+include_png(mortinf$paths$figures$infection_prevalence_trend_predicted_square_png)
+```
+
+***
+
+## Supplementary figures: infection prevalence and worm burden (bar charts)
+
+Descriptive bar plots mirror the exposure-regime manuscript style: **by prior stressor history** (three levels: 0, 1, or 2 prior stressors before the parasite phase) use the history color palette from the legacy experiment summary; **by exposure regime** panels repeat **total** and **mean (infected-only)** burden with facets for prior stressor history (Zero / One / Two), matching the infection prevalence faceted figure.
+
+### Infection prevalence and burden by prior stressor history
+
+```{r fig-supp-inf-prev-hist, echo=FALSE, fig.cap="Infection prevalence among Day-60 sampled P+ survivors, pooled by prior stressor history (0–2). Labels: percent and infected/total sampled."}
+include_png(mortinf$paths$figures$infection_prevalence_by_prior_stressor_history_bars_square_png)
+```
+
+```{r fig-supp-inf-total-hist, echo=FALSE, fig.cap="Total worm counts (sum of Total.Worm.Count) across all sampled P+ survivors within each prior stressor history level."}
+include_png(mortinf$paths$figures$infection_total_worm_count_by_prior_stressor_history_bars_square_png)
+```
+
+```{r fig-supp-inf-mean-hist, echo=FALSE, fig.cap="Mean worm burden among infected fish only (Total.Worm.Count > 0) by prior stressor history; n = infected fish in each level."}
+include_png(mortinf$paths$figures$infection_mean_worm_burden_infected_by_prior_stressor_history_bars_square_png)
+```
+
+### Total and mean worm burden by exposure regime (faceted by prior stressor history)
+
+```{r fig-supp-inf-total-regime, echo=FALSE, fig.cap="Total worm counts per exposure regime within each prior-stressor-history facet (same structure as infection prevalence by regime)."}
+include_png(mortinf$paths$figures$infection_total_worm_count_by_exposure_regime_prior_history_square_png)
+```
+
+```{r fig-supp-inf-mean-regime, echo=FALSE, fig.cap="Mean worm burden among infected fish per exposure regime, faceted by prior stressor history."}
+include_png(mortinf$paths$figures$infection_mean_worm_burden_infected_by_exposure_regime_prior_history_square_png)
+```
+
+***
+
+## Supplementary figure: mortality P+ vs P− (interaction model)
+
+```{r fig-mortality-parasite-sq, echo=FALSE, fig.cap="Predicted mortality by prior stressors and parasite challenge (P+ vs P-). Model: HistoryLevelNum * Parasite + (1 | Tank.ID)."}
+include_png(mortinf$paths$figures$mortality_parasite_trend_comparison_square_png)
+```
+
+***
+
+## Table: deaths and at-risk by exposure regime
+
+```{r tbl-deaths, echo=FALSE}
+tbl_deaths <- mortinf$tables$deaths_by_exposure_regime
+
+gt_deaths <- tbl_deaths %>%
+  gt::gt() %>%
+  gt::tab_header(
+    title = "Deaths and survivors by exposure regime (Day 60)",
+    subtitle = "Per regime: 3 tanks × 15 fish = 45 at risk"
+  ) %>%
+  gt::cols_label(
+    Treatment = "Exposure regime",
+    deaths = "Deaths",
+    at_risk = "At risk",
+    survived = "Survived"
+  ) %>%
+  gt_bold_column_labels()
+
+if (exists("treatment_color_scale", inherits = TRUE) && exists("treatment_order", inherits = TRUE)) {
+  for (trt in treatment_order) {
+    if (trt %in% names(treatment_color_scale)) {
+      trt_color <- treatment_color_scale[[trt]]
+      gt_deaths <- gt_deaths %>%
+        gt::tab_style(
+          style = gt::cell_fill(color = trt_color),
+          locations = gt::cells_body(columns = "Treatment", rows = Treatment == trt)
+        ) %>%
+        gt::tab_style(
+          style = gt::cell_text(color = "white", weight = "bold"),
+          locations = gt::cells_body(columns = "Treatment", rows = Treatment == trt)
+        )
+    }
+  }
+}
+
+gt_deaths
+```
+
+***
+
+## Table: mortality (%) by exposure regime
+
+```{r tbl-mort-pct, echo=FALSE}
+tbl_pct <- mortinf$tables$mortality_percent_by_exposure_regime
+
+gt_pct <- tbl_pct %>%
+  gt::gt() %>%
+  gt::tab_header(
+    title = "Mortality percentage by exposure regime",
+    subtitle = "Day 60; denominator 45 fish per regime"
+  ) %>%
+  gt::cols_label(
+    Treatment = "Exposure regime",
+    mortality_percent = "Mortality (%)"
+  ) %>%
+  gt_bold_column_labels()
+
+if (exists("treatment_color_scale", inherits = TRUE) && exists("treatment_order", inherits = TRUE)) {
+  for (trt in treatment_order) {
+    if (trt %in% names(treatment_color_scale)) {
+      trt_color <- treatment_color_scale[[trt]]
+      gt_pct <- gt_pct %>%
+        gt::tab_style(
+          style = gt::cell_fill(color = trt_color),
+          locations = gt::cells_body(columns = "Treatment", rows = Treatment == trt)
+        ) %>%
+        gt::tab_style(
+          style = gt::cell_text(color = "white", weight = "bold"),
+          locations = gt::cells_body(columns = "Treatment", rows = Treatment == trt)
+        )
+    }
+  }
+}
+
+gt_pct
+```
+
+***
+
+## Table: combined mortality summary (optional manuscript layout)
+
+```{r tbl-mort-summary, echo=FALSE}
+tbl_sum <- mortinf$tables$mortality_summary_by_exposure_regime %>%
+  dplyr::transmute(
+    Treatment = as.character(.data$Treatment),
+    `At risk` = .data$at_risk,
+    Survived = .data$alive,
+    Deaths = .data$dead,
+    `Mortality (%)` = .data$percent_mortality
+  )
+
+gt_sum <- tbl_sum %>%
+  gt::gt() %>%
+  gt::tab_header(
+    title = "Mortality summary by exposure regime",
+    subtitle = "Treatment, at risk, survived, deaths, and percent mortality (Day 60)"
+  ) %>%
+  gt_bold_column_labels()
+
+if (exists("treatment_color_scale", inherits = TRUE) && exists("treatment_order", inherits = TRUE)) {
+  for (trt in treatment_order) {
+    if (trt %in% names(treatment_color_scale)) {
+      trt_color <- treatment_color_scale[[trt]]
+      gt_sum <- gt_sum %>%
+        gt::tab_style(
+          style = gt::cell_fill(color = trt_color),
+          locations = gt::cells_body(columns = "Treatment", rows = Treatment == trt)
+        ) %>%
+        gt::tab_style(
+          style = gt::cell_text(color = "white", weight = "bold"),
+          locations = gt::cells_body(columns = "Treatment", rows = Treatment == trt)
+        )
+    }
+  }
+}
+
+gt_sum
+```
+
+***
+
+## Table: mortality by exposure regime and prior stressor history (descriptive)
+
+```{r tbl-mort-regime-prior-history, echo=FALSE}
+tbl_cross <- mortinf$tables$mortality_percent_by_exposure_regime_prior_history
+tbl_cross <- tbl_cross %>%
+  dplyr::transmute(
+    `Prior stressor history` = as.character(.data$Prior_Stressor_History),
+    `Exposure regime` = as.character(.data$Treatment),
+    `At risk` = .data$at_risk,
+    Survived = .data$alive,
+    Deaths = .data$dead,
+    `Mortality (%)` = .data$percent_mortality
+  ) %>%
+  dplyr::arrange(.data$`Prior stressor history`, .data$`Exposure regime`)
+
+tbl_cross %>%
+  gt::gt() %>%
+  gt::tab_header(
+    title = "Mortality by exposure regime and prior stressor history",
+    subtitle = "Day 60; descriptive counts (same structure as faceted bar figure). 45 fish at risk per regime."
+  ) %>%
+  gt_fmt_numbers(tbl_cross, decimals = 1L) %>%
+  gt_bold_column_labels()
+```
+
+***
+
+## Table: mortality GLMM — marginal means (response scale)
+
+```{r tbl-mort-glmm-emmeans, echo=FALSE}
+mme <- mortinf$tables$mortality_glmm_history_emmeans_response
+gt::gt(mme) %>%
+  gt::tab_header(
+    title = "Mortality: emmeans by prior stressor count",
+    subtitle = "Tank-level binomial GLMM: cbind(dead, alive) ~ HistoryLevelNum + (1 | Tank.ID), type = response"
+  ) %>%
+  gt_fmt_numbers(mme, decimals = 3L, pvalue_threshold = 1e-4) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = mme, sig_fill = "#C7EFCF")
+```
+
+***
+
+## Table: mortality GLMM — polynomial trend (stress history)
+
+```{r tbl-mort-glmm-poly, echo=FALSE}
+mpoly <- mortinf$tables$mortality_glmm_history_poly_contrast
+gt::gt(mpoly) %>%
+  gt::tab_header(
+    title = "Polynomial contrasts: mortality vs HistoryLevelNum",
+    subtitle = "emmeans::contrast(emm, \"poly\") on HistoryLevelNum + (1 | Tank.ID) binomial GLMM"
+  ) %>%
+  gt_fmt_numbers(mpoly, decimals = 3L, pvalue_threshold = 1e-4) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = mpoly, sig_fill = "#C7EFCF")
+```
+
+***
+
+## Table: mortality pairwise contrasts (stress history levels, FDR)
+
+```{r tbl-mort-glmm-history-pairs, echo=FALSE}
+mpair <- mortinf$tables$mortality_glmm_history_pairs_fdr
+gt::gt(mpair) %>%
+  gt::tab_header(
+    title = "Pairwise contrasts: mortality by prior stressor count",
+    subtitle = "emmeans::contrast(..., \"pairwise\", adjust = \"fdr\") on HistoryLevelNum + (1 | Tank.ID) GLMM"
+  ) %>%
+  gt_fmt_numbers(mpair, decimals = 3L, pvalue_threshold = 1e-4) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = mpair, sig_fill = "#C7EFCF")
+```
+
+***
+
+## Table: infection prevalence by prior stressor history
+
+```{r tbl-infection, echo=FALSE}
+tbl_inf <- mortinf$tables$infection_prevalence_by_prior_stressor_history
+if (!"n_survivors_sampled" %in% names(tbl_inf) && "n_fish" %in% names(tbl_inf)) {
+  tbl_inf <- tbl_inf %>% dplyr::rename(n_survivors_sampled = n_fish)
+}
+tbl_inf <- tbl_inf %>%
+  dplyr::select(
+    dplyr::any_of(c(
+      "History_Label",
+      "n_survivors_sampled",
+      "n_infected",
+      "percent_infected",
+      "mean_worm_burden",
+      "total_worm_count",
+      "mean_worm_burden_infected"
+    ))
+  )
+
+tbl_inf %>%
+  gt::gt() %>%
+  gt::tab_header(
+    title = "Infection in parasite-exposed fish (Day 60 survivors)",
+    subtitle = "Unique sampled fish per prior stressor history; worm presence = Total.Worm.Count > 0"
+  ) %>%
+  gt::cols_label(
+    History_Label = "Prior stressor history",
+    n_survivors_sampled = "N survivors (sampled)",
+    n_infected = "N infected",
+    percent_infected = "Infected (%)",
+    mean_worm_burden = "Mean worms (all fish)",
+    total_worm_count = "Total worms",
+    mean_worm_burden_infected = "Mean worms (infected only)"
+  ) %>%
+  gt_fmt_numbers(tbl_inf, decimals = 2L) %>%
+  gt_bold_column_labels()
+```
+
+## Supplementary figures: mortality by stress history (levels)
+
+### Mortality by prior stressor history (3 levels; history palette)
+
+```{r fig-mort-history-levels, echo=FALSE, fig.cap="Mortality by prior stressor history (3 levels). Tank-level binomial GLMM: cbind(dead, alive) ~ HistoryLevel + (1 | Tank.ID). Colors use the stress-history palette (green/orange/purple)."}
+include_png(mortinf$paths$figures$mortality_by_prior_stressor_history_levels_png)
+```
+
+### Mortality by prior stressor history × parasite exposure (history palette)
+
+```{r fig-mort-history-levels-x-parasite, echo=FALSE, fig.cap="Mortality by prior stressor history × parasite exposure. Tank-level binomial GLMM: cbind(dead, alive) ~ HistoryLevel * Parasite + (1 | Tank.ID). Colors use the stress-history palette (green/orange/purple)."}
+include_png(mortinf$paths$figures$mortality_by_prior_stressor_history_levels_x_parasite_png)
+```
+
+***
+
+
+
+## Table: infection GLMM — marginal means (response scale)
+
+```{r tbl-inf-emmeans, echo=FALSE}
+em <- mortinf$tables$infection_glmm_history_emmeans_response
+gt::gt(em) %>%
+  gt::tab_header(
+    title = "Infection prevalence: emmeans by prior stressor count",
+    subtitle = "P+ Day 60 survivors; model: HistoryLevelNum + (1 | Tank.ID), type = response"
+  ) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = em, sig_fill = "#C7EFCF")
+```
+
+***
+
+## Table: infection GLMM — polynomial trend (stress history)
+
+```{r tbl-inf-poly, echo=FALSE}
+pl <- mortinf$tables$infection_glmm_history_poly_contrast
+gt::gt(pl) %>%
+  gt::tab_header(
+    title = "Polynomial contrasts: infection vs HistoryLevelNum",
+    subtitle = "emmeans::contrast(emm, \"poly\") on HistoryLevelNum + (1 | Tank.ID) binomial GLMM"
+  ) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = pl, sig_fill = "#C7EFCF")
+```
+
+***
+
+## Table: infection pairwise contrasts (stress history levels, FDR)
+
+```{r tbl-inf-history-pairs, echo=FALSE}
+hp <- mortinf$tables$infection_glmm_history_pairs_fdr
+gt::gt(hp) %>%
+  gt::tab_header(
+    title = "Pairwise contrasts: infection by prior stressor count",
+    subtitle = "emmeans::contrast(..., \"pairwise\", adjust = \"fdr\") on HistoryLevelNum + (1 | Tank.ID) GLMM"
+  ) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = hp, sig_fill = "#C7EFCF")
+```
+
+***
+## Table: mortality GLMM joint tests (History × Parasite)
+
+```{r tbl-mort-joint, echo=FALSE}
+jt <- mortinf$tables$mortality_glmm_joint_tests
+gt::gt(jt) %>%
+  gt::tab_header(
+    title = "Joint tests: mortality model",
+    subtitle = "cbind(dead, alive) ~ HistoryLevelNum * Parasite + (1 | Tank.ID)"
+  ) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = jt, sig_fill = "#C7EFCF")
+```
+
+***
+
+## Table: infection pairwise contrasts (P+ regimes, FDR)
+
+```{r tbl-inf-pairs, echo=FALSE}
+ip <- mortinf$tables$infection_glmm_treatment_pairs_fdr
+gt::gt(ip) %>%
+  gt::tab_header(
+    title = "Pairwise contrasts: infection by Treatment (P+ Day 60)",
+    subtitle = "emmeans pairs(..., adjust = 'fdr') on Treatment + (1 | Tank.ID) binomial GLMM"
+  ) %>%
+  gt_bold_column_labels() %>%
+  style_gt_significance(data_tbl = ip, sig_fill = "#C7EFCF")
+```
+
+***
+
+## Output paths
+
+```{r paths, echo=FALSE}
+mortinf$paths
+```

@@ -1,0 +1,19 @@
+ID,Description,p.adjust,Count,geneID,log_padj,Taxon,Description_plot,Description_wrapped
+dre01240,Biosynthesis of cofactors,9.601893746391505e-5,4,406789/100330410/406731/100379286,4.017643104200134,Culicoidibacter,Biosynthesis of cofactors,Biosynthesis of cofactors
+dre00982,Drug metabolism - cytochrome P450,9.601893746391505e-5,3,567275/406731/100379286,4.017643104200134,Culicoidibacter,Drug metabolism - cytochrome P450,Drug metabolism - cytochrome P450
+dre00980,Metabolism of xenobiotics by cytochrome P450,9.601893746391505e-5,3,567275/406731/100379286,4.017643104200134,Culicoidibacter,Metabolism of xenobiotics by cytochrome P450,Metabolism of xenobiotics by cytochrome P450
+dre00830,Retinol metabolism,1.4087264159039992e-4,3,777751/406731/100379286,3.8511733415960516,Culicoidibacter,Retinol metabolism,Retinol metabolism
+dre00983,Drug metabolism - other enzymes,1.4781457215583494e-4,3,567275/406731/100379286,3.830282749331528,Culicoidibacter,Drug metabolism - other enzymes,Drug metabolism - other enzymes
+dre00120,Primary bile acid biosynthesis,5.242715219524953e-4,2,327462/553543,3.280443732205764,Culicoidibacter,Primary bile acid biosynthesis,Primary bile acid biosynthesis
+dre00040,Pentose and glucuronate interconversions,0.0016442097518752767,2,406731/100379286,2.7840427803048993,Culicoidibacter,Pentose and glucuronate interconversions,Pentose and glucuronate interconversions
+dre00053,Ascorbate and aldarate metabolism,0.0016442097518752767,2,406731/100379286,2.7840427803048993,Culicoidibacter,Ascorbate and aldarate metabolism,Ascorbate and aldarate metabolism
+dre00860,Porphyrin metabolism,0.0025933704386493315,2,406731/100379286,2.58613544390528,Culicoidibacter,Porphyrin metabolism,Porphyrin metabolism
+dre00140,Steroid hormone biosynthesis,0.0027804194930469866,2,406731/100379286,2.5558896753871636,Culicoidibacter,Steroid hormone biosynthesis,Steroid hormone biosynthesis
+dre04140,Autophagy - animal,0.018625697774056312,2,393285/100329702,1.7298874483114375,Culicoidibacter,Autophagy - animal,Autophagy - animal
+dre04814,Motor proteins,0.006079199486076171,2,373076/57934,2.2161536052122646,Shewanella,Motor proteins,Motor proteins
+dre04820,Cytoskeleton in muscle cells,0.006079199486076171,2,373076/57934,2.2161536052122646,Shewanella,Cytoskeleton in muscle cells,Cytoskeleton in muscle cells
+dre04518,Integrin signaling,0.048339083990279294,1,57934,1.3157015835877872,Shewanella,Integrin signaling,Integrin signaling
+dre04140,Autophagy - animal,0.048339083990279294,1,100332293,1.3157015835877872,Shewanella,Autophagy - animal,Autophagy - animal
+dre03050,Proteasome,1.6592148684301076e-18,11,403011/321585/322265/799058/326884/445030/573095/796450/445285/171585/393922,17.78009736917091,Flavobacterium,Proteasome,Proteasome
+dre04518,Integrin signaling,0.0016345237682847283,2,403049/100330961,2.7866087597823888,Cetobacterium,Integrin signaling,Integrin signaling
+dre04820,Cytoskeleton in muscle cells,0.055577198572947295,1,100330961,1.255103348076334,Cetobacterium,Cytoskeleton in muscle cells,Cytoskeleton in muscle cells

@@ -1,0 +1,2 @@
+taxon_id,p,freq,freq_pred,pred_lwr,pred_upr,bino_pred,bino_lwr,bino_upr,partition,Time,genus_label,is_culici
+Flavobacterium,0.0052299618833987925,0.7872340425531915,0.8673030672824449,0.8179679412934895,0.9048229948996686,1,0.9839162813706559,1.0000000000000002,below,60,Flavobacterium,TRUE

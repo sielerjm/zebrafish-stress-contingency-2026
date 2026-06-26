@@ -1,0 +1,9 @@
+Treatment,at_risk,alive,dead,percent_mortality,Prior_Stressor_History
+A- T- P-,45,36,9,20,Zero
+A- T- P+,45,37,8,17.8,Zero
+A+ T- P-,45,31,14,31.1,One
+A+ T- P+,45,35,10,22.2,One
+A- T+ P-,45,26,19,42.2,One
+A- T+ P+,45,32,13,28.9,One
+A+ T+ P-,45,15,30,66.7,Two
+A+ T+ P+,45,25,20,44.4,Two

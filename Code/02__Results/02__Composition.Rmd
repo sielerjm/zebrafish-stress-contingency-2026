@@ -1,0 +1,467 @@
+---
+title: "Gut microbial community composition (display)"
+subtitle: "02__Composition — mirrors `Code/01__Analysis/02__Composition.R`"
+author: "Michael Sieler"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    fig_width: 10
+    fig_height: 6
+params:
+  rerun_analysis: false
+---
+
+```{r setup, include=FALSE}
+# Knit from any working directory: locate Sieler2026 repo root, then source_project_init.
+knitr::opts_chunk$set(
+  echo = isTRUE(params$rerun_analysis),
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  dpi = 300
+)
+
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+
+# Knit with repo root as working directory so relative paths resolve consistently.
+knitr::opts_knit$set(root.dir = root)
+
+bundle_path <- here::here("Results", "02__Composition", "Stats", "composition__gut__bundle.rds")
+
+if (isTRUE(params$rerun_analysis)) {
+  source(here::here("Code", "01__Analysis", "02__Composition.R"))
+}
+
+if (!file.exists(bundle_path)) {
+  stop(
+    "Bundle not found: ", bundle_path, "\n",
+    "Run `Code/01__Analysis/02__Composition.R` from the project root, or knit this document with ",
+    "`params$rerun_analysis: true` (requires full analysis environment)."
+  )
+}
+
+comp <- readRDS(bundle_path)
+
+# Resolve paths saved in bundles:
+# - Prefer the stored path when it exists on this machine
+# - Otherwise, treat it as relative to the repo root (here::here)
+resolve_bundle_path <- function(p) {
+  if (is.null(p) || !nzchar(p)) {
+    return(NA_character_)
+  }
+  if (file.exists(p)) {
+    return(p)
+  }
+  p2 <- tryCatch(here::here(p), error = function(e) NA_character_)
+  if (!is.na(p2) && file.exists(p2)) {
+    return(p2)
+  }
+  p3 <- file.path(root, p)
+  if (file.exists(p3)) {
+    return(p3)
+  }
+  p
+}
+
+# Include a PNG from the bundle, robust to absolute/relative paths.
+# We rely on Pandoc `--embed-resources` (RStudio knit) to create a standalone HTML.
+include_png <- function(p) {
+  p_res <- resolve_bundle_path(p)
+  if (is.null(p_res) || !nzchar(p_res)) {
+    return(invisible(NULL))
+  }
+  p_abs <- normalizePath(p_res, winslash = "/", mustWork = TRUE)
+  knitr::include_graphics(p_abs, rel_path = FALSE)
+}
+
+# Helper: safely fetch a module PNG path (returns NA if missing).
+comp_png <- function(module, sub) {
+  mod <- comp$modules[[module]]
+  if (is.null(mod) || is.null(mod[[sub]])) {
+    return(NA_character_)
+  }
+  p <- mod[[sub]]$paths[["figure_png"]]
+  p <- resolve_bundle_path(p)
+  if (is.na(p) || !nzchar(p) || !file.exists(p)) {
+    NA_character_
+  } else {
+    p
+  }
+}
+```
+
+This report loads `Results/02__Composition/Stats/composition__gut__bundle.rds` and displays **gt tables** (PERMANOVA and betadisper ANOVA; Bray–Curtis and Canberra) and **figures** from [`Code/01__Analysis/02__Composition.R`](../01__Analysis/02__Composition.R). The driver is not re-run unless you knit with `params$rerun_analysis: true`.
+
+---
+
+## Statistical framework
+
+```{r model-text, echo=FALSE, results='asis'}
+if (!is.null(comp$meta$description)) {
+  cat(comp$meta$description, "\n\n")
+}
+if (!is.null(comp$meta$model_table_c)) {
+  cat("**Table C (PERMANOVA, stress history):**\n\n")
+  cat(comp$meta$model_table_c, "\n\n")
+}
+if (!is.null(comp$meta$model_table_d)) {
+  cat("**Table D (PERMANOVA, stress history × parasite — interaction model):**\n\n")
+  cat(comp$meta$model_table_d, "\n\n")
+}
+if (!is.null(comp$meta$model_table_dispersion_history)) {
+  cat("**Dispersion — stress history (betadisper ANOVA):**\n\n")
+  cat(comp$meta$model_table_dispersion_history, "\n\n")
+}
+if (!is.null(comp$meta$model_table_dispersion_parasite)) {
+  cat("**Dispersion — stress history × parasite (betadisper ANOVA):**\n\n")
+  cat(comp$meta$model_table_dispersion_parasite, "\n\n")
+}
+if (!is.null(comp$meta$model_table_parasite_within_permanova)) {
+  cat("**Table E (PERMANOVA, stratified — Parasite within each history level):**\n\n")
+  cat(comp$meta$model_table_parasite_within_permanova, "\n\n")
+}
+if (!is.null(comp$meta$model_table_parasite_within_betadisper)) {
+  cat("**Table F (betadisper ANOVA, stratified — Parasite within each history level):**\n\n")
+  cat(comp$meta$model_table_parasite_within_betadisper, "\n\n")
+}
+# Backward compatibility if an older bundle only had diversity-style meta keys
+if (!is.null(comp$meta$model_linear_trend)) {
+  cat("**Linear trend (legacy meta key):**\n\n")
+  cat(comp$meta$model_linear_trend, "\n\n")
+}
+if (!is.null(comp$meta$model_table2)) {
+  cat("**P-value summary (legacy meta key):**\n\n")
+  cat(comp$meta$model_table2, "\n\n")
+}
+if (!is.null(comp$meta$model_interaction)) {
+  cat("**History × parasite (legacy meta key):**\n\n")
+  cat(comp$meta$model_interaction, "\n\n")
+}
+if (!is.null(comp$meta$model_formulas)) {
+  gt::gt(tibble::enframe(comp$meta$model_formulas, name = "Model", value = "Formula")) %>%
+    gt::tab_header(title = "Model formulas (reference)")
+}
+if (!is.null(comp$meta$n_perm)) {
+  cat(
+    "\n\n*Permutations:* ", comp$meta$n_perm,
+    if (!is.null(comp$meta$n_processes)) {
+      paste0("; parallel processes: ", comp$meta$n_processes)
+    } else {
+      ""
+    },
+    "\n\n"
+  )
+}
+```
+
+---
+
+## Tables
+
+## Exposure regimes (factorial A × T × P)
+
+### PERMANOVA: Antibiotics × Temperature × Parasite (Bray–Curtis and Canberra)
+
+```{r table-permanova-factorial-atp, echo=FALSE}
+if (!is.null(comp$table_permanova_factorial_atp)) {
+  comp$table_permanova_factorial_atp
+}
+```
+
+### Betadisper ANOVA: factorial exposure regimes (Bray–Curtis and Canberra)
+
+```{r table-bdisp-factorial-atp, echo=FALSE}
+if (!is.null(comp$table_betadisper_anova_factorial_atp)) {
+  comp$table_betadisper_anova_factorial_atp
+}
+```
+
+### Table C — PERMANOVA: stress history (Bray–Curtis and Canberra)
+
+```{r table-permanova-history, echo=FALSE}
+if (!is.null(comp$table_permanova_stress_history)) {
+  comp$table_permanova_stress_history
+}
+```
+
+### Table D — PERMANOVA: stress history × parasite (interaction model)
+
+```{r table-permanova-hp, echo=FALSE}
+if (!is.null(comp$table_permanova_stress_history_parasite)) {
+  comp$table_permanova_stress_history_parasite
+}
+```
+
+### Betadisper ANOVA — stress history (Bray–Curtis and Canberra)
+
+```{r table-bdisp-anova-hist, echo=FALSE}
+if (!is.null(comp$table_betadisper_anova_stress_history)) {
+  comp$table_betadisper_anova_stress_history
+}
+```
+
+### Betadisper ANOVA — stress history × parasite (Bray–Curtis and Canberra)
+
+```{r table-bdisp-anova-hp, echo=FALSE}
+if (!is.null(comp$table_betadisper_anova_stress_history_parasite)) {
+  comp$table_betadisper_anova_stress_history_parasite
+}
+```
+
+### Table E — PERMANOVA: Parasite within each prior stressor history (stratified)
+
+```{r table-permanova-parasite-within, echo=FALSE}
+if (!is.null(comp$table_permanova_parasite_within_history)) {
+  comp$table_permanova_parasite_within_history
+}
+```
+
+### Table F — Betadisper ANOVA: Parasite within each prior stressor history (stratified)
+
+```{r table-bdisp-parasite-within, echo=FALSE}
+if (!is.null(comp$table_betadisper_parasite_within_history)) {
+  comp$table_betadisper_parasite_within_history
+}
+```
+
+### Legacy combined slots (diversity-style, usually `NULL` for composition)
+
+```{r table-legacy-combined, echo=FALSE, results='asis'}
+if (!is.null(comp$table_combined_trends)) {
+  cat("### Linear stress-history trends\n\n")
+  print(comp$table_combined_trends)
+}
+if (!is.null(comp$table_combined_interaction)) {
+  cat("\n\n### History × parasite interaction\n\n")
+  print(comp$table_combined_interaction)
+}
+if (!is.null(comp$table_combined_table2)) {
+  cat("\n\n### P-value summary (combined table 2)\n\n")
+  print(comp$table_combined_table2)
+}
+```
+
+### Other `table_*` objects (forward compatibility)
+
+```{r table-extra, echo=FALSE, results='asis'}
+reserved <- c(
+  "table_combined_trends", "table_combined_interaction", "table_combined_table2",
+  "table_permanova_stress_history", "table_permanova_stress_history_parasite",
+  "table_betadisper_anova_stress_history", "table_betadisper_anova_stress_history_parasite",
+  "table_permanova_parasite_within_history", "table_betadisper_parasite_within_history",
+  "tables_tidy", "modules", "meta"
+)
+extra <- setdiff(names(comp), reserved)
+extra <- extra[grepl("^table_", extra)]
+if (length(extra) > 0L) {
+  for (nm in extra) {
+    cat("\n### ", nm, "\n\n")
+    print(comp[[nm]])
+  }
+}
+```
+
+---
+
+## Figures
+
+Files live under `Results/02__Composition/Figures/` (PDF and PNG). Below uses **PNG** via `knitr::include_graphics()` for reliable HTML embedding. ggplot objects are also stored in `comp$modules` if you want to tweak layers in an interactive session.
+
+### Relative abundance by exposure regime (genus, merged samples)
+
+```{r fig-rel-abund, echo=FALSE, fig.width=8, fig.height=8, fig.cap="Relative abundance by exposure regime (genus level), faceted by prior stressor history; top 8 genera plus Other. Samples merged by Treatment."}
+p <- comp_png("relative_abundance", "treatment")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — factorial exposure regimes (Bray–Curtis)
+
+```{r fig-pcoa-factorial-atp-bray, echo=FALSE, fig.width=10, fig.height=7, fig.cap="PCoA of Bray–Curtis distances faceted by Antibiotics and Temperature; points colored by parasite exposure."}
+p <- comp$modules$beta_bray$factorial_atp$pcoa$paths[["figure_png"]]
+if (!is.null(p)) {
+  include_png(p)
+}
+```
+
+### Betadisper — factorial exposure regimes (Bray–Curtis)
+
+```{r fig-bdisp-factorial-atp-bray, echo=FALSE, fig.width=10, fig.height=7, fig.cap="Betadisper distances by Antibiotics × Temperature × Parasite groups; Bray–Curtis."}
+p <- comp$modules$beta_bray$factorial_atp$betadisper$paths[["figure_png"]]
+if (!is.null(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — factorial exposure regimes (Canberra)
+
+```{r fig-pcoa-factorial-atp-canberra, echo=FALSE, fig.width=10, fig.height=7, fig.cap="PCoA of Canberra distances faceted by Antibiotics and Temperature; points colored by parasite exposure."}
+p <- comp$modules$beta_canberra$factorial_atp$pcoa$paths[["figure_png"]]
+if (!is.null(p)) {
+  include_png(p)
+}
+```
+
+### Betadisper — factorial exposure regimes (Canberra)
+
+```{r fig-bdisp-factorial-atp-canberra, echo=FALSE, fig.width=10, fig.height=7, fig.cap="Betadisper distances by Antibiotics × Temperature × Parasite groups; Canberra."}
+p <- comp$modules$beta_canberra$factorial_atp$betadisper$paths[["figure_png"]]
+if (!is.null(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — stressor history (Bray–Curtis)
+
+```{r fig-pcoa-history, echo=FALSE, fig.cap="Unconstrained PCoA of Bray–Curtis distances; points and ellipses colored by stressor history."}
+p <- comp_png("beta_bray", "pcoa_history")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — stressor history and parasite exposure (Bray–Curtis)
+
+```{r fig-pcoa-hp, echo=FALSE, fig.width=9, fig.height=10, fig.cap="PCoA with parasite exposure indicated by point fill and ellipse linetype."}
+p <- comp_png("beta_bray", "pcoa_history_parasite")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### Betadisper — stressor history (Bray–Curtis)
+
+```{r fig-bdisp-history, echo=FALSE, fig.width=8, fig.height=8, fig.cap="Distance to group centroid (betadisper) by stressor history."}
+p <- comp_png("beta_bray", "betadisper_history")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### Betadisper — stressor history × parasite (Bray–Curtis)
+
+```{r fig-bdisp-hp, echo=FALSE, fig.width=9, fig.height=10, fig.cap="Betadisper distances for HistoryLevel × Parasite groups (six levels)."}
+p <- comp_png("beta_bray", "betadisper_history_parasite")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — stressor history (Canberra)
+
+```{r fig-pcoa-canberra-history, echo=FALSE, fig.cap="Unconstrained PCoA of Canberra distances; points and ellipses colored by stressor history."}
+p <- comp_png("beta_canberra", "pcoa_history")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — stressor history and parasite exposure (Canberra)
+
+```{r fig-pcoa-canberra-hp, echo=FALSE, fig.width=9, fig.height=10, fig.cap="PCoA on Canberra distances with parasite exposure indicated by point fill and ellipse linetype."}
+p <- comp_png("beta_canberra", "pcoa_history_parasite")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### Betadisper — stressor history (Canberra)
+
+```{r fig-bdisp-canberra-history, echo=FALSE, fig.cap="Distance to group centroid (betadisper) by stressor history; Canberra metric."}
+p <- comp_png("beta_canberra", "betadisper_history")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### Betadisper — stressor history × parasite (Canberra)
+
+```{r fig-bdisp-canberra-hp, echo=FALSE, fig.width=9, fig.height=10, fig.cap="Betadisper distances (Canberra) for HistoryLevel × Parasite groups."}
+p <- comp_png("beta_canberra", "betadisper_history_parasite")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — parasite exposure faceted by prior stressor history (Bray–Curtis)
+
+```{r fig-pcoa-bray-faceted, echo=FALSE, fig.width=12, fig.height=5, fig.cap="Global PCoA (cmdscale on Bray–Curtis); one ordination for all samples, faceted by prior stressor history; points colored by parasite exposure."}
+p <- comp_png("beta_bray", "pcoa_parasite_faceted_history")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — parasite exposure faceted by prior stressor history (Canberra)
+
+```{r fig-pcoa-canberra-faceted, echo=FALSE, fig.width=12, fig.height=5, fig.cap="Global PCoA (cmdscale on Canberra); same layout as the Bray–Curtis faceted figure."}
+p <- comp_png("beta_canberra", "pcoa_parasite_faceted_history")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — exposure regime (points) with parasite ellipses (Bray–Curtis)
+
+Same global ordination as the figures above; **points** use the eight exposure regimes (`Treatment`: A/T/P combinations); **ellipses** remain grouped by parasite exposure.
+
+```{r fig-pcoa-bray-faceted-regime-points, echo=FALSE, fig.width=12, fig.height=6.5, fig.cap="Global PCoA (cmdscale on Bray–Curtis); points colored by exposure regime; ellipses by parasite exposure within each prior stressor history facet."}
+p <- comp_png("beta_bray", "pcoa_parasite_faceted_history_regime_points")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+### PCoA — exposure regime (points) with parasite ellipses (Canberra)
+
+```{r fig-pcoa-canberra-faceted-regime-points, echo=FALSE, fig.width=12, fig.height=6.5, fig.cap="Global PCoA (cmdscale on Canberra); points colored by exposure regime; ellipses by parasite exposure within each facet."}
+p <- comp_png("beta_canberra", "pcoa_parasite_faceted_history_regime_points")
+if (!is.na(p)) {
+  include_png(p)
+}
+```
+
+---
+
+## Bundle metadata
+
+```{r meta, echo=FALSE}
+meta_simple <- comp$meta[
+  intersect(
+    names(comp$meta),
+    c(
+      "run_date", "ps_list_element", "bundle_version", "script", "description",
+      "model_linear_trend", "model_table2", "model_interaction",
+      "model_table_c", "model_table_d", "model_table_dispersion_history", "model_table_dispersion_parasite",
+      "model_table_parasite_within_permanova", "model_table_parasite_within_betadisper",
+      "n_perm", "n_processes"
+    )
+  )
+]
+gt::gt(tibble::enframe(meta_simple, name = "Field", value = "Value")) %>%
+  gt::tab_header(title = "Bundle provenance")
+if (!is.null(comp$meta$model_formulas)) {
+  gt::gt(tibble::enframe(comp$meta$model_formulas, name = "Model", value = "Formula")) %>%
+    gt::tab_header(title = "Model formulas (reference)")
+}
+```
+

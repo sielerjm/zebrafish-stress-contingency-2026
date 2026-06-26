@@ -1,0 +1,265 @@
+---
+title: "Sloan neutral community model (display)"
+subtitle: "08__NeutralModel — day 60 ASV / Genus fit, Culicoidibacter focal panels, regime partitions"
+author: "Michael Sieler"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    fig_width: 8
+    fig_height: 6.5
+params:
+  rerun_analysis: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = isTRUE(params$rerun_analysis),
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 8,
+  fig.height = 6.5,
+  dpi = 300
+)
+
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+
+bundle_path <- here::here("Results", "08__NeutralModel", "Stats", "neutral_model__bundle.rds")
+
+if (isTRUE(params$rerun_analysis)) {
+  source(here::here("Code", "01__Analysis", "08__NeutralModel.R"))
+}
+
+if (!file.exists(bundle_path)) {
+  stop(
+    "Bundle not found: ", bundle_path, "\nRun `Code/01__Analysis/08__NeutralModel.R` from the project root, or knit with ",
+    "`params$rerun_analysis: true` (slow: bootstrap + regime summaries)."
+  )
+}
+
+nm <- readRDS(bundle_path)
+
+# Resolve paths saved in bundles:
+# - Prefer the stored path when it exists on this machine
+# - Otherwise, treat it as relative to the repo root (here::here)
+resolve_bundle_path <- function(p) {
+  if (is.null(p) || !nzchar(p)) {
+    return(NA_character_)
+  }
+  if (file.exists(p)) {
+    return(p)
+  }
+  p2 <- tryCatch(here::here(p), error = function(e) NA_character_)
+  if (!is.na(p2) && file.exists(p2)) {
+    return(p2)
+  }
+  p3 <- file.path(root, p)
+  if (file.exists(p3)) {
+    return(p3)
+  }
+  # Bundle may store absolute paths from another machine; same basename under project Results
+  bn <- basename(p)
+  if (nzchar(bn)) {
+    p4 <- here::here("Results", "08__NeutralModel", "Figures", bn)
+    if (file.exists(p4)) {
+      return(p4)
+    }
+    p5 <- file.path(root, "Results", "08__NeutralModel", "Figures", bn)
+    if (file.exists(p5)) {
+      return(p5)
+    }
+  }
+  p
+}
+
+include_png <- function(p) {
+  p_res <- resolve_bundle_path(p)
+  if (is.null(p_res) || !nzchar(p_res)) {
+    return(invisible(NULL))
+  }
+  if (!file.exists(p_res)) {
+    cat(
+      "\n\n*(Figure not found on disk. Expected:* `", p_res,
+      "`. *Re-run `Code/01__Analysis/08__NeutralModel.R` or knit with `params$rerun_analysis: true`.)*\n\n",
+      sep = ""
+    )
+    return(invisible(NULL))
+  }
+  p_abs <- normalizePath(p_res, winslash = "/", mustWork = TRUE)
+  knitr::include_graphics(p_abs, rel_path = FALSE)
+}
+
+path_tbl <- resolve_bundle_path(nm$tables_dir)
+```
+
+This report loads [`Results/08__NeutralModel/Stats/neutral_model__bundle.rds`](../../Results/08__NeutralModel/Stats/neutral_model__bundle.rds) and displays key **figures** and **tables** from [`Code/01__Analysis/08__NeutralModel.R`](../01__Analysis/08__NeutralModel.R) (Sloan et al. 2006; Burns et al. 2016 recipe). By default the driver is **not** re-run. To refresh outputs from R Markdown, knit with `params$rerun_analysis: true` (expect several minutes for 1000 bootstrap replicates per rank).
+
+---
+
+## Interpretation note
+
+```{r disclaimer, echo=FALSE, results='asis'}
+disc <- nm$meta$disclaimer
+if (!is.null(disc) && nzchar(as.character(disc))) {
+  cat(as.character(disc), "\n\n")
+} else {
+  cat("*(No disclaimer text in bundle `meta`.)*\n\n")
+}
+```
+
+---
+
+## Figures: focal ASVs, Genus highlight, regime panels
+
+```{r fig-focal-two-asv, echo=FALSE, fig.width=11, fig.height=8.5, out.width="100%", fig.cap="Two Culicoidibacter ASVs (day 60): observed relative abundance vs neutral expectation with Wilson band on the fitted curve."}
+p <- nm$fig_neutral_focal_two_asv
+include_png(p)
+```
+
+```{r fig-genus-culico, echo=FALSE, fig.width=11, fig.height=8.5, out.width="100%", fig.cap="Genus-level fit (day 60): Culicoidibacter highlighted; styling aligned with focal-two ASV panel."}
+p <- nm$fig_neutral_genus_culicoidibacter
+include_png(p)
+```
+
+```{r fig-side-by-side, echo=FALSE, fig.width=11, fig.height=9, out.width="100%", fig.cap="Regime-stratified neutral partitions (read-pooled) vs Culicoidibacter read fraction (day 60). Model fit is global; strata summarize sample-level assignments."}
+p <- nm$fig_partition_side_by_side
+include_png(p)
+```
+
+---
+
+## Reviewer appendix: focal genera highlights and regime panels
+
+```{r focal-genus-appendix, echo=FALSE, results="asis"}
+focal <- nm$focal
+if (is.null(focal) || is.null(focal$genera) || length(focal$genera) < 1L) {
+  cat("No focal-genus appendix entries in bundle.\n")
+} else {
+  others <- setdiff(as.character(focal$genera), "Culicoidibacter")
+  if (length(others) < 1L) {
+    cat("No additional focal genera beyond Culicoidibacter.\n")
+  }
+  for (g in others) {
+    cat("\n\n### ", g, "\n\n", sep = "")
+    p1 <- focal$fig_neutral_genus_highlight[[g]]
+    p2 <- focal$fig_partition_side_by_side[[g]]
+    p3 <- focal$fig_focal_two_asv[[g]]
+
+    if (!is.null(p1) && file.exists(p1)) include_png(p1)
+    if (!is.null(p2) && file.exists(p2)) include_png(p2)
+    if (!is.null(p3) && file.exists(p3)) include_png(p3)
+
+    if ((is.null(p1) || !file.exists(p1)) &&
+        (is.null(p2) || !file.exists(p2)) &&
+        (is.null(p3) || !file.exists(p3))) {
+      cat("No appendix figures found on disk for ", g, ". Re-run `Code/01__Analysis/08__NeutralModel.R`.\n", sep = "")
+    }
+  }
+}
+```
+
+---
+
+## Tables: global fit statistics (ASV and Genus)
+
+```{r tbl-fit-asv, echo=FALSE}
+f <- file.path(path_tbl, "fit_stats__Time60__ASV.csv")
+if (file.exists(f)) {
+  tab <- readr::read_csv(f, show_col_types = FALSE)
+  gt::gt(tab) %>%
+    gt::tab_header(title = "Fit statistics — ASV (day 60)") %>%
+    gt::fmt_number(columns = dplyr::where(is.numeric), decimals = 4)
+} else {
+  cat("Table not found: ", f)
+}
+```
+
+```{r tbl-fit-genus, echo=FALSE}
+f <- file.path(path_tbl, "fit_stats__Time60__Genus.csv")
+if (file.exists(f)) {
+  tab <- readr::read_csv(f, show_col_types = FALSE)
+  gt::gt(tab) %>%
+    gt::tab_header(title = "Fit statistics — Genus (day 60)") %>%
+    gt::fmt_number(columns = dplyr::where(is.numeric), decimals = 4)
+} else {
+  cat("Table not found: ", f)
+}
+```
+
+---
+
+## Tables: partition counts and bootstrap quantiles (preview)
+
+```{r tbl-partition-asv, echo=FALSE}
+f <- file.path(path_tbl, "partition_counts__Time60__ASV.csv")
+if (file.exists(f)) {
+  tab <- readr::read_csv(f, show_col_types = FALSE)
+  gt::gt(tab) %>%
+    gt::tab_header(title = "Taxon counts by neutral partition — ASV")
+} else {
+  cat("Table not found.")
+}
+```
+
+```{r tbl-partition-genus, echo=FALSE}
+f <- file.path(path_tbl, "partition_counts__Time60__Genus.csv")
+if (file.exists(f)) {
+  tab <- readr::read_csv(f, show_col_types = FALSE)
+  gt::gt(tab) %>%
+    gt::tab_header(title = "Taxon counts by neutral partition — Genus")
+} else {
+  cat("Table not found.")
+}
+```
+
+```{r tbl-boot-asv, echo=FALSE}
+f <- file.path(path_tbl, "bootstrap_quantiles__Time60__ASV.csv")
+if (file.exists(f)) {
+  tab <- readr::read_csv(f, show_col_types = FALSE)
+  gt::gt(utils::head(tab, 25L)) %>%
+    gt::tab_header(
+      title = "Bootstrap quantiles — ASV",
+      subtitle = "First 25 rows; see Tables/ for full CSV"
+    ) %>%
+    gt::fmt_number(columns = dplyr::where(is.numeric), decimals = 4)
+} else {
+  cat("Table not found.")
+}
+```
+
+```{r tbl-boot-genus, echo=FALSE}
+f <- file.path(path_tbl, "bootstrap_quantiles__Time60__Genus.csv")
+if (file.exists(f)) {
+  tab <- readr::read_csv(f, show_col_types = FALSE)
+  gt::gt(utils::head(tab, 25L)) %>%
+    gt::tab_header(
+      title = "Bootstrap quantiles — Genus",
+      subtitle = "First 25 rows; see Tables/ for full CSV"
+    ) %>%
+    gt::fmt_number(columns = dplyr::where(is.numeric), decimals = 4)
+} else {
+  cat("Table not found.")
+}
+```
+
+---
+
+## Linked outputs
+
+Full **CSV** and **HTML** exports (regime/history summaries, per-taxon predictions, Culicoidibacter extracts) live under `Results/08__NeutralModel/Tables/`. Serialized fit objects: `nm$rds_time60_asv` and `nm$rds_time60_genus` in the bundle (paths on disk under `Results/08__NeutralModel/Stats/`).

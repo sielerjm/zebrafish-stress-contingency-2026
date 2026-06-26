@@ -1,0 +1,17 @@
+Distance,Term,Df,R2,F,p_value
+Bray-Curtis,Antibiotics,1,0.0119,3.02,0.019
+Bray-Curtis,Temperature,1,0.026,6.612,0.001
+Bray-Curtis,Parasite,1,0.0335,8.517,0.001
+Bray-Curtis,Antibiotics:Temperature,1,0.0112,2.839,0.025
+Bray-Curtis,Antibiotics:Parasite,1,0.0056,1.426,0.176
+Bray-Curtis,Temperature:Parasite,1,0.0113,2.878,0.033
+Bray-Curtis,Antibiotics:Temperature:Parasite,1,0.0088,2.231,0.063
+Bray-Curtis,Residual,227,0.8919,NA,NA
+Canberra,Antibiotics,1,0.0108,2.725,0.001
+Canberra,Temperature,1,0.0125,3.158,0.001
+Canberra,Parasite,1,0.0291,7.347,0.001
+Canberra,Antibiotics:Temperature,1,0.0114,2.876,0.001
+Canberra,Antibiotics:Parasite,1,0.0139,3.523,0.001
+Canberra,Temperature:Parasite,1,0.0144,3.637,0.001
+Canberra,Antibiotics:Temperature:Parasite,1,0.0091,2.3,0.001
+Canberra,Residual,227,0.8988,NA,NA

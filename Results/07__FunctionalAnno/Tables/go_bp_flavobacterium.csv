@@ -1,0 +1,32 @@
+ID,Description,p.adjust,Count,geneID,log_padj
+GO:0006511,ubiquitin-dependent protein catabolic process,1.481824725134985e-7,14,fbxo44.3/psma5/vcp/psmc6/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/psmd13/ubxn1/uchl5/ccdc22,6.8292031630290415
+GO:0019941,modification-dependent protein catabolic process,1.481824725134985e-7,14,fbxo44.3/psma5/vcp/psmc6/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/psmd13/ubxn1/uchl5/ccdc22,6.8292031630290415
+GO:0043632,modification-dependent macromolecule catabolic process,1.481824725134985e-7,14,fbxo44.3/psma5/vcp/psmc6/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/psmd13/ubxn1/uchl5/ccdc22,6.8292031630290415
+GO:0051603,proteolysis involved in protein catabolic process,1.296951671074803e-6,14,fbxo44.3/psma5/vcp/psmc6/psmd11b/psmd14/psmc4/psmb3/psmc5/psma6a/psmd13/ubxn1/uchl5/ccdc22,5.887076206935647
+GO:0043161,proteasome-mediated ubiquitin-dependent protein catabolic process,8.655180430111877e-6,10,fbxo44.3/psma5/vcp/psmc6/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1,5.062723874179669
+GO:0043248,proteasome assembly,1.9365934268536793e-5,4,psmg1/psmd11b/pomp/adrm1,4.712961546553821
+GO:0010498,proteasomal protein catabolic process,4.805872589957311e-5,10,fbxo44.3/psma5/vcp/psmc6/psmd14/psmc4/psmb3/psmc5/psma6a/ubxn1,4.318227747100981
+GO:0006397,mRNA processing,4.873058187827594e-5,10,prpf8/snrpd3/ilf3b/snrnp200/hnrnpl2/hnrnpul1l/ddx39ab/srsf7a/cpsf3/hnrnpl,4.312198402798561
+GO:0016071,mRNA metabolic process,1.314565746279132e-4,11,prpf8/snrpd3/ilf3b/snrnp200/fastkd1/hnrnpl2/hnrnpul1l/ddx39ab/srsf7a/cpsf3/hnrnpl,3.881217688346364
+GO:0008380,RNA splicing,2.2728487791368e-4,9,prpf8/snrpd3/ilf3b/snrnp200/hnrnpl2/hnrnpul1l/ddx39ab/srsf7a/hnrnpl,3.643429458499035
+GO:0000375,"RNA splicing, via transesterification reactions",0.0016328033530494219,7,prpf8/snrpd3/ilf3b/snrnp200/hnrnpul1l/ddx39ab/srsf7a,2.7870661164440156
+GO:0000377,"RNA splicing, via transesterification reactions with bulged adenosine as nucleophile",0.0016328033530494219,7,prpf8/snrpd3/ilf3b/snrnp200/hnrnpul1l/ddx39ab/srsf7a,2.7870661164440156
+GO:0000398,"mRNA splicing, via spliceosome",0.0016328033530494219,7,prpf8/snrpd3/ilf3b/snrnp200/hnrnpul1l/ddx39ab/srsf7a,2.7870661164440156
+GO:0006998,nuclear envelope organization,0.004977101893389238,3,banf1/lmnb1/lmnb2,2.303023468099916
+GO:2000058,regulation of ubiquitin-dependent protein catabolic process,0.01954408381448567,3,vcp/ubxn1/ccdc22,1.7089846835658016
+GO:0006325,chromatin organization,0.022209659834621136,7,banf1/lmnb1/hdac1/ddx39ab/hmgn2/lmnb2/dot1l,1.6534580930984557
+GO:0006997,nucleus organization,0.025100845901862838,3,banf1/lmnb1/lmnb2,1.6003116424902377
+GO:0040029,epigenetic regulation of gene expression,0.035884667333339546,4,lmnb1/hdac1/ddx39ab/lmnb2,1.445091075514001
+GO:1903050,regulation of proteolysis involved in protein catabolic process,0.037439034974615405,3,vcp/ubxn1/ccdc22,1.4266753541273296
+GO:0010629,negative regulation of gene expression,0.04466914514259444,7,banf1/lmnb1/fastkd1/focad/hdac1/lmnb2/eif4ebp3l,1.3499923587752294
+GO:0003401,axis elongation,0.04466914514259444,3,ap2a1/ap1g2/hdac1,1.3499923587752294
+GO:0033365,protein localization to organelle,0.04956298572152503,6,vcp/lmnb1/nup62l/timm10/chchd4a/lmnb2,1.3048425391941714
+GO:0007097,nuclear migration,0.04956298572152503,2,lmnb1/lmnb2,1.3048425391941714
+GO:0051647,nucleus localization,0.04956298572152503,2,lmnb1/lmnb2,1.3048425391941714
+GO:0006301,postreplication repair,0.060338703625717804,2,vcp/ube2na,1.2194040248578368
+GO:0034504,protein localization to nucleus,0.060901732036811485,3,lmnb1/nup62l/lmnb2,1.2153703559166624
+GO:0031507,heterochromatin formation,0.061212740525487065,3,lmnb1/hdac1/lmnb2,1.2131581764809902
+GO:0036503,ERAD pathway,0.07240131549379723,3,fbxo44.3/vcp/psmc6,1.1402535428290013
+GO:0006886,intracellular protein transport,0.0846741878029425,6,ap2a1/vcp/ap1g2/nup62l/ap1b1/timm10,1.072248960427554
+GO:0045814,"negative regulation of gene expression, epigenetic",0.0846741878029425,3,lmnb1/hdac1/lmnb2,1.072248960427554
+GO:0000387,spliceosomal snRNP assembly,0.09363002132476518,2,prpf8/snrpd3,1.028584877701977

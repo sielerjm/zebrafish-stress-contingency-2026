@@ -1,0 +1,2 @@
+taxon_id,p,freq,freq_pred,pred_lwr,pred_upr,bino_pred,bino_lwr,bino_upr,partition,Time,genus_label,is_culici
+Shewanella,0.012982820628489367,0.9404255319148936,0.9953242296804474,0.9755966328885046,0.9991185153914366,1,0.9839162813706559,1.0000000000000002,below,60,Shewanella,TRUE

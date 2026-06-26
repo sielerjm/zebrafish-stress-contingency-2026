@@ -1,0 +1,5 @@
+gene_id,TaxaID,correlation,p_value,fdr,abs_correlation,comparison_name,base_treatment,comparison_treatment
+selenos,Cetobacterium,-0.6285672263387619,9.99000999000999e-4,0.05354220247837269,0.6285672263387619,A- T- P- vs A- T- P+,A- T- P-,A- T- P+
+thbd,Cetobacterium,-0.6939902095881174,9.99000999000999e-4,0.01238761238761238,0.6939902095881174,A- T- P- vs A+ T+ P+,A- T- P-,A+ T+ P+
+vegfc,Cetobacterium,-0.6092196498571429,0.00299700299700299,0.01858141858141858,0.6092196498571429,A- T- P- vs A+ T+ P+,A- T- P-,A+ T+ P+
+fbn1,Cetobacterium,-0.538912873769706,0.00299700299700299,0.01858141858141858,0.538912873769706,A- T- P- vs A+ T+ P+,A- T- P-,A+ T+ P+

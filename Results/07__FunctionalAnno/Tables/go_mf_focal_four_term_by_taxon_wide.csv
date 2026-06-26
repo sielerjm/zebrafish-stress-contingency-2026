@@ -1,0 +1,16 @@
+ID,Description,Count_Culicoidibacter,Count_Shewanella,Count_Flavobacterium,Count_Cetobacterium,log_padj_Culicoidibacter,log_padj_Shewanella,log_padj_Flavobacterium,log_padj_Cetobacterium
+GO:0003729,mRNA binding,NA,NA,7,NA,NA,NA,2.318319435218906,NA
+GO:0004497,monooxygenase activity,4,NA,NA,NA,3.1787968354141944,NA,NA,NA
+GO:0005506,iron ion binding,4,NA,NA,NA,3.1293469821739257,NA,NA,NA
+GO:0015020,glucuronosyltransferase activity,2,NA,NA,NA,2.002861530025302,NA,NA,NA
+GO:0016705,Oxidoreductase activity (GO:0016705),4,NA,NA,NA,2.933145797504572,NA,NA,NA
+GO:0016712,Oxidoreductase activity (GO:0016712),2,NA,NA,NA,1.79719478371821,NA,NA,NA
+GO:0020037,heme binding,4,NA,NA,NA,3.1787968354141944,NA,NA,NA
+GO:0031210,phosphatidylcholine binding,NA,1,NA,NA,NA,1.7492573179224673,NA,NA
+GO:0031492,nucleosomal DNA binding,NA,1,NA,NA,NA,1.7492573179224673,NA,NA
+GO:0042056,chemoattractant activity,NA,NA,NA,1,NA,NA,NA,1.813402719078519
+GO:0044877,protein-containing complex binding,NA,2,NA,NA,NA,1.7492573179224673,NA,NA
+GO:0046906,tetrapyrrole binding,4,NA,NA,NA,3.1787968354141944,NA,NA,NA
+GO:0050997,quaternary ammonium group binding,NA,1,NA,NA,NA,1.7492573179224673,NA,NA
+GO:0070628,proteasome binding,NA,NA,4,NA,NA,NA,4.7897897081976675,NA
+GO:0120014,phospholipid transfer activity,NA,1,NA,NA,NA,1.7492573179224673,NA,NA

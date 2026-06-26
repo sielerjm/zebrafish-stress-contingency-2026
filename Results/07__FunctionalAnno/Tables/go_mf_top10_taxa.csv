@@ -1,0 +1,14 @@
+ID,Description,p.adjust,Count,geneID,log_padj
+GO:0070628,proteasome binding,0.005608273885465051,5,psmg1/psmd14/adrm1/uchl5/usp14,2.2511707853335423
+GO:0017056,structural constituent of nuclear pore,0.00570734744111192,5,nup85/tprb/nup35/nup62l/nup160,2.2435656884875326
+GO:0003729,mRNA binding,0.00570734744111192,20,ddx23/nudt21/mrps7/ilf3b/hnrnpa1a/hnrnpl2/ddx39ab/srsf7a/hnrnpl/ppp1r8b/serbp1b/dcp1b/hnrnpa0b/sf1/igf2bp2b/cstf2/eif4a3/thoc5/tut1/mettl14,2.2435656884875326
+GO:0016887,ATP hydrolysis activity,0.01091246133682633,21,orc1/smc1al/psmc1b/psmc2/vcp/psmc6/rfc3/rfc2/snrnp200/psmc4/psmc5/trap1/atp6v1ab/psmc3/tap1/tap2t/mcm3/cct3/eif4a3/tcp1/psmc1a,1.9620772820018582
+GO:0008641,ubiquitin-like modifier activating enzyme activity,0.01091246133682633,4,uba3/sae1/uba1/uba7,1.9620772820018582
+GO:0140098,"catalytic activity, acting on RNA",0.010947183043502498,22,drosha/ddx23/polr2b/dis3l2/trmt61b/ptrh2/snrnp200/qtrt1/sars2/ddx39ab/mhc1zka/cpsf3/trub1/dars2/upf1/eif4a3/dis3/dhx16/cars1/tut1/trmt11/mettl14,1.9606976201893278
+GO:0140097,"catalytic activity, acting on DNA",0.017966177269323286,16,pold1/msh2/ftr06/dnmt1/alkbh4/tdg.1/chd4a/rfc3/recql4/srcap/dnmt3ba/polb/mcm3/mcm6/tdp1/lig4,1.745544319521448
+GO:0003697,single-stranded DNA binding,0.017966177269323286,8,rpa1/rpa3/mcm10/mcm3/mcm6/tdp1/mms22l/rad18,1.745544319521448
+GO:0003682,chromatin binding,0.03636211234093772,16,orc1/mcmbp/cbx5/ctcf/kdm8/eed/stag1b/dnmt1/suz12a/hmgn2/zgc:110425/ezh2/mcm3/paf1/lrwd1/hdac3,1.4393508957645214
+GO:0005200,structural constituent of cytoskeleton,0.04094137933169313,7,tubb2b/tubb4b/tubb5/lmnb1/tuba8l4/lmnb2/actb1,1.387837529869604
+GO:0101005,deubiquitinase activity,0.05403205269650342,9,usp45/usp5/uchl3/psmd14/uchl5/usp14/usp11/usp39/usp38,1.2673485331487457
+GO:0004386,helicase activity,0.058604273209086,11,ddx23/chd4a/snrnp200/recql4/ddx39ab/srcap/upf1/mcm3/mcm6/eif4a3/dhx16,1.2320707156634074
+GO:0019783,ubiquitin-like protein peptidase activity,0.09949504059214255,9,usp45/usp5/uchl3/psmd14/uchl5/usp14/usp11/usp39/usp38,1.002198566461763

@@ -1,0 +1,16 @@
+ID,Description,Count_Culicoidibacter,Count_Shewanella,Count_Flavobacterium,Count_Cetobacterium,log_padj_Culicoidibacter,log_padj_Shewanella,log_padj_Flavobacterium,log_padj_Cetobacterium
+GO:0000502,proteasome complex,NA,NA,11,NA,NA,NA,12.813152503903888,NA
+GO:0005682,U5 snRNP,NA,NA,2,NA,NA,NA,1.9291939829759968,NA
+GO:0005838,proteasome regulatory particle,NA,NA,7,NA,NA,NA,10.091979389259162,NA
+GO:0005839,proteasome core complex,NA,NA,3,NA,NA,NA,2.6769980194318195,NA
+GO:0005884,actin filament,NA,2,NA,NA,NA,3.5080405047967926,NA,NA
+GO:0008540,"proteasome regulatory particle, base subcomplex",NA,NA,3,NA,NA,NA,3.625319062870367,NA
+GO:0015629,actin cytoskeleton,NA,2,NA,NA,NA,2.117114192923127,NA,NA
+GO:0019773,"proteasome core complex, alpha-subunit complex",NA,NA,2,NA,NA,NA,2.055415058716344,NA
+GO:0022624,proteasome accessory complex,NA,NA,7,NA,NA,NA,9.743122588582539,NA
+GO:0030118,clathrin coat,NA,NA,3,NA,NA,NA,2.0755062544096385,NA
+GO:0030119,AP-type membrane coat adaptor complex,NA,NA,3,NA,NA,NA,2.271521527103541,NA
+GO:0030131,clathrin adaptor complex,NA,NA,3,NA,NA,NA,2.5222317360481634,NA
+GO:0099513,polymeric cytoskeletal fiber,NA,2,NA,1,NA,2.0700228055095478,NA,1.1107832197416143
+GO:1905368,peptidase complex,NA,NA,11,NA,NA,NA,11.20226629357901,NA
+GO:1905369,endopeptidase complex,NA,NA,11,NA,NA,NA,12.148520499434111,NA

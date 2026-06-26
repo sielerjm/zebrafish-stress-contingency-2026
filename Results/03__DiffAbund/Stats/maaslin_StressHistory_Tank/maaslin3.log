@@ -1,0 +1,174 @@
+2026-04-24 18:39:04.932941 INFO::Writing function arguments to log file
+2026-04-24 18:39:04.9356 DEBUG::Function arguments
+2026-04-24 18:39:04.935775 DEBUG::Output folder: /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank
+2026-04-24 18:39:04.935901 DEBUG::Formula: ~HistoryLevelNum + (1 | Tank.ID)
+2026-04-24 18:39:04.936013 DEBUG::Fixed effects:
+2026-04-24 18:39:04.936117 DEBUG::Reference:
+2026-04-24 18:39:04.93622 DEBUG::Random effects:
+2026-04-24 18:39:04.936324 DEBUG::Group effects:
+2026-04-24 18:39:04.936425 DEBUG::Ordered effects:
+2026-04-24 18:39:04.936523 DEBUG::Strata effects:
+2026-04-24 18:39:04.936621 DEBUG::Min Abundance: 0.001000
+2026-04-24 18:39:04.936717 DEBUG::Min Prevalence: 0.100000
+2026-04-24 18:39:04.936813 DEBUG::Max Prevalence: 1.010000
+2026-04-24 18:39:04.936913 DEBUG::Zero Threshold: 0.000000
+2026-04-24 18:39:04.937004 DEBUG::Min variance: 0.000000
+2026-04-24 18:39:04.937102 DEBUG::Max significance: 0.100000
+2026-04-24 18:39:04.937194 DEBUG::Normalization: TSS
+2026-04-24 18:39:04.93729 DEBUG::Transform: LOG
+2026-04-24 18:39:04.937387 DEBUG::Correction method: BH
+2026-04-24 18:39:04.937485 DEBUG::Standardize: FALSE
+2026-04-24 18:39:04.937585 DEBUG::Abundance median comparison: TRUE
+2026-04-24 18:39:04.937683 DEBUG::Prevalence median comparison: FALSE
+2026-04-24 18:39:04.937872 DEBUG::Abundance median comparison threshold: 0
+2026-04-24 18:39:04.938026 DEBUG::Prevalence median comparison threshold: 0
+2026-04-24 18:39:04.93815 DEBUG::Subtract median: FALSE
+2026-04-24 18:39:04.938262 DEBUG::Warn prevalence: TRUE
+2026-04-24 18:39:04.938366 DEBUG::Small random effects: TRUE
+2026-04-24 18:39:04.93858 DEBUG::Augment: TRUE
+2026-04-24 18:39:04.938797 DEBUG::Evaluate only:
+2026-04-24 18:39:04.93894 DEBUG::Cores: 8
+2026-04-24 18:39:04.939056 DEBUG::Balanced Summary plot: FALSE
+2026-04-24 18:39:04.939171 INFO::Verifying options selected are valid
+2026-04-24 18:39:04.93944 INFO::Determining format of input files
+2026-04-24 18:39:04.939645 INFO::Input format is data samples as rows and metadata samples as rows
+2026-04-24 18:39:04.93984 DEBUG::A total of 235 samples were found in both the data and metadata
+2026-04-24 18:39:04.939972 DEBUG::Reordering data/metadata to use same sample ordering
+2026-04-24 18:39:04.941213 INFO::Running selected normalization method: TSS
+2026-04-24 18:39:04.946912 INFO::Creating output feature tables folder
+2026-04-24 18:39:04.953669 INFO::Writing normalized data to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/features/data_norm.tsv
+2026-04-24 18:39:05.020542 INFO::Filter data based on min abundance, min prevalence, and max prevalence
+2026-04-24 18:39:05.021 INFO::Total samples in data: 235
+2026-04-24 18:39:05.02123 INFO::Min samples required with min abundance for a feature not to be filtered: 23.500000
+2026-04-24 18:39:05.021435 INFO::Max samples allowed with min abundance for a feature not to be filtered: 237.350000
+2026-04-24 18:39:05.040703 INFO::Total filtered features: 306
+2026-04-24 18:39:05.041366 INFO::Filtered feature names from abundance, min prevalence, and max prevalence filtering: Oleiharenicola, Halomonas, Pseudorhodoplanes, Exiguobacterium, Parachlamydiaceae Genus, Fluviicoccus, Rickettsiaceae Genus, Rhodovarius, Chitinophagales Genus, SWB02, Noviherbaspirillum, Crenobacter, Blfdi19 Genus, Streptococcus, Rhodospirillales Genus, Chloroflexaceae Genus, Paracaedibacteraceae Genus, Lutispora, Beijerinckiaceae Genus, Piscinibacter, Rhodococcus, Frankiales Genus, Bacillus, Phaselicystis, Pedomicrobium, Reyranella, JGI 0001001-H03, Obscuribacteraceae Genus, Candidatus Bealeia, Luteolibacter, Babeliaceae Genus, Ideonella, Arthrobacter, Candidatus Obscuribacter, Hyphomonadaceae Genus, Lysobacter, Terrimonas, Leuconostoc, Psychromonas, Sediminibacterium, SM1A02, Deinococcus, Larkinella, Burkholderia-Caballeronia-Paraburkholderia, Fimbriimonadaceae Genus, Brevifollis, Pajaroellobacter, IS-44, Brevibacterium, Marmoricola, Hyphomicrobium, Cytophaga, Gracilibacteria Genus, Verrucomicrobiaceae Genus, Candidatus Protochlamydia, Armatimonadaceae Genus, Alphaproteobacteria Genus, Microscillaceae Genus, Paludibaculum, Xanthobacteraceae Genus, Sphingomonas, Ilumatobacter, Chryseobacterium, Peptostreptococcus, Leeia, Brevundimonas, Chlamydiales Genus, Agitococcus, Microtrichaceae Genus, Novispirillum, Paucibacter, Unknown Family Genus, Uliginosibacterium, Novosphingobium, Candidatus Berkiella, Pseudobdellovibrio, Chitinibacter, Polyangiia Genus, P3OB-42, Limnobacter, A21b Genus, Shinella, Hydrogenophaga, Burkholderiales Genus, AAP99, SM2D12 Genus, Turicibacter, Rickettsiella, Stagnimonas, Vibrio, Candidatus Ovatusbacter, Vampirovibrio, Bryobacteraceae Genus, Granulicatella, Sphingobium, IMCC26207, Truepera, Caulobacter, Tetragenococcus, Abditibacterium, Chitinivorax, Saccharimonadales Genus, Fundidesulfovibrio, Neochlamydia, Sandaracinaceae Genus, Leucobacter, Ga0077536 Genus, Verrucomicrobiia Genus, Phenylobacterium, Opitutaceae Genus, Micrococcus, Anaerovorax, Micavibrionales Genus, 37-13 Genus, Paracoccus, Sphingopyxis, Rhizorhapis, Gaiellales Genus, Kinneretia, 0319-6G20 Genus, Lactobacillus, Marinomonas, cvE6 Genus, Pir4 lineage, JG30-KF-CM45 Genus, Candidatus Nomurabacteria Genus, mle1-27 Genus, Methylibium, Polymorphobacter, Dyadobacter, Caedibacter, Chitinophagaceae Genus, Agromyces, LiUU-11-161 Genus, Pararhodobacter, Ligilactobacillus, Stella, Neisseriaceae Genus, TM7a, Mariniblastus, Holosporaceae Genus, Parvibium, Afipia, Pseudolysobacter, Arthrospira PCC-7345, Citrobacter, Loigolactobacillus, Glutamicibacter, Rothia, Candidatus Megaira, alphaI cluster, NS11-12 marine group Genus, Blastococcus, Dietzia, Candidatus Finniella, Candidatus Alysiosphaera, Geminicoccaceae Genus, Bacilli Genus, Gemmatimonas, TRA3-20 Genus, Aquicella, KD4-96 Genus, Curvibacter, Brucella, CM1G08, Nocardioides, Aerococcus, Chloracidobacterium, Staphylococcus, Vicinamibacteraceae Genus, Flavihumibacter, Kineosporiaceae Genus, PB19 Genus, Anaerocolumna, Candidatus Paracaedibacter, Thermodesulfobacteriota Genus, Rhizorhabdus, BIrii41 Genus, Kapabacteriales Genus, Dechlorobacter, Aeromicrobium, CL500-3, Ruminiclostridium, Sphingomonadaceae Genus, DEV007 Genus, Pyrinomonadaceae Genus, Nevskiaceae Genus, Vagococcus, Acetobacteroides, Variovorax, Blastocatella, Bryobacter, Trueperella, Ottowia, Oscillospiraceae Genus, Oligoflexaceae Genus, Stenotrophomonas, Pirellula, Sandaracinus, Babeliales Genus, 67-14 Genus, RBG-13-54-9 Genus, Blastomonas, PeM15 Genus, Cypionkella, Caldilineaceae Genus, Enterococcus, Allomeiothermus, Paraconexibacter, Silvanigrellaceae Genus, Defluviimonas, Microbulbifer, Rheinheimera, Ellin6055, Terrisporobacter, Massilia, 11-24 Genus, Thermomicrobiales Genus, Chloronema, Paraclostridium, Pseudomonadales Genus, Methylorubrum, Candidatus Captivus, Weissella, MBNT15 Genus, Brevitalea, Spirosomataceae Genus, Sporichthyaceae Genus, Gemmatimonadaceae Genus, Vibrionaceae Genus, Rhodopseudomonas, Armatimonadota Genus, Thermoactinomycetaceae Genus, DEV114, Simkaniaceae Genus, Azospira, Eremiobacteria Genus, Hirschia, Knoellia, Anoxybacillus, OLB12, Thermus, Sporomusaceae Genus, Chitinimonas, Levilactobacillus, Lysinibacillus, Frisingicoccus, Lactococcus, Rhodospirillaceae Genus, Raineya, Barnesiellaceae Genus, NB1-j Genus, Pirellulaceae Genus, Ferruginibacter, Altererythrobacter, Methylobacterium, Kocuria, Pediococcus, Peptoniphilus, Methylocystis, Mesorhizobium, Hyphomicrobiales Genus, Hassallia, Nannocystis, WY65, Chthoniobacter, Turneriella, Permianibacter, Pseudoduganella, Nordella, Sporocytophaga, Delftia, Steroidobacter, Latilactobacillus, Serinicoccus, Roseicella, IMCC26134, Parcubacteria Genus, Pseudoxanthomonas, Flectobacillus, Desulfotomaculum, Rubripirellula, Candidatus Accumulibacter, KD3-10, Lacibacter, Propionivibrio, Peptostreptococcaceae Genus, Romboutsia, Opitutus, Enhydrobacter, AKYH767 Genus, Lautropia, Methyloversatilis, Bordetella, Dongia, Ramlibacter, Panacibacter, Elsteraceae Genus, Perlucidibaca, Coxiella, Acetivibrio, Polyangiaceae Genus, Agrobacterium, Anaerotaenia, Limosilactobacillus, CL500-29 marine group
+2026-04-24 18:39:05.042462 INFO::Total features filtered by non-zero variance filtering: 0
+2026-04-24 18:39:05.04271 INFO::Filtered feature names from variance filtering:
+2026-04-24 18:39:05.045091 INFO::Writing filtered data to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/features/filtered_data.tsv
+2026-04-24 18:39:05.052652 INFO::Running selected transform method: LOG
+2026-04-24 18:39:05.053667 INFO::Writing normalized, filtered, transformed data to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/features/data_transformed.tsv
+2026-04-24 18:39:05.076607 INFO::Bypass z-score application to metadata
+2026-04-24 18:39:05.077029 INFO::Running the linear model component
+2026-04-24 18:39:05.078312 INFO::Creating cluster of 8 R processes
+2026-04-24 18:39:08.363732 DEBUG::Object: augment, Size: 56
+2026-04-24 18:39:08.364207 DEBUG::Object: cluster, Size: 11928
+2026-04-24 18:39:08.36452 DEBUG::Object: cores, Size: 56
+2026-04-24 18:39:08.364702 DEBUG::Object: correction, Size: 112
+2026-04-24 18:39:08.364849 DEBUG::Object: extract_out, Size: 1864
+2026-04-24 18:39:08.36499 DEBUG::Object: feature_specific_covariate, Size: 0
+2026-04-24 18:39:08.365129 DEBUG::Object: feature_specific_covariate_name, Size: 0
+2026-04-24 18:39:08.36526 DEBUG::Object: feature_specific_covariate_record, Size: 0
+2026-04-24 18:39:08.365408 DEBUG::Object: features, Size: 164520
+2026-04-24 18:39:08.365529 DEBUG::Object: formula, Size: 1456
+2026-04-24 18:39:08.36567 DEBUG::Object: fun_list, Size: 124640
+2026-04-24 18:39:08.365822 DEBUG::Object: func_to_run, Size: 435336
+2026-04-24 18:39:08.365947 DEBUG::Object: groups, Size: 48
+2026-04-24 18:39:08.366075 DEBUG::Object: median_comparison, Size: 56
+2026-04-24 18:39:08.366191 DEBUG::Object: median_comparison_threshold, Size: 56
+2026-04-24 18:39:08.36638 DEBUG::Object: metadata, Size: 158664
+2026-04-24 18:39:08.366494 DEBUG::Object: model, Size: 112
+2026-04-24 18:39:08.366602 DEBUG::Object: model_function, Size: 71464
+2026-04-24 18:39:08.366704 DEBUG::Object: ordereds, Size: 48
+2026-04-24 18:39:08.366808 DEBUG::Object: random_effects_formula, Size: 1456
+2026-04-24 18:39:08.36692 DEBUG::Object: ranef_function, Size: 1240
+2026-04-24 18:39:08.36702 DEBUG::Object: save_models, Size: 56
+2026-04-24 18:39:08.36712 DEBUG::Object: small_random_effects, Size: 56
+2026-04-24 18:39:08.36722 DEBUG::Object: strata, Size: 48
+2026-04-24 18:39:08.367323 DEBUG::Object: subtract_median, Size: 56
+2026-04-24 18:39:08.36744 DEBUG::Object: summary_function, Size: 51456
+2026-04-24 18:39:08.367589 DEBUG::Object: func_to_run, Size: 435336
+2026-04-24 18:39:09.364111 INFO::Performing tests against medians
+2026-04-24 18:39:09.53415 INFO::Counting total values for each feature
+2026-04-24 18:39:09.535397 INFO::Running the logistic model component
+2026-04-24 18:39:09.537011 INFO::Creating cluster of 8 R processes
+2026-04-24 18:39:12.540101 DEBUG::Object: augment, Size: 56
+2026-04-24 18:39:12.540486 DEBUG::Object: cluster, Size: 11928
+2026-04-24 18:39:12.540715 DEBUG::Object: cores, Size: 56
+2026-04-24 18:39:12.540842 DEBUG::Object: correction, Size: 112
+2026-04-24 18:39:12.540957 DEBUG::Object: extract_out, Size: 1864
+2026-04-24 18:39:12.541075 DEBUG::Object: feature_specific_covariate, Size: 0
+2026-04-24 18:39:12.541185 DEBUG::Object: feature_specific_covariate_name, Size: 0
+2026-04-24 18:39:12.54142 DEBUG::Object: feature_specific_covariate_record, Size: 0
+2026-04-24 18:39:12.541604 DEBUG::Object: features, Size: 160264
+2026-04-24 18:39:12.541738 DEBUG::Object: fixed_part, Size: 728
+2026-04-24 18:39:12.541863 DEBUG::Object: formula, Size: 1008
+2026-04-24 18:39:12.54199 DEBUG::Object: fun_list, Size: 70920
+2026-04-24 18:39:12.542157 DEBUG::Object: func_to_run, Size: 435336
+2026-04-24 18:39:12.542272 DEBUG::Object: grouping, Size: 112
+2026-04-24 18:39:12.542418 DEBUG::Object: groups, Size: 48
+2026-04-24 18:39:12.542529 DEBUG::Object: median_comparison, Size: 56
+2026-04-24 18:39:12.54265 DEBUG::Object: median_comparison_threshold, Size: 56
+2026-04-24 18:39:12.542805 DEBUG::Object: metadata, Size: 158664
+2026-04-24 18:39:12.542915 DEBUG::Object: model, Size: 120
+2026-04-24 18:39:12.543025 DEBUG::Object: model_function, Size: 21016
+2026-04-24 18:39:12.543132 DEBUG::Object: new_formula, Size: 1008
+2026-04-24 18:39:12.543238 DEBUG::Object: ordereds, Size: 48
+2026-04-24 18:39:12.543344 DEBUG::Object: random_effects_formula, Size: 0
+2026-04-24 18:39:12.543451 DEBUG::Object: random_terms, Size: 392
+2026-04-24 18:39:12.543558 DEBUG::Object: ranef_function, Size: 0
+2026-04-24 18:39:12.543664 DEBUG::Object: save_models, Size: 56
+2026-04-24 18:39:12.543771 DEBUG::Object: small_random_effects, Size: 56
+2026-04-24 18:39:12.543877 DEBUG::Object: strata, Size: 48
+2026-04-24 18:39:12.543983 DEBUG::Object: subtract_median, Size: 56
+2026-04-24 18:39:12.544095 DEBUG::Object: summary_function, Size: 49424
+2026-04-24 18:39:12.544237 DEBUG::Object: func_to_run, Size: 435336
+2026-04-24 18:39:13.645251 INFO::Counting total values for each feature
+2026-04-24 18:39:13.646662 INFO::Re-running abundances for warn_prevalence
+2026-04-24 18:39:13.646885 INFO::Running selected normalization method: TSS
+2026-04-24 18:39:13.653256 INFO::Running selected transform method: LOG
+2026-04-24 18:39:13.654768 INFO::Creating cluster of 8 R processes
+2026-04-24 18:39:16.849745 DEBUG::Object: augment, Size: 56
+2026-04-24 18:39:16.850075 DEBUG::Object: cluster, Size: 11928
+2026-04-24 18:39:16.850223 DEBUG::Object: cores, Size: 56
+2026-04-24 18:39:16.850351 DEBUG::Object: correction, Size: 112
+2026-04-24 18:39:16.850479 DEBUG::Object: extract_out, Size: 1864
+2026-04-24 18:39:16.850595 DEBUG::Object: feature_specific_covariate, Size: 0
+2026-04-24 18:39:16.85071 DEBUG::Object: feature_specific_covariate_name, Size: 0
+2026-04-24 18:39:16.850822 DEBUG::Object: feature_specific_covariate_record, Size: 0
+2026-04-24 18:39:16.850951 DEBUG::Object: features, Size: 164520
+2026-04-24 18:39:16.851068 DEBUG::Object: formula, Size: 1456
+2026-04-24 18:39:16.851192 DEBUG::Object: fun_list, Size: 124640
+2026-04-24 18:39:16.851345 DEBUG::Object: func_to_run, Size: 435336
+2026-04-24 18:39:16.851458 DEBUG::Object: groups, Size: 48
+2026-04-24 18:39:16.85157 DEBUG::Object: median_comparison, Size: 56
+2026-04-24 18:39:16.851676 DEBUG::Object: median_comparison_threshold, Size: 56
+2026-04-24 18:39:16.851828 DEBUG::Object: metadata, Size: 158664
+2026-04-24 18:39:16.851937 DEBUG::Object: model, Size: 112
+2026-04-24 18:39:16.852056 DEBUG::Object: model_function, Size: 71464
+2026-04-24 18:39:16.852168 DEBUG::Object: ordereds, Size: 48
+2026-04-24 18:39:16.852276 DEBUG::Object: random_effects_formula, Size: 1456
+2026-04-24 18:39:16.852383 DEBUG::Object: ranef_function, Size: 1240
+2026-04-24 18:39:16.85249 DEBUG::Object: save_models, Size: 56
+2026-04-24 18:39:16.852597 DEBUG::Object: small_random_effects, Size: 56
+2026-04-24 18:39:16.852706 DEBUG::Object: strata, Size: 48
+2026-04-24 18:39:16.852816 DEBUG::Object: subtract_median, Size: 56
+2026-04-24 18:39:16.852931 DEBUG::Object: summary_function, Size: 51456
+2026-04-24 18:39:16.853079 DEBUG::Object: func_to_run, Size: 435336
+2026-04-24 18:39:17.873816 INFO::Creating fits folder
+2026-04-24 18:39:17.874508 INFO::Writing residuals to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/fits/residuals_linear.rds
+2026-04-24 18:39:17.878154 INFO::Writing fitted values to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/fits/fitted_linear.rds
+2026-04-24 18:39:17.880253 INFO::Writing extracted random effects to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/fits/ranef_linear.rds
+2026-04-24 18:39:17.880976 INFO::Writing residuals to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/fits/residuals_logistic.rds
+2026-04-24 18:39:17.884781 INFO::Writing fitted values to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/fits/fitted_logistic.rds
+2026-04-24 18:39:17.887745 INFO::Writing extracted random effects to file /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/fits/ranef_logistic.rds
+2026-04-24 18:39:17.888484 INFO::Writing all the results to file (ordered 
+            by increasing individual q-values): /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/all_results.tsv
+2026-04-24 18:39:17.889512 INFO::Writing the significant results without errors (those which have joint q-values less than or equal to the threshold of 0.100000 ) to file (ordered by increasing individual q-values): /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/significant_results.tsv
+2026-04-24 18:39:17.890022 INFO::Creating output figures folder
+2026-04-24 18:39:17.890407 INFO::Writing summary plot of significant
+                        results to file: /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/figures/summary_plot.pdf
+2026-04-24 18:39:18.434751 INFO::Writing association plots (one for each significant association) to output folder: /Users/michaelsieler/Library/CloudStorage/Dropbox/Documents/Sharpton_Lab/Projects_Repository/Sieler2026/Results/03__DiffAbund/Stats/maaslin_StressHistory_Tank/figures
+2026-04-24 18:39:18.435397 INFO::Plotting associations from most to least significant, grouped by metadata
+2026-04-24 18:39:18.436856 INFO::Creating scatter plot for continuous 
+                        data (linear), HistoryLevelNum vs Aeromonas
+2026-04-24 18:39:18.458662 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Flavobacterium
+2026-04-24 18:39:18.481996 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Cloacibacterium
+2026-04-24 18:39:18.504819 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Vogesella
+2026-04-24 18:39:18.527871 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Rhodocyclaceae Genus
+2026-04-24 18:39:18.550489 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Acinetobacter
+2026-04-24 18:39:18.573778 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Rhizobiaceae Genus
+2026-04-24 18:39:18.596649 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Sutterellaceae Genus
+2026-04-24 18:39:18.620221 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Undibacterium
+2026-04-24 18:39:18.644079 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Telmatocola
+2026-04-24 18:39:18.669111 INFO::Creating boxplot for continuous data (logistic), HistoryLevelNum vs Ensifer

@@ -1,0 +1,5 @@
+value,n_significant,n_positive,n_negative
+No prior stressors,0,0,0
+One prior stressor,1,1,0
+Two prior stressors,1,1,0
+Total,2,2,0

@@ -1,0 +1,2 @@
+taxon_id,p,freq,freq_pred,pred_lwr,pred_upr,bino_pred,bino_lwr,bino_upr,partition,Time,genus_label,is_culici
+Culicoidibacter,0.036514959007064605,0.9574468085106383,0.9999999550239811,0.9839161928655052,0.9999999999998763,1,0.9839162813706559,1.0000000000000002,below,60,Culicoidibacter,TRUE

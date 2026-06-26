@@ -1,0 +1,4 @@
+History,n_survivors_sampled,n_infected,mean_worm_burden,total_worm_count,mean_worm_burden_infected,percent_infected,History_Label
+0,37,31,4.513513513513514,167,5.387096774193548,83.8,No prior stressors
+1,67,40,2.4776119402985075,166,4.15,59.7,One prior stressor
+2,25,15,3.08,77,5.133333333333334,60,Two prior stressors

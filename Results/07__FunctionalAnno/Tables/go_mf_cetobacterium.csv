@@ -1,0 +1,8 @@
+ID,Description,p.adjust,Count,geneID,log_padj
+GO:0042056,chemoattractant activity,0.015367289783842941,1,vegfc,1.813402719078519
+GO:0070851,growth factor receptor binding,0.03360637285708579,1,vegfc,1.4735783584962499
+GO:0008083,growth factor activity,0.03874829747584366,1,vegfc,1.4117473747857998
+GO:0005126,cytokine receptor binding,0.03874829747584366,1,vegfc,1.4117473747857998
+GO:0048018,receptor ligand activity,0.06737741836787958,1,vegfc,1.1714856334567634
+GO:0030546,signaling receptor activator activity,0.06737741836787958,1,vegfc,1.1714856334567634
+GO:0030545,signaling receptor regulator activity,0.06737741836787958,1,vegfc,1.1714856334567634

@@ -1,0 +1,140 @@
+---
+title: "Gut microbial differential abundance — MaAsLin3 (display)"
+subtitle: "03__DiffAbund — mirrors `Code/01__Analysis/03__DiffAbund.R`"
+author: "Michael Sieler"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    fig_width: 10
+    fig_height: 6
+params:
+  rerun_analysis: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = isTRUE(params$rerun_analysis),
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  dpi = 300
+)
+
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+
+bundle_path <- here::here("Results", "03__DiffAbund", "Stats", "diffabund__gut__bundle.rds")
+
+if (isTRUE(params$rerun_analysis)) {
+  source(here::here("Code", "01__Analysis", "03__DiffAbund.R"))
+}
+
+if (!file.exists(bundle_path)) {
+  stop(
+    "Bundle not found: ", bundle_path, "\n",
+    "Run `Code/01__Analysis/03__DiffAbund.R` from the project root, or knit with ",
+    "`params$rerun_analysis: true` (requires `ps.list`, `maaslin3`, and full analysis environment)."
+  )
+}
+
+dab <- readRDS(bundle_path)
+```
+
+This report loads `Results/03__DiffAbund/Stats/diffabund__gut__bundle.rds` from [`Code/01__Analysis/03__DiffAbund.R`](../01__Analysis/03__DiffAbund.R). To re-run MaAsLin3 from R Markdown, knit with `rerun_analysis: true`.
+
+
+```{r meta, echo=FALSE}
+dab$meta
+```
+
+---
+
+## Significant taxa counts by exposure regime (no-tank)
+
+```{r sig-counts-table, echo=FALSE}
+if (!is.null(dab$table_sig_counts_by_exposure_regime_noTank)) {
+  dab$table_sig_counts_by_exposure_regime_noTank
+} else {
+  cat("Table not found in bundle. Re-run `Code/01__Analysis/03__DiffAbund.R` to regenerate outputs.")
+}
+```
+
+---
+
+## Significant taxa counts by prior stressor history (tank)
+
+```{r sig-counts-stress-history, echo=FALSE}
+if (!is.null(dab$table_sig_counts_by_stress_history_tank)) {
+  dab$table_sig_counts_by_stress_history_tank
+} else {
+  cat("Table not found in bundle. Re-run `Code/01__Analysis/03__DiffAbund.R` to regenerate outputs.")
+}
+```
+
+## Significant taxa counts by stress history × parasite exposure (tank)
+
+```{r sig-counts-stress-history-parasite, echo=FALSE}
+if (!is.null(dab$table_sig_counts_by_stress_history_x_parasite_tank)) {
+  dab$table_sig_counts_by_stress_history_x_parasite_tank
+} else {
+  cat("Table not found in bundle. Re-run `Code/01__Analysis/03__DiffAbund.R` to regenerate outputs.")
+}
+```
+
+## Mortality: significant taxa vs percent_mortality (tank effect model)
+
+```{r mortality-top-table, echo=FALSE}
+if (!is.null(dab$table_top10_taxa_associated_with_mortality_tank)) {
+  dab$table_top10_taxa_associated_with_mortality_tank
+} else {
+  cat("Table not found in bundle. Re-run `Code/01__Analysis/03__DiffAbund.R` to regenerate outputs.")
+}
+```
+
+## Figures: mortality-associated taxa (exported from driver)
+
+```{r mortality-figs, echo=FALSE, fig.width=12, fig.height=8, out.width="100%"}
+figs <- dab$figures
+
+paths <- c(
+  figs$mortality_top_taxa_coef_bar_tank,
+  figs$mortality_top_taxa_scatter_facets_tank,
+  figs$mortality_top_taxa_scatter_combined_tank,
+  figs$mortality_culicoidibacter_scatter_tank
+)
+
+paths <- paths[!is.na(paths) & nzchar(paths)]
+paths <- paths[file.exists(paths)]
+
+if (length(paths) > 0L) {
+  knitr::include_graphics(paths)
+} else {
+  cat(
+    "Mortality figures not found in bundle outputs. Re-run `Code/01__Analysis/03__DiffAbund.R` ",
+    "to export figures to `Results/03__DiffAbund/Figures/`."
+  )
+}
+```
+
+## MaAsLin output paths
+
+```{r paths, echo=FALSE}
+dab$paths
+```

@@ -1,0 +1,382 @@
+---
+title: "Functional annotation of host genes (GO / KEGG)"
+subtitle: "07__FunctionalAnno — genes linked to significant partial correlations (module 06)"
+author: "Michael Sieler"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    fig_width: 7
+    fig_height: 6
+params:
+  rerun_analysis: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = isTRUE(params$rerun_analysis),
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 7,
+  fig.height = 6,
+  dpi = 300
+)
+
+start <- if (requireNamespace("knitr", quietly = TRUE) && !is.null(knitr::current_input())) {
+  dirname(knitr::current_input(dir = TRUE))
+} else {
+  getwd()
+}
+init_rel <- file.path("Code", "00__Setup", "source_project_init.R")
+root <- normalizePath(start, mustWork = TRUE)
+while (!file.exists(file.path(root, init_rel))) {
+  parent <- dirname(root)
+  if (identical(parent, root)) {
+    stop("Could not find ", init_rel, " above ", start)
+  }
+  root <- parent
+}
+source(file.path(root, init_rel))
+sieler2026_source_initialize_project(root = root)
+
+bundle_path <- here::here("Results", "07__FunctionalAnno", "Stats", "functional_anno__bundle.rds")
+
+if (isTRUE(params$rerun_analysis)) {
+  source(here::here("Code", "01__Analysis", "07__FunctionalAnno.R"))
+}
+
+if (!file.exists(bundle_path)) {
+  stop(
+    "Bundle not found: ", bundle_path, "\nRun `Code/01__Analysis/07__FunctionalAnno.R` from the project root, or knit with ",
+    "`params$rerun_analysis: true`."
+  )
+}
+
+fa <- readRDS(bundle_path)
+
+# Resolve paths saved in bundles:
+# - Prefer the stored path when it exists on this machine
+# - Otherwise, treat it as relative to the repo root (here::here)
+resolve_bundle_path <- function(p) {
+  if (is.null(p) || !nzchar(p)) {
+    return(NA_character_)
+  }
+  if (file.exists(p)) {
+    return(p)
+  }
+  p2 <- tryCatch(here::here(p), error = function(e) NA_character_)
+  if (!is.na(p2) && file.exists(p2)) {
+    return(p2)
+  }
+  p3 <- file.path(root, p)
+  if (file.exists(p3)) {
+    return(p3)
+  }
+  p
+}
+
+include_png <- function(p) {
+  p_res <- resolve_bundle_path(p)
+  if (is.null(p_res) || !nzchar(p_res)) {
+    return(invisible(NULL))
+  }
+  if (!file.exists(p_res)) {
+    cat("Figure not found: ", p_res, sep = "")
+    return(invisible(NULL))
+  }
+  p_abs <- normalizePath(p_res, winslash = "/", mustWork = TRUE)
+  knitr::include_graphics(p_abs, rel_path = FALSE)
+}
+
+# Safe access for optional bundle fields (older bundles)
+meta_chr <- function(nm) {
+  v <- fa$meta[[nm]]
+  if (is.null(v)) NA_character_ else as.character(v)
+}
+meta_num <- function(nm) {
+  v <- fa$meta[[nm]]
+  if (is.null(v)) NA_real_ else as.numeric(v)
+}
+```
+
+This report displays outputs from [`Code/01__Analysis/07__FunctionalAnno.R`](../01__Analysis/07__FunctionalAnno.R). **Inputs** are FDR-significant **partial** correlations between host gene expression and genus relative abundance from [`Code/01__Analysis/06__Taxon-DEG-Mort.R`](../01__Analysis/06__Taxon-DEG-Mort.R) (Spearman screen, then `nptest::np.cor.test` with **Total.Worm.Count** as a covariate; BH FDR on partial *p*-values &lt; 0.1). Focal-four **gene-set Venns** (overlap of those gene lists) are drawn in module **06**, not here. Gene symbols are mapped to **Entrez** IDs (`org.Dr.eg.db`), then **clusterProfiler** runs `enrichGO` (BP, MF, CC) and `enrichKEGG` (organism `dre`). **Full tables** are written under `Results/07__FunctionalAnno/Tables/`; this HTML shows the top rows for readability.
+
+---
+
+## Run summary
+
+```{r tbl-meta, echo=FALSE}
+tbl_meta <- tibble::tibble(
+  Field = c(
+    "run_date", "script", "skipped", "n_sig_edges",
+    "n_genes_top10_unique", "n_entrez_top10", "mapping_rate_top10",
+    "n_genes_culicoidibacter_unique", "n_entrez_culicoidibacter", "mapping_rate_culicoidibacter"
+  ),
+  Value = c(
+    meta_chr("run_date"),
+    meta_chr("script"),
+    as.character(isTRUE(fa$meta$skipped)),
+    if (!is.null(fa$meta$n_sig_edges)) as.character(fa$meta$n_sig_edges) else NA_character_,
+    as.character(meta_num("n_genes_top10_unique")),
+    as.character(meta_num("n_entrez_top10")),
+    as.character(round(meta_num("mapping_rate_top10"), 4)),
+    as.character(meta_num("n_genes_culicoidibacter_unique")),
+    as.character(meta_num("n_entrez_culicoidibacter")),
+    as.character(round(meta_num("mapping_rate_culicoidibacter"), 4))
+  )
+)
+gt::gt(tbl_meta) %>%
+  gt::tab_header(title = "07__FunctionalAnno bundle metadata")
+```
+
+---
+
+## Top 10 genera (gene-set for combined enrichment)
+
+```{r tbl-top10-summary, echo=FALSE}
+if (isTRUE(fa$meta$skipped)) {
+  cat("Enrichment was skipped (no significant edges in module 06).")
+} else if (!is.null(fa$tables$top_10_taxa_summary) && nrow(fa$tables$top_10_taxa_summary) > 0L) {
+  gt::gt(utils::head(fa$tables$top_10_taxa_summary, 10L)) %>%
+    gt::tab_header(
+      title = "Top genera by count of significant partial-correlation edges",
+      subtitle = "Same ranking rule as module 06 (then union of genes for enrichment)"
+    ) %>%
+    gt::fmt_number(columns = dplyr::contains("mean"), decimals = 3)
+} else {
+  cat("No top-10 summary in bundle.")
+}
+```
+
+---
+
+## Culicoidibacter: manuscript highlight
+
+Genes with significant partial correlations to **Culicoidibacter** are analyzed as a **separate** gene set (not only as part of the top-10 union). Interpret pathway and GO results below together with the taxon-level partial-correlation summaries in `06__Taxon-DEG-Mort`.
+
+```{r tbl-culico-comp, echo=FALSE}
+cbc <- fa$tables$culicoidibacter_by_comparison
+if (!is.null(cbc) && nrow(cbc) > 0L) {
+  gt::gt(cbc) %>%
+    gt::tab_header(
+      title = "Culicoidibacter: associations by exposure contrast",
+      subtitle = "Counts of significant partial-correlation edges vs A- T- P-"
+    ) %>%
+    gt::fmt_number(columns = dplyr::any_of("mean_correlation"), decimals = 3)
+} else {
+  cat("No per-comparison Culicoidibacter table (or zero edges).")
+}
+```
+
+---
+
+## Figures: top 10 genera (combined gene set)
+
+```{r fig-go-bp-top10, echo=FALSE, fig.cap="GO Biological Process enrichment (top terms). Genes = union of genes with significant partial correlations to the top 10 genera."}
+include_png(fa$paths$figures$go_bp_top10)
+```
+
+```{r fig-go-mf-top10, echo=FALSE, fig.cap="GO Molecular Function enrichment (top terms)."}
+include_png(fa$paths$figures$go_mf_top10)
+```
+
+```{r fig-go-cc-top10, echo=FALSE, fig.cap="GO Cellular Component enrichment (top terms)."}
+include_png(fa$paths$figures$go_cc_top10)
+```
+
+```{r fig-kegg-top10, echo=FALSE, fig.cap="KEGG pathway enrichment."}
+include_png(fa$paths$figures$kegg_top10)
+```
+
+---
+
+## Figures: Culicoidibacter-associated genes
+
+```{r fig-go-bp-culico, echo=FALSE, fig.cap="GO Biological Process for genes partially correlated with Culicoidibacter."}
+include_png(fa$paths$figures$go_bp_culico)
+```
+
+```{r fig-go-mf-culico, echo=FALSE, fig.cap="GO Molecular Function (Culicoidibacter)."}
+include_png(fa$paths$figures$go_mf_culico)
+```
+
+```{r fig-go-cc-culico, echo=FALSE, fig.cap="GO Cellular Component (Culicoidibacter)."}
+include_png(fa$paths$figures$go_cc_culico)
+```
+
+```{r fig-kegg-culico, echo=FALSE, fig.cap="KEGG pathways (Culicoidibacter-associated genes)."}
+include_png(fa$paths$figures$kegg_culico)
+```
+
+---
+
+## Figures: focal four genera (combined enrichment)
+
+Combined dotplots stack GO/KEGG terms across *Culicoidibacter*, *Shewanella*, *Flavobacterium*, and *Cetobacterium* (dot fill = focal taxon; x-axis = \(-\log_{10}\) adjusted *p*; dot size = gene count). The KEGG panel caps the x-axis at 5 with the true value annotated when a term exceeds the limit (e.g., Proteasome). Gene-set Venns for the same four taxa are produced in **module 06** (`Code/02__Results/06__Taxon-DEG-Mort.Rmd`).
+
+```{r fig-go-bp-focal-four, echo=FALSE, fig.cap="GO Biological Process: focal four genera combined (one panel)."}
+include_png(fa[["paths"]][["figures"]][["go_bp_focal_four"]])
+```
+
+```{r fig-go-mf-focal-four, echo=FALSE, fig.cap="GO Molecular Function: focal four genera combined (one panel)."}
+include_png(fa[["paths"]][["figures"]][["go_mf_focal_four"]])
+```
+
+```{r fig-go-cc-focal-four, echo=FALSE, fig.cap="GO Cellular Component: focal four genera combined (one panel)."}
+include_png(fa[["paths"]][["figures"]][["go_cc_focal_four"]])
+```
+
+```{r fig-kegg-focal-four, echo=FALSE, fig.cap="KEGG pathways: focal four genera combined (one panel)."}
+include_png(fa[["paths"]][["figures"]][["kegg_focal_four"]])
+```
+
+### Tables: term-by-taxon summaries (focal four enrichment)
+
+**Term-by-taxon** tables use the same GO/KEGG terms as the combined dotplots above (top 15 terms per ontology by max \(-\log_{10}\) adjusted *p* across taxa, matching `Code/01__Analysis/07__FunctionalAnno.R`). Each row is one term or pathway; columns are gene **Count** and **\(-\log_{10}\)(adj. *p*)** for *Culicoidibacter*, *Shewanella*, *Flavobacterium*, and *Cetobacterium* (`NA` = that taxon’s enrichment did not include the term in the plotted set). Full CSV and HTML exports live under `Results/07__FunctionalAnno/Tables/` (see bundle paths `fa$paths$tables`).
+
+```{r tbl-focal-four-go-bp-wide-preview, echo=FALSE}
+p <- resolve_bundle_path(fa[["paths"]][["tables"]][["go_bp_focal_four_term_by_taxon_wide"]])
+if (is.na(p) || !nzchar(p) || !file.exists(p)) {
+  cat("GO BP term-by-taxon wide table not found. Re-run `Code/01__Analysis/07__FunctionalAnno.R`.\n")
+} else {
+  readr::read_csv(p, show_col_types = FALSE) %>%
+    dplyr::slice_head(n = 25L) %>%
+    gt::gt() %>%
+    gt::tab_header(
+      title = "GO Biological Process: term × taxon (preview, 25 rows)",
+      subtitle = "Full export: `go_bp_focal_four_term_by_taxon_wide.csv` in module Tables/"
+    )
+}
+```
+
+```{r tbl-focal-four-go-mf-wide-preview, echo=FALSE}
+p <- resolve_bundle_path(fa[["paths"]][["tables"]][["go_mf_focal_four_term_by_taxon_wide"]])
+if (is.na(p) || !nzchar(p) || !file.exists(p)) {
+  cat("GO MF term-by-taxon wide table not found. Re-run `Code/01__Analysis/07__FunctionalAnno.R`.\n")
+} else {
+  readr::read_csv(p, show_col_types = FALSE) %>%
+    dplyr::slice_head(n = 25L) %>%
+    gt::gt() %>%
+    gt::tab_header(
+      title = "GO Molecular Function: term × taxon (preview, 25 rows)",
+      subtitle = "Full export: `go_mf_focal_four_term_by_taxon_wide.csv`"
+    )
+}
+```
+
+```{r tbl-focal-four-go-cc-wide-preview, echo=FALSE}
+p <- resolve_bundle_path(fa[["paths"]][["tables"]][["go_cc_focal_four_term_by_taxon_wide"]])
+if (is.na(p) || !nzchar(p) || !file.exists(p)) {
+  cat("GO CC term-by-taxon wide table not found. Re-run `Code/01__Analysis/07__FunctionalAnno.R`.\n")
+} else {
+  readr::read_csv(p, show_col_types = FALSE) %>%
+    dplyr::slice_head(n = 25L) %>%
+    gt::gt() %>%
+    gt::tab_header(
+      title = "GO Cellular Component: term × taxon (preview, 25 rows)",
+      subtitle = "Full export: `go_cc_focal_four_term_by_taxon_wide.csv`"
+    )
+}
+```
+
+```{r tbl-focal-four-kegg-wide-preview, echo=FALSE}
+p <- resolve_bundle_path(fa[["paths"]][["tables"]][["kegg_focal_four_term_by_taxon_wide"]])
+if (is.na(p) || !nzchar(p) || !file.exists(p)) {
+  cat("KEGG pathway-by-taxon wide table not found. Re-run `Code/01__Analysis/07__FunctionalAnno.R`.\n")
+} else {
+  readr::read_csv(p, show_col_types = FALSE) %>%
+    dplyr::slice_head(n = 25L) %>%
+    gt::gt() %>%
+    gt::tab_header(
+      title = "KEGG: pathway × taxon (preview, 25 rows)",
+      subtitle = "Full export: `kegg_focal_four_term_by_taxon_wide.csv`"
+    )
+}
+```
+
+---
+
+## Reviewer appendix: focal genera (Shewanella, Flavobacterium, Cetobacterium)
+
+These additional focal genera replicate the Culicoidibacter enrichment workflow, using the same thresholds and export conventions, in case a reviewer requests the full set of overlapping taxa.
+
+```{r focal-genera-appendix, echo=FALSE, results="asis"}
+focal_list <- fa$enrich$focal
+if (is.null(focal_list) || length(focal_list) == 0L) {
+  cat("No focal-genus enrichment results found in bundle. Re-run `Code/01__Analysis/07__FunctionalAnno.R`.\n")
+} else {
+  genera <- setdiff(names(focal_list), "Culicoidibacter")
+  if (length(genera) == 0L) {
+    cat("No additional focal genera beyond Culicoidibacter.\n")
+  }
+  for (g in genera) {
+    slug <- tolower(gsub("[^A-Za-z0-9]+", "_", g))
+    cat("\n\n### ", g, "\n\n", sep = "")
+
+    byc <- fa$tables$focal_by_comparison[[g]]
+    if (!is.null(byc) && nrow(byc) > 0L) {
+      print(
+        gt::gt(byc) %>%
+          gt::tab_header(
+            title = paste0(g, ": associations by exposure contrast"),
+            subtitle = "Counts of significant partial-correlation edges vs A- T- P-"
+          ) %>%
+          gt::fmt_number(columns = dplyr::any_of("mean_correlation"), decimals = 3)
+      )
+    } else {
+      cat("No per-comparison table (or zero edges).\n\n")
+    }
+
+    fig_dir <- file.path("Results", "07__FunctionalAnno", "Figures")
+    fig_paths <- c(
+      file.path(fig_dir, paste0("go_bp_", slug, "_dotplot.png")),
+      file.path(fig_dir, paste0("go_mf_", slug, "_dotplot.png")),
+      file.path(fig_dir, paste0("go_cc_", slug, "_dotplot.png")),
+      file.path(fig_dir, paste0("kegg_", slug, "_dotplot.png"))
+    )
+    fig_paths <- fig_paths[file.exists(fig_paths)]
+    if (length(fig_paths) > 0L) {
+      print(knitr::include_graphics(fig_paths))
+    } else {
+      cat("No dotplots found under `", fig_dir, "` for ", g, ".\n", sep = "")
+    }
+  }
+}
+```
+
+---
+
+## Tables: GO / KEGG (top 25 rows; see `Results/07__FunctionalAnno/Tables/` for full exports)
+
+```{r tbl-go-bp-top10, echo=FALSE}
+if (!is.null(fa$table_go_bp_top10_taxa)) {
+  fa$table_go_bp_top10_taxa
+} else {
+  cat("GO BP table not found in bundle.")
+}
+```
+
+```{r tbl-kegg-top10, echo=FALSE}
+if (!is.null(fa$table_kegg_top10_taxa)) {
+  fa$table_kegg_top10_taxa
+} else {
+  cat("KEGG table not found in bundle.")
+}
+```
+
+```{r tbl-go-bp-culico, echo=FALSE}
+if (!is.null(fa$table_go_bp_culicoidibacter)) {
+  fa$table_go_bp_culicoidibacter
+} else {
+  cat("GO BP (Culicoidibacter) table not found in bundle.")
+}
+```
+
+```{r tbl-kegg-culico, echo=FALSE}
+if (!is.null(fa$table_kegg_culicoidibacter)) {
+  fa$table_kegg_culicoidibacter
+} else {
+  cat("KEGG (Culicoidibacter) table not found in bundle.")
+}
+```

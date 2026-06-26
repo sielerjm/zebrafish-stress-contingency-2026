@@ -1,0 +1,4 @@
+Metric,Term,Estimate,SE,z_ratio,p_value,p_signif
+Shannon diversity,HistoryLevelNum:Parasite,0.0493,0.2614,0.189,0.8503,ns
+Simpson diversity,HistoryLevelNum:Parasite,0.1275,0.275,0.464,0.6429,ns
+Observed richness,HistoryLevelNum:Parasite,-0.0665,0.2797,-0.238,0.812,ns

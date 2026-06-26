@@ -1,0 +1,20 @@
+Reference for aligning non-R assets (Figure 1 schematic, Table 1 exposure table) with ggplot outputs.
+
+Exposure regime order (treatment_order in Code/00__Setup/02__PlotSettings.R) and hex (treatment_colors / treatment_color_scale / exposure_regime_colors in code):
+
+  A- T- P-   #1B9E77
+  A- T- P+   #D95F02
+  A+ T- P-   #7570B3
+  A+ T- P+   #E7298A
+  A- T+ P-   #66A61E
+  A- T+ P+   #E6AB02
+  A+ T+ P-   #A6761D
+  A+ T+ P+   #666666
+
+Prior stressor history (0 / 1 / 2 prior stressors), same as prior_stressor_history_colors_numeric and history_color_scale:
+
+  0 (No prior stressors)   #1B9E77
+  1 (One prior stressor)   #D95F02
+  2 (Two prior stressors)  #7570B3
+
+After updating external PDFs/PNGs, confirm embedded fonts and vector text in Acrobat or Illustrator per Nature artwork guidelines.

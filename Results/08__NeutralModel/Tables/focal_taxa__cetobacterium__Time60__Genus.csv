@@ -1,0 +1,2 @@
+taxon_id,p,freq,freq_pred,pred_lwr,pred_upr,bino_pred,bino_lwr,bino_upr,partition,Time,genus_label,is_culici
+Cetobacterium,0.016277154457076403,0.8978723404255319,0.998967654459285,0.9819428692359499,0.9999419289636864,1,0.9839162813706559,1.0000000000000002,below,60,Cetobacterium,TRUE

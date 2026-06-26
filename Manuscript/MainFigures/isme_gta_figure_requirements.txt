@@ -1,0 +1,18 @@
+ISME Journal — Guide to Authors (figure-relevant excerpts)
+Source: Manuscript/ReferencePapers/ismej-gta.pdf (revised 2021-12-20)
+
+- Submit production-quality artwork with the initial submission; detailed resolution, font, and line-weight rules are in Nature’s separate "Artwork Guidelines" (download from the journal / Springer Nature author instructions).
+
+- Composite figures containing more than three individual sub-panels count as two figures toward the journal figure limit. Plan layout or supplementary placement accordingly.
+
+- Graphs: plotting individual data points is preferred when N is small. Axes on graphs should extend to zero except for logarithmic axes.
+
+- Statistical annotations (error bars, p-values) should apply only to independently repeated experiments, not technical replicates of a single experiment. State experimental repetition (N) in the figure legend.
+
+- Graphical abstracts (optional): 9 cm wide x 5 cm high at print scale, minimum 300 dpi, white background.
+
+- Three-dimensional histograms are discouraged unless the third dimension is essential.
+
+- Large figures may be moved to Supplementary Information; supplementary figures are not copyedited—submit clean final files.
+
+For this repository: Code/00__Setup/03__HelperFunctions.R defines SIELER2026_MIN_LINEWIDTH_MM and theme_sieler2026_publication for ggplot outputs. Cross-check compiled PDFs against the Nature artwork checklist before submission.

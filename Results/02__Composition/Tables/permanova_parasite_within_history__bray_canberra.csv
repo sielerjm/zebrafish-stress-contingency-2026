@@ -1,0 +1,7 @@
+stratum,Distance,Term,Df,R2,F,p_value,n_samples,n_parasite_0,n_parasite_1,p_fdr_bh
+0,Bray-Curtis,Parasite,1,0.0489,3.6025,0.011,72,36,36,0.0165
+1,Bray-Curtis,Parasite,1,0.0475,6.0386,0.003,123,56,67,0.009
+2,Bray-Curtis,Parasite,1,0.0637,2.5859,0.045,40,15,25,0.045
+0,Canberra,Parasite,1,0.0468,3.4378,0.001,72,36,36,0.001
+1,Canberra,Parasite,1,0.0398,5.0187,0.001,123,56,67,0.001
+2,Canberra,Parasite,1,0.0734,3.0085,0.001,40,15,25,0.001

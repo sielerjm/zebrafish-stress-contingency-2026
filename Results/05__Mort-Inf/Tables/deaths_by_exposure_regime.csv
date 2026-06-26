@@ -1,0 +1,9 @@
+Treatment,deaths,at_risk,survived
+A- T- P-,9,45,36
+A- T- P+,8,45,37
+A+ T- P-,14,45,31
+A+ T- P+,10,45,35
+A- T+ P-,19,45,26
+A- T+ P+,13,45,32
+A+ T+ P-,30,45,15
+A+ T+ P+,20,45,25

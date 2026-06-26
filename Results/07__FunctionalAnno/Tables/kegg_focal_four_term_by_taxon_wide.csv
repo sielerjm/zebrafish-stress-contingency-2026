@@ -1,0 +1,16 @@
+ID,Description,Count_Culicoidibacter,Count_Shewanella,Count_Flavobacterium,Count_Cetobacterium,log_padj_Culicoidibacter,log_padj_Shewanella,log_padj_Flavobacterium,log_padj_Cetobacterium
+dre00040,Pentose and glucuronate interconversions,2,NA,NA,NA,2.7840427803048993,NA,NA,NA
+dre00053,Ascorbate and aldarate metabolism,2,NA,NA,NA,2.7840427803048993,NA,NA,NA
+dre00120,Primary bile acid biosynthesis,2,NA,NA,NA,3.280443732205764,NA,NA,NA
+dre00140,Steroid hormone biosynthesis,2,NA,NA,NA,2.5558896753871636,NA,NA,NA
+dre00830,Retinol metabolism,3,NA,NA,NA,3.8511733415960516,NA,NA,NA
+dre00860,Porphyrin metabolism,2,NA,NA,NA,2.58613544390528,NA,NA,NA
+dre00980,Metabolism of xenobiotics by cytochrome P450,3,NA,NA,NA,4.017643104200134,NA,NA,NA
+dre00982,Drug metabolism - cytochrome P450,3,NA,NA,NA,4.017643104200134,NA,NA,NA
+dre00983,Drug metabolism - other enzymes,3,NA,NA,NA,3.830282749331528,NA,NA,NA
+dre01240,Biosynthesis of cofactors,4,NA,NA,NA,4.017643104200134,NA,NA,NA
+dre03050,Proteasome,NA,NA,11,NA,NA,NA,17.78009736917091,NA
+dre04140,Autophagy - animal,2,1,NA,NA,1.7298874483114375,1.3157015835877872,NA,NA
+dre04518,Integrin signaling,NA,1,NA,2,NA,1.3157015835877872,NA,2.7866087597823888
+dre04814,Motor proteins,NA,2,NA,NA,NA,2.2161536052122646,NA,NA
+dre04820,Cytoskeleton in muscle cells,NA,2,NA,1,NA,2.2161536052122646,NA,1.255103348076334

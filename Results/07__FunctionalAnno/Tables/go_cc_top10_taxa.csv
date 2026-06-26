@@ -1,0 +1,75 @@
+ID,Description,p.adjust,Count,geneID,log_padj
+GO:0000502,proteasome complex,9.124862150020685e-31,32,psmd12/psmd2/psmd6/psmd13/psmd4a/psmc1b/psmc2/psmb5/psma5/psmc6/psmd4b/psmd11b/psmd14/psmc4/pomp/psmb3/adrm1/psmc5/psma6a/usp14/psmb12/psmc3/psma2a/psmd5/psmd1/psmd3/psmc1a/psmb2/psma1/psma4/psmb1/psma6b,30.039773687741356
+GO:1905369,endopeptidase complex,4.026515928562856e-29,33,psmd12/psmd2/psmd6/psmd13/psmd4a/psmc1b/psmc2/pigs/psmb5/psma5/psmc6/psmd4b/psmd11b/psmd14/psmc4/pomp/psmb3/adrm1/psmc5/psma6a/usp14/psmb12/psmc3/psma2a/psmd5/psmd1/psmd3/psmc1a/psmb2/psma1/psma4/psmb1/psma6b,28.395070578535226
+GO:1905368,peptidase complex,1.9733513006896922e-25,33,psmd12/psmd2/psmd6/psmd13/psmd4a/psmc1b/psmc2/pigs/psmb5/psma5/psmc6/psmd4b/psmd11b/psmd14/psmc4/pomp/psmb3/adrm1/psmc5/psma6a/usp14/psmb12/psmc3/psma2a/psmd5/psmd1/psmd3/psmc1a/psmb2/psma1/psma4/psmb1/psma6b,24.704795593729074
+GO:0005838,proteasome regulatory particle,5.973075487464837e-23,18,psmd12/psmd2/psmd6/psmd13/psmd4a/psmc1b/psmc2/psmc6/psmd4b/psmd11b/psmd14/psmc4/adrm1/psmc5/psmc3/psmd1/psmd3/psmc1a,22.223801996623717
+GO:0022624,proteasome accessory complex,2.9004399077674893e-21,18,psmd12/psmd2/psmd6/psmd13/psmd4a/psmc1b/psmc2/psmc6/psmd4b/psmd11b/psmd14/psmc4/adrm1/psmc5/psmc3/psmd1/psmd3/psmc1a,20.537536127953782
+GO:0008540,"proteasome regulatory particle, base subcomplex",4.729826886281365e-16,11,psmd2/psmd4a/psmc1b/psmc2/psmc6/psmd4b/psmc4/psmc5/psmc3/psmd1/psmc1a,15.325154754337998
+GO:0000228,nuclear chromosome,1.060146135406299e-10,19,pold1/orc1/rpa1/smarcb1a/sap130b/rpa3/mcm10/dmap1/orc6/anp32e/gins1/timeless/uchl5/brms1/rad9a/lrwd1/prim1/mms22l/pole2,9.974634265465271
+GO:0005839,proteasome core complex,3.513592646359941e-10,11,psmb5/psma5/psmb3/psma6a/psmb12/psma2a/psmb2/psma1/psma4/psmb1/psma6b,9.454248590505184
+GO:0005681,spliceosomal complex,1.0552151731034781e-7,20,ddx23/ppwd1/sf3a3/prpf3/smu1a/bud13/plrg1/sf3b5/prpf8/snrpd3/snrnp200/rbm17/xab2/sf3b4/sf1/sf3b2/eif4a3/yju2/lsm3/usp39,6.976658972628734
+GO:0019773,"proteasome core complex, alpha-subunit complex",3.079421939066396e-6,6,psma5/psma6a/psma2a/psma1/psma4/psma6b,5.511530800459066
+GO:0005643,nuclear pore,1.194708708747333e-5,9,nup85/nup205/tprb/seh1l/nup35/nup62l/nutf2/nup160/aaas,4.922737970535623
+GO:0043596,nuclear replication fork,3.1205174819793573e-05,7,pold1/rpa1/rpa3/mcm10/timeless/prim1/mms22l,4.505773380041631
+GO:0005635,nuclear envelope,6.182046875834921e-5,17,nup85/nup205/tprb/seh1l/clic1/nup35/banf1/lmnb1/nup62l/tmpob/lmnb2/mgst3b/nutf2/nemp2/nup160/ran/aaas,4.2088677061896895
+GO:0005657,replication fork,1.0937647327726517e-4,8,pold1/rpa1/rpa3/mcm10/rfc3/timeless/prim1/mms22l,3.9610760840781802
+GO:0000313,organellar ribosome,1.542643424014452e-4,10,mrpl21/mrpl17/mrpl47/mrps35/mrps26/mrps7/mrpl15/mrps5/mrps10/mrpl14,3.811734447805321
+GO:0005761,mitochondrial ribosome,1.542643424014452e-4,10,mrpl21/mrpl17/mrpl47/mrps35/mrps26/mrps7/mrpl15/mrps5/mrps10/mrpl14,3.811734447805321
+GO:1904949,ATPase complex,3.321361779344297e-4,11,atp6v1ba/zgc:103508/smarcb1a/dmap1/suz12a/hdac1/anp32e/uchl5/atp6v1ab/phf10/dpf2l,3.478683816296977
+GO:0070603,SWI/SNF superfamily-type complex,3.39605924400735e-4,9,zgc:103508/smarcb1a/dmap1/suz12a/hdac1/anp32e/uchl5/phf10/dpf2l,3.4690247421262437
+GO:0071011,precatalytic spliceosome,5.675952187967059e-4,6,smu1a/sf3b5/snrpd3/sf3b4/sf3b2/lsm3,3.2459612715284343
+GO:0071013,catalytic step 2 spliceosome,7.572876216644022e-4,8,ddx23/plrg1/prpf8/snrpd3/xab2/sf3b2/eif4a3/lsm3,3.1207391419298847
+GO:0120114,Sm-like protein family complex,7.953038149778579e-4,9,gemin4/prpf3/sf3b5/prpf8/snrpd3/sf3b4/sf3b2/lsm3/prpf4,3.099466934283245
+GO:0000785,chromatin,9.248155251541233e-4,25,rbl1/h3f3a/rb1/cbx5/zgc:103508/smarcb1a/sap130b/stag1b/dmap1/suz12a/hdac1/anp32e/skic8/myb/banf1/hmgn2/uchl5/h2ax/zgc:110425/hnrnpdl/brms1/phf10/lrwd1/dpf2l/mms22l,3.0339448882313187
+GO:0097525,spliceosomal snRNP complex,0.0010430611320497874,8,prpf3/sf3b5/prpf8/snrpd3/sf3b4/sf3b2/lsm3/prpf4,2.9816902375620886
+GO:0005849,mRNA cleavage factor complex,0.001109116220380922,5,nudt21/cpsf3/sympk/cstf2/tut1,2.9550229432777675
+GO:0030532,small nuclear ribonucleoprotein complex,0.0011100713411189656,8,prpf3/sf3b5/prpf8/snrpd3/sf3b4/sf3b2/lsm3/prpf4,2.954649109448764
+GO:0016604,nuclear body,0.0012380665358907147,13,tp53inp1/rpa1/sumo3a/rmi1/smu1a/nudt21/srsf7a/ppp1r8b/zgc:77262/srsf9/eif4a3/thoc5/tut1,2.9072560149332625
+GO:0061695,"transferase complex, transferring phosphorus-containing groups",0.0017753956568045818,16,pold1/tcea1/polr2b/gtf2h4/prps1b/ikbkb/mnat1/skic8/csnk2a1/prkag1/paf1/dbf4/prim1/cks2/cdk7/pole2,2.750704846880028
+GO:0019774,"proteasome core complex, beta-subunit complex",0.0020284470264046407,4,psmb5/psmb3/psmb12/psmb2,2.692836329562098
+GO:0000314,organellar small ribosomal subunit,0.002602407108199678,5,mrps35/mrps26/mrps7/mrps5/mrps10,2.5846247634951545
+GO:0005763,mitochondrial small ribosomal subunit,0.002602407108199678,5,mrps35/mrps26/mrps7/mrps5/mrps10,2.5846247634951545
+GO:0030894,replisome,0.002602407108199678,4,pold1/rpa1/rpa3/prim1,2.5846247634951545
+GO:0043601,nuclear replisome,0.002602407108199678,4,pold1/rpa1/rpa3/prim1,2.5846247634951545
+GO:0098798,mitochondrial protein-containing complex,0.0033507661972959992,11,mrpl21/mrpl17/mrpl47/mrps35/mrps26/mrps7/mrpl15/mrps5/mrps10/mrpl14/chchd6b,2.4748558743929037
+GO:0005847,mRNA cleavage and polyadenylation specificity factor complex,0.0033595405514449364,4,cpsf3/sympk/cstf2/tut1,2.4737201123767525
+GO:0042555,MCM complex,0.0033595405514449364,4,mcmbp/mcm3/mcm6/mms22l,2.4737201123767525
+GO:0005684,U2-type spliceosomal complex,0.00384941281168735,7,smu1a/bud13/snrpd3/xab2/sf3b2/eif4a3/yju2,2.414605512593528
+GO:0016591,"RNA polymerase II, holoenzyme",0.006831093922016484,7,tcea1/polr2b/gtf2h4/mnat1/skic8/paf1/cdk7,2.165509743426273
+GO:0032993,protein-DNA complex,0.007315752391657176,10,pold1/h3f3a/rpa1/rpa3/gins1/wdr18/h2ax/zgc:110425/prim1/brf2,2.1357410020415406
+GO:0000118,histone deacetylase complex,0.008936008611639668,6,sap130b/znf703/dmap1/hdac1/anp32e/brms1,2.0488564213622564
+GO:0005686,U2 snRNP,0.008936008611639668,4,sf3b5/snrpd3/sf3b4/sf3b2,2.0488564213622564
+GO:0034708,methyltransferase complex,0.010508151167141143,7,zgc:103508/ash2l/eed/trmt61b/suz12a/ezh2/mettl14,1.9784736882096232
+GO:0055029,nuclear DNA-directed RNA polymerase complex,0.010508998817496722,8,tcea1/polr2b/gtf2h4/mnat1/skic8/paf1/prim1/cdk7,1.9784386568307275
+GO:0005840,ribosome,0.01187614811058812,13,mrpl21/mrpl17/mrpl47/mrps35/mrps26/mrps7/mrpl15/mrps5/mrps10/mrpl33/mrpl14/mrps23/gadd45gip1,1.925324394840726
+GO:0035098,ESC/E(Z) complex,0.01670853006370962,3,eed/suz12a/ezh2,1.7770617555703951
+GO:0000428,DNA-directed RNA polymerase complex,0.01688307593981906,8,tcea1/polr2b/gtf2h4/mnat1/skic8/paf1/prim1/cdk7,1.772548426075784
+GO:0030880,RNA polymerase complex,0.01688307593981906,8,tcea1/polr2b/gtf2h4/mnat1/skic8/paf1/prim1/cdk7,1.772548426075784
+GO:0030119,AP-type membrane coat adaptor complex,0.017076161216348636,5,ap5s1/ap2a1/ap1b1/ap1g2/ap4e1,1.7676097536666329
+GO:0005759,mitochondrial matrix,0.018895709945026304,12,mrpl21/mrpl17/mrpl47/mrps35/mrps26/mrps7/mrpl15/mrps5/mrps10/fastkd1/mrpl14/cs,1.7236367862335957
+GO:0016607,nuclear speck,0.019800627591609984,8,smu1a/srsf7a/ppp1r8b/zgc:77262/srsf9/eif4a3/thoc5/tut1,1.7033210443216205
+GO:0000315,organellar large ribosomal subunit,0.02034825334565346,5,mrpl21/mrpl17/mrpl47/mrpl15/mrpl14,1.6914728638294403
+GO:0005762,mitochondrial large ribosomal subunit,0.02034825334565346,5,mrpl21/mrpl17/mrpl47/mrpl15/mrpl14,1.6914728638294403
+GO:0000793,condensed chromosome,0.02296393571532518,8,seh1l/cenpt/cenpo/banf1/rad9a/gpatch11/lrwd1/si:ch211-161h7.4,1.6389536775559697
+GO:0030117,membrane coat,0.02296393571532518,7,ap5s1/ap2a1/ap1b1/sec24b/ap1g2/pef1/ap4e1,1.6389536775559697
+GO:0048475,coated membrane,0.02296393571532518,7,ap5s1/ap2a1/ap1b1/sec24b/ap1g2/pef1/ap4e1,1.6389536775559697
+GO:1902911,protein kinase complex,0.02296393571532518,8,gtf2h4/ikbkb/mnat1/csnk2a1/prkag1/dbf4/cks2/cdk7,1.6389536775559697
+GO:0005667,transcription regulator complex,0.02296393571532518,15,tcea1/rbl1/rb1/nfyc/gtf2h4/mnat1/hdac1/med23/nfya/e2f7/june/med15/hdac3/cdk7/brf2,1.6389536775559697
+GO:0090575,RNA polymerase II transcription regulator complex,0.02297290684567097,9,tcea1/rb1/nfyc/gtf2h4/mnat1/nfya/e2f7/med15/cdk7,1.6387840484635925
+GO:0097526,spliceosomal tri-snRNP complex,0.02734865735016609,4,prpf3/snrpd3/lsm3/prpf4,1.563063989978711
+GO:0032806,carboxy-terminal domain protein kinase complex,0.034717531584523544,3,gtf2h4/mnat1/cdk7,1.4594511607227876
+GO:0044391,ribosomal subunit,0.03550826676196564,10,mrpl21/mrpl17/mrpl47/mrps35/mrps26/mrps7/mrpl15/mrps5/mrps10/mrpl14,1.4496705260674414
+GO:0000776,kinetochore,0.03884287869581167,6,seh1l/cenpt/cenpo/gpatch11/lrwd1/si:ch211-161h7.4,1.4106885914474028
+GO:1902554,serine/threonine protein kinase complex,0.03884287869581167,7,gtf2h4/ikbkb/mnat1/csnk2a1/dbf4/cks2/cdk7,1.4106885914474028
+GO:0042575,DNA polymerase complex,0.03979032504013362,3,pold1/prim1/pole2,1.400222513164246
+GO:0035097,histone methyltransferase complex,0.04262976806796454,5,zgc:103508/ash2l/eed/suz12a/ezh2,1.3702870301742889
+GO:0000779,"condensed chromosome, centromeric region",0.04273785388499967,6,seh1l/cenpt/cenpo/gpatch11/lrwd1/si:ch211-161h7.4,1.3691872900639357
+GO:0034399,nuclear periphery,0.045185625465881424,3,znf703/lmnb1/lmnb2,1.3449997017754498
+GO:0000775,"chromosome, centromeric region",0.045185625465881424,8,cbx5/seh1l/stag1b/cenpt/cenpo/gpatch11/lrwd1/si:ch211-161h7.4,1.3449997017754498
+GO:0097346,INO80-type complex,0.052815710855522335,3,dmap1/anp32e/uchl5,1.2772368705924302
+GO:0098687,chromosomal region,0.05744071387104667,9,rif1/cbx5/seh1l/stag1b/cenpt/cenpo/gpatch11/lrwd1/si:ch211-161h7.4,1.2407801713366156
+GO:0046540,U4/U6 x U5 tri-snRNP complex,0.07009741496914737,3,prpf3/lsm3/prpf4,1.1542979975160124
+GO:0042611,MHC protein complex,0.07851029340524482,3,mhc2daa/mhc2dhb/zmp:0000001138,1.105073399611025
+GO:0042613,MHC class II protein complex,0.07851029340524482,3,mhc2daa/mhc2dhb/zmp:0000001138,1.105073399611025
+GO:0015935,small ribosomal subunit,0.09067544808087027,5,mrps35/mrps26/mrps7/mrps5/mrps10,1.042510289637039
+GO:0048471,perinuclear region of cytoplasm,0.09866163581721521,8,ndor1/anp32a/cherp/ehd1b/gak/cyfip1/upf1/dlc,1.0058516881795692
